@@ -5,6 +5,8 @@
     [
       ./hardware-configuration.nix
       ./boot.nix
+      ./users.nix
+      ./graphics.nix
     ];
 
   networking.hostName = "PC";
@@ -45,18 +47,6 @@
     alsa.support32Bit = true;
     # Pulseaudio compatability layer.
     pulse.enable = true;
-  };
-
-  # Immutable user configs.
-  users.mutableUsers = false;
-  users.users.root = {
-    uid = 0;
-    hashedPassword = "**REDACTED**";
-  };
-  users.users.keith = {
-    isNormalUser = true;
-    hashedPassword = "**REDACTED**";
-    extraGroups = [ "wheel" ]; # Enable `sudo`
   };
 
   programs.firefox.enable = true;
@@ -111,29 +101,6 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
-
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [nvidia-vaapi-driver];
-  };
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
-    open = false;
-    nvidiaSettings = true;  # Nvidia settings menu `nvidia-settings`.
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
-    # of just the bare essentials.
-    powerManagement.enable = false;
-
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-  };
-
 
   # Allow Spotify to discover Google Cast devices.
   networking.firewall.allowedUDPPorts = [ 5333 ];
