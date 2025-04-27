@@ -16,6 +16,8 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
+  swapDevices = [ { device = "/dev/disk/by-uuid/44090b89-b355-4498-b272-4264d3d94ae8"; } ];
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/fb594a2d-ba40-4ed3-bc91-b1f53966b4e5";
       fsType = "btrfs";
@@ -37,9 +39,11 @@
       neededForBoot = true;
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/44090b89-b355-4498-b272-4264d3d94ae8"; }
-    ];
+  fileSystems."/games" =
+    { device = "/dev/disk/by-uuid/15352c74-bed2-4ba3-b743-1463003519d9";
+      fsType = "ext4";
+      options = [ "noatime" "exec" ];
+    };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
