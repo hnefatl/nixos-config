@@ -4,14 +4,8 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./boot.nix
     ];
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot = {
-    enable = true;
-    configurationLimit = 100;
-  };
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "PC";
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -95,6 +89,7 @@
     i3blocks
     i3lock
     arandr
+    ntfs3g
     spotify
     playerctl
     pavucontrol
