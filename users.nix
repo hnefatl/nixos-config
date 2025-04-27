@@ -12,5 +12,8 @@
     hashedPassword = "**REDACTED**";
     extraGroups = [ "wheel" ]; # Enable `sudo`
   };
+
+  # Allow these users to edit the nixos config files.
+  users.groups.nixos.members = [ "keith" "root" ];
 }
 
