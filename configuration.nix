@@ -24,6 +24,7 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
+
     xkb = {
       layout = "gb";
       options = "caps:escape";
@@ -32,7 +33,27 @@
     autoRepeatDelay = 200;
     autoRepeatInterval = 17;
 
-    windowManager.i3.enable = true;
+    windowManager.i3 = {
+      enable = true;
+      extraSessionCommands = ''
+	# Desktop background colour
+        xsetroot -solid "#333333"
+      '';
+    };
+
+    # Configure initial monitor layout.
+    xrandrHeads = [{
+      output = "DP-0";
+      primary = true;
+      monitorConfig = ''
+        Option "Position" "0 331"
+      '';
+    } {
+      output = "HDMI-0";
+      monitorConfig = ''
+        Option "Rotate" "right"
+      '';
+    }];
   };
   services.displayManager.autoLogin = {
     enable = true;
@@ -78,12 +99,15 @@
     pulseaudio
     i3blocks
     i3lock
+    scrot
+    xclip
     arandr
     ntfs3g
     spotify
     playerctl
     pavucontrol
     discord
+    xorg.xev
   ];
 
   programs.neovim = {
