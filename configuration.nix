@@ -1,8 +1,12 @@
 { config, lib, pkgs, ... }:
 
+let
+  impermanence = builtins.fetchTarball "https://github.com/nix-community/impermanence/archive/master.tar.gz";
+in
 {
   imports =
     [
+      "${impermanence}/nixos.nix"
       ./hardware-configuration.nix
     ];
 
@@ -63,6 +67,36 @@
     isNormalUser = true;
     hashedPassword = "**REDACTED**";
     extraGroups = [ "wheel" ]; # Enable `sudo`
+  };
+
+  # Configure impermanence
+  environment.persistence."/persistent/root" = {
+    hideMounts = true;
+    directories = [
+      "/etc/nixos"
+      "/var/log"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
+      "/var/lib/systemd/timers"
+      "/etc/NetworkManager/system-connections"
+    ];
+    files = [
+      "/etc/machine-id"
+    ];
+  
+    users.root = {
+      home = "/root";
+      files = [ ".bash_history" ];
+    };
+    users.keith = {
+      directories = [
+        "Downloads"
+        "Documents"
+        "Videos"
+        "test_persist"
+      ];
+      files = [];
+    };
   };
 
   programs.firefox.enable = true;
