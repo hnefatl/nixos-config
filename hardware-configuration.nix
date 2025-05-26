@@ -48,7 +48,13 @@
   fileSystems."/games" =
     { device = "/dev/disk/by-uuid/15352c74-bed2-4ba3-b743-1463003519d9";
       fsType = "ext4";
-      options = [ "noatime" "exec" ];
+      options = [
+	"noatime"
+	"exec"
+	# Don't mount on boot, only when accessed.
+        "noauto"
+	"x-systemd.automount"
+      ];
     };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
