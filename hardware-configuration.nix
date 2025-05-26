@@ -39,6 +39,12 @@
       neededForBoot = true;
     };
 
+  fileSystems."/tmp" =
+    { device = "none";
+      fsType = "tmpfs";
+      options = [ "size=2G" "noatime" ];
+    };
+
   fileSystems."/games" =
     { device = "/dev/disk/by-uuid/15352c74-bed2-4ba3-b743-1463003519d9";
       fsType = "ext4";
