@@ -33,7 +33,8 @@
 
     xkb = {
       layout = "gb";
-      options = "caps:escape";
+      # cat $(nix-build --no-out-link '<nixpkgs>' -A xkeyboard_config)/etc/X11/xkb/rules/base.lst | less
+      options = "caps:hyper";
     };
 
     autoRepeatDelay = 200;
