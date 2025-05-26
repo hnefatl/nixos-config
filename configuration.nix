@@ -133,8 +133,20 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  programs.ssh.startAgent = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
+
   # Allow Spotify to discover Google Cast devices.
-  networking.firewall.allowedUDPPorts = [ 5333 ];
+  networking.firewall = {
+    allowedUDPPorts = [ 5333 ];
+    allowedTCPPorts = [ 22 ];
+  };
   services.avahi.enable = true;
 
   fonts = {
@@ -153,9 +165,6 @@
       };
     };
   };
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Copy the NixOS configuration file to /run/current-system/configuration.nix.
   system.copySystemConfiguration = true;
