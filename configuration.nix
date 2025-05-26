@@ -78,6 +78,7 @@
   };
 
   programs.firefox.enable = true;
+  programs.zsh.enable = true;
 
   # Allowlist for nonfree packages.
   nixpkgs.config.allowUnfreePredicate = p: builtins.elem (lib.getName p) [
@@ -88,6 +89,10 @@
     "steam-original"
     "steam-unwrapped"
     "steam-run"
+
+    "vscode"
+    "vscode-with-extensions"
+    "vscode-extension-ms-vscode-remote-remote-ssh"
 
     "nvidia-x11"
     "nvidia-settings"
@@ -102,6 +107,9 @@
     sysstat
     dmenu
     gparted
+    pciutils
+    flashrom
+    unzip
     terminator
     pulseaudio
     i3blocks
@@ -110,11 +118,12 @@
     xclip
     arandr
     ntfs3g
-    spotify
     playerctl
     pavucontrol
-    discord
+    vlc
     xorg.xev
+    gimp
+    (callPackage ./vscode.nix {})
   ];
 
   programs.neovim = {
@@ -131,6 +140,16 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
+  # Only very few proprietary drivers here but nice when it works :)
+  services.fwupd.enable = true;
+
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
   };
 
   programs.ssh.startAgent = true;
