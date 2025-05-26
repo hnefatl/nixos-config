@@ -9,8 +9,13 @@
       ./graphics.nix
     ];
 
-  networking.hostName = "PC";
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.hostName = "desktop";
+  networking.networkmanager.enable = true;
+  # Don't wait for network startup, for faster boots: `systemd-analyze`
+  # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a
+  systemd = {
+    services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce [];  # Normally ["network-online.target"]
+  };
 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
