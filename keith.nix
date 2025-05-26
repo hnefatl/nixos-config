@@ -25,6 +25,38 @@
       ];
     };
 
+    programs.obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-backgroundremoval
+        obs-pipewire-audio-capture
+      ];
+    };
+
+    systemd.user = {
+      enable = true;
+
+      services = {
+        discord = {
+          Unit = {
+            Description = "Start discord on login.";
+            # Wait for network to avoid "reconnecting" on startup.
+	    # TODO: doesn't seem to work, maybe network service isn't available in user mode?
+            After = ["network-online.service"];
+	    Wants = ["graphical-session.target"];
+          };
+          Service = {
+            Type = "exec";
+            RemainAfterExit = true;
+            ExecStart= "${pkgs.discord}/bin/discord --start-minimized";
+          };
+          Install = {
+            WantedBy = ["graphical-session.target"];
+          };
+        };
+      };
+    };
 
     home.stateVersion = "24.11";
   };
