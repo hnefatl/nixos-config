@@ -7,6 +7,7 @@
       ./boot.nix
       ./users.nix
       ./graphics.nix
+      ./hibernate.nix
     ];
 
   networking.hostName = "desktop";
