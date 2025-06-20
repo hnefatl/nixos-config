@@ -25,6 +25,20 @@
       ];
     };
 
+    programs.kitty = lib.mkForce {
+      enable = true;
+      settings = {
+	font_family = "family = 'Noto Mono'";
+	font_size = 12.0;
+	cursor = "#aaaaaa";
+	background = "#333333";
+	foreground = "#ffffff";
+        dynamic_background_opacity = true;
+	background_opacity = 0.5;
+	background_blur = 5;
+      };
+    };
+
     programs.obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [
@@ -33,6 +47,7 @@
         obs-pipewire-audio-capture
       ];
     };
+    programs.ranger.enable = true;
 
     systemd.user = {
       enable = true;
