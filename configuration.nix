@@ -107,6 +107,8 @@
     ncdu
     htop
     sysstat
+    fatrace
+    python3
     dmenu
     gparted
     pciutils
@@ -125,6 +127,7 @@
     vlc
     xorg.xev
     gimp
+    p7zip
     (callPackage ./vscode.nix {})
   ];
 
