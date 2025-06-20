@@ -48,6 +48,11 @@
       ];
     };
     programs.ranger.enable = true;
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
 
     systemd.user = {
       enable = true;
