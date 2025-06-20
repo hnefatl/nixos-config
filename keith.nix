@@ -58,11 +58,6 @@
       };
     };
 
-    home.stateVersion = "24.11";
+    home.stateVersion = "25.05";
   };
-
-  users.users."keith".openssh.authorizedKeys.keys = [
-    # Laptop
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFwVu5wURjrYYBrXhuX1L/Bdi0fliXs1ldSI16QEHcjd kcollister@kcollister"
-  ];
 }

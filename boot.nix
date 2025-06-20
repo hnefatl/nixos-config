@@ -21,10 +21,6 @@
       # Install a netboot efi onto /boot as well.
       extraFiles = { "EFI/netboot/ipxe.efi" = "${pkgs.ipxe}/ipxe.efi"; };
       extraEntries = ''
-        menuentry "Microsoft Windows" {
-          insmod chain
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
 	menuentry "Netboot" {
           insmod chain
           chainloader /EFI/netboot/ipxe.efi

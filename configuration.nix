@@ -7,16 +7,16 @@
       ./boot.nix
       ./users.nix
       ./graphics.nix
-      ./hibernate.nix
+      #./hibernate.nix
     ];
 
-  networking.hostName = "desktop";
+  networking.hostName = "laptop";
   networking.networkmanager.enable = true;
   # Don't wait for network startup, for faster boots: `systemd-analyze`
   # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a
-  systemd = {
-    services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce [];  # Normally ["network-online.target"]
-  };
+  #systemd = {
+  #  services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce [];  # Normally ["network-online.target"]
+  #};
 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -30,6 +30,8 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
+    # Laptop
+    dpi = 256;
 
     xkb = {
       layout = "gb";
@@ -50,21 +52,9 @@
 
     # Configure initial monitor layout.
     xrandrHeads = [{
-      output = "DP-0";
+      output = "eDP-1";
       primary = true;
-      monitorConfig = ''
-        Option "Position" "0 331"
-      '';
-    } {
-      output = "HDMI-0";
-      monitorConfig = ''
-        Option "Rotate" "right"
-      '';
     }];
-  };
-  services.displayManager.autoLogin = {
-    enable = true;
-    user = "keith";
   };
 
   # Enable sound.
@@ -93,10 +83,6 @@
     "vscode"
     "vscode-with-extensions"
     "vscode-extension-ms-vscode-remote-remote-ssh"
-
-    "nvidia-x11"
-    "nvidia-settings"
-    "nvidia-persistenced"
   ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -104,6 +90,7 @@
     wget
     ncdu
     htop
+    acpi
     sysstat
     dmenu
     gparted
@@ -117,7 +104,6 @@
     scrot
     xclip
     arandr
-    ntfs3g
     playerctl
     pavucontrol
     vlc
@@ -137,29 +123,11 @@
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-  # Only very few proprietary drivers here but nice when it works :)
   services.fwupd.enable = true;
 
-  services.sunshine = {
-    enable = true;
-    autoStart = true;
-    capSysAdmin = true;
-    openFirewall = true;
-  };
-
   programs.ssh.startAgent = true;
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-    };
-  };
 
   # Allow Spotify to discover Google Cast devices.
   networking.firewall = {
@@ -189,6 +157,6 @@
   system.copySystemConfiguration = true;
 
   # DO NOT CHANGE: original NixOS version, for backcompat decisions.
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }
 
