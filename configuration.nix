@@ -1,3 +1,5 @@
+# Use e.g. `nixos-option services.fprintd.enable` to query the value of the current config.
+
 { config, lib, pkgs, ... }:
 
 {
@@ -8,9 +10,10 @@
       ./users.nix
       ./graphics.nix
       ./hibernate.nix
+      ./machine_config.nix
     ];
 
-  networking.hostName = "desktop";
+  networking.hostName = config.machine_config.hostname;
   networking.networkmanager.enable = true;
   # Don't wait for network startup, for faster boots: `systemd-analyze`
   # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a
