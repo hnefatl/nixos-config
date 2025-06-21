@@ -11,13 +11,12 @@ in {
       type = lib.types.str;
       description = "Hostname for the machine.";
     };
-    laptop = lib.mkOption {
-      type = lib.types.bool;
-      description = "Whether the machine is a laptop.";
+    formFactor = lib.mkOption {
+      type = lib.types.enum ["laptop" "desktop"];
+      description = "The physical form-factor of the machine. To be used for common portability decisions (e.g. WiFi, Bluetooth, VPN, ...).";
     };
     hasFingerprintReader = lib.mkOption {
       type = lib.types.bool;
-      description = "Whether the machine has a fingerprint reader.";
     };
   };
 
