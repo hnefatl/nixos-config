@@ -1,3 +1,5 @@
+# Use e.g. `nixos-option services.fprintd.enable` to query the value of the current config.
+
 { config, lib, pkgs, ... }:
 
 {
@@ -8,6 +10,7 @@
       ./users.nix
       ./graphics.nix
       ./wireguard.nix
+      ./machine_config.nix
       #./hibernate.nix
     ];
 
@@ -140,12 +143,12 @@
     };
   };
 
-  services.fprintd.enable = true;
-  systemd.services.fprintd = {
+  services.fprintd.enable = config.machine_config.hasFingerprintReader;
+  systemd.services.fprintd = lib.mkIf config.machine_config.hasFingerprintReader {
     wantedBy = [ "multi-user.target" ];
     serviceConfig.Type = "simple";
   };
-  security.pam.services.swaylock = {
+  security.pam.services.swaylock = lib.mkIf config.machine_config.hasFingerprintReader {
     fprintAuth = true;
     # Allow passwords to unlock the lockscreen, not just fingerprint.
     text = ''
