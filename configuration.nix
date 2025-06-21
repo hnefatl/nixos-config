@@ -23,38 +23,8 @@
 
   # TTY config
   console = {
+    keyMap = "uk";
     font = "Lat2-Terminus16";
-    useXkbConfig = true; # use xkb.options in tty.
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    # Laptop
-    dpi = 256;
-
-    xkb = {
-      layout = "gb";
-      # cat $(nix-build --no-out-link '<nixpkgs>' -A xkeyboard_config)/etc/X11/xkb/rules/base.lst | less
-      options = "caps:hyper";
-    };
-
-    autoRepeatDelay = 200;
-    autoRepeatInterval = 17;
-
-    windowManager.i3 = {
-      enable = true;
-      extraSessionCommands = ''
-	# Desktop background colour
-        xsetroot -solid "#333333"
-      '';
-    };
-
-    # Configure initial monitor layout.
-    xrandrHeads = [{
-      output = "eDP-1";
-      primary = true;
-    }];
   };
 
   # Enable sound.
@@ -66,6 +36,8 @@
     # Pulseaudio compatability layer.
     pulse.enable = true;
   };
+
+  services.autorandr.enable = true;
 
   programs.firefox.enable = true;
   programs.zsh.enable = true;
@@ -92,15 +64,15 @@
     htop
     acpi
     sysstat
+    fatrace
+    python3
     dmenu
     gparted
     pciutils
     flashrom
     unzip
-    terminator
     pulseaudio
-    i3blocks
-    i3lock
+    networkmanagerapplet
     scrot
     xclip
     arandr
@@ -109,6 +81,8 @@
     vlc
     xorg.xev
     gimp
+    p7zip
+    brightnessctl
     (callPackage ./vscode.nix {})
   ];
 
@@ -152,6 +126,46 @@
       };
     };
   };
+
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      # Login without prompting password when booted.
+      initial_session = {
+        command = "${pkgs.sway}/bin/sway";
+        user = "keith";
+      };
+      default_session = initial_session;
+    };
+  };
+
+  services.fprintd.enable = true;
+  systemd.services.fprintd = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.Type = "simple";
+  };
+  security.pam.services.swaylock = {
+    fprintAuth = true;
+    # Allow passwords to unlock the lockscreen, not just fingerprint.
+    text = ''
+      auth sufficient pam_unix.so try_first_pass likeauth nullok
+      auth sufficient pam_fprintd.so
+      auth include login
+    '';
+  };
+
+  # Configure swaylock for all invocations (e.g. manual, lid-close, hibernate, ...).
+  environment.etc."swaylock/config" = {
+    text = ''
+    show-failed-attempts
+    show-keyboard-layout
+    indicator-caps-lock
+    color=848884
+    '';
+  };
+
+  security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # Copy the NixOS configuration file to /run/current-system/configuration.nix.
   system.copySystemConfiguration = true;
