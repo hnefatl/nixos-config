@@ -151,16 +151,6 @@
     };
   };
 
-  # Configure swaylock for all invocations (e.g. manual, lid-close, hibernate, ...).
-  environment.etc."swaylock/config" = {
-    text = ''
-    show-failed-attempts
-    show-keyboard-layout
-    indicator-caps-lock
-    color=848884
-    '';
-  };
-
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
