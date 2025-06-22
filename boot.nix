@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   boot.loader = {
     timeout = 2;
     efi = { canTouchEfiVariables = true; };
 
-    # Grub neatly sorts all the previous generations of NixOS into a folder, nicer that systemd-boot.
+    # Grub neatly sorts all the previous generations of NixOS into a folder, nicer than systemd-boot.
     grub = {
       enable = true;
       useOSProber = false;  # Statically defined here instead (more stable, faster builds).
@@ -20,11 +20,15 @@
 
       # Install a netboot efi onto /boot as well.
       extraFiles = { "EFI/netboot/ipxe.efi" = "${pkgs.ipxe}/ipxe.efi"; };
-      extraEntries = ''
-        menuentry "Microsoft Windows" {
-          insmod chain
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
+      extraEntries = (
+        if config.machine_config.instance == "desktop" then ''
+          menuentry "Microsoft Windows" {
+            insmod chain
+            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          }
+          ''
+        else ""
+      ) + ''
 	menuentry "Netboot" {
           insmod chain
           chainloader /EFI/netboot/ipxe.efi
