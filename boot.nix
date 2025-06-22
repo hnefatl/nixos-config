@@ -29,14 +29,14 @@
           ''
         else ""
       ) + ''
-	menuentry "Netboot" {
-          insmod chain
-          chainloader /EFI/netboot/ipxe.efi
-	};
+        menuentry "Netboot" {
+              insmod chain
+              chainloader /EFI/netboot/ipxe.efi
+        };
         menuentry 'Shutdown' {
           halt
         }
-        menuentry 'Restart' {
+        menuentry 'restart' {
           reboot
         }
       '';
