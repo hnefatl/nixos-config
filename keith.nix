@@ -110,6 +110,28 @@
       };
     };
 
+    programs.neovim = {
+      enable = true;
+      extraConfig = ''
+        syntax enable
+        set autoindent
+        set shiftwidth=4
+        set tabstop=4
+        set smarttab
+        set expandtab
+        set hlsearch
+        set smartcase
+        set relativenumber
+        set number
+
+        " Re-open at previous position in file: https://stackoverflow.com/a/774599
+        if has("autocmd")
+          au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+            \| exe "normal! g'\"" | endif
+        endif
+      '';
+    };
+
     programs.obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [
