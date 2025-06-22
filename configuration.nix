@@ -27,8 +27,8 @@
 
   # TTY config
   console = {
+    keyMap = "uk";
     font = "Lat2-Terminus16";
-    useXkbConfig = true; # use xkb.options in tty.
   };
 
   # Enable the X11 windowing system.
@@ -93,6 +93,7 @@
     wget
     ncdu
     htop
+    acpi
     sysstat
     fatrace
     python3
@@ -105,16 +106,17 @@
     pulseaudio
     i3blocks
     i3lock
+    networkmanagerapplet
     scrot
     xclip
     arandr
-    ntfs3g
     playerctl
     pavucontrol
     vlc
     xorg.xev
     gimp
     p7zip
+    brightnessctl
     (callPackage ./vscode.nix {})
   ];
 

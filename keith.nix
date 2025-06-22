@@ -4,7 +4,7 @@
   users.users.keith = {
     isNormalUser = true;
     hashedPassword = "**REDACTED**";
-    extraGroups = [ "wheel" ]; # Enable `sudo`
+    extraGroups = [ "wheel" "video" ];
     shell = pkgs.zsh;
   };
 
