@@ -13,7 +13,21 @@
     ];
   };
 
-  home-manager.users.keith = { pkgs, ... }: {
+  home-manager.users.keith = { pkgs, ... }: let
+    catppuccin = builtins.fetchGit {
+      url = "https://github.com/catppuccin/nix";
+      # Recent pinned commit for stability.
+      # Could use e.g.
+      # `builtins.fetchTarball https://github.com/catppuccin/nix/archive/refs/tags/v1.2.1.tar.gz`
+      # instead but there's no up-to-date stable release atm.
+      rev = "6d571d2feebaaed62b0932b3a0eba4305a59be7f";
+    };
+  in {
+    imports = [(import "${catppuccin}/modules/home-manager")];
+
+    catppuccin.enable = true;
+    catppuccin.flavor = "mocha";
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
