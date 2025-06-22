@@ -109,6 +109,6 @@ in rec {
   # Handle actionable notifications
   "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu dmenu";
 
-  # TODO: printscreen
-  # TODO: notification daemon closure, like dunst. mod+x
+  "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify --cursor copy anything";
+  "${mod}+Print" = "${Print} --wait $(echo '3\\n5' | dmenu -p 'Delay:')";
 }
