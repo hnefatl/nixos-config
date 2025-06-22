@@ -63,7 +63,6 @@
     pciutils
     flashrom
     unzip
-    terminator
     pulseaudio
     networkmanagerapplet
     scrot

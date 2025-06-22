@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   users.users.keith = {
@@ -6,6 +6,11 @@
     hashedPassword = "**REDACTED**";
     extraGroups = [ "wheel" "video" ];
     shell = pkgs.zsh;
+
+    openssh.authorizedKeys.keys = lib.mkIf (config.machine_config.instance == "desktop") [
+      # Laptop
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFwVu5wURjrYYBrXhuX1L/Bdi0fliXs1ldSI16QEHcjd kcollister@kcollister"
+    ];
   };
 
   home-manager.users.keith = { pkgs, ... }: {
@@ -243,9 +248,4 @@
 
     home.stateVersion = "24.11";
   };
-
-  users.users."keith".openssh.authorizedKeys.keys = [
-    # Laptop
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFwVu5wURjrYYBrXhuX1L/Bdi0fliXs1ldSI16QEHcjd kcollister@kcollister"
-  ];
 }
