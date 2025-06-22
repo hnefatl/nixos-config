@@ -127,17 +127,19 @@
 
   programs.git.enable = true;
 
-  programs.steam = {
+  programs.steam = let
+    isDesktop = config.machine_config.instance == "desktop";
+  in {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    # Only run the desktop as a "game provider server", to keep laptop slim.
+    remotePlay.openFirewall = isDesktop; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = isDesktop; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = isDesktop; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-  # Only very few proprietary drivers here but nice when it works :)
   services.fwupd.enable = true;
 
-  services.sunshine = {
+  services.sunshine = lib.mkIf (config.machine_config.instance == "desktop") {
     enable = true;
     autoStart = true;
     capSysAdmin = true;
@@ -145,7 +147,7 @@
   };
 
   programs.ssh.startAgent = true;
-  services.openssh = {
+  services.openssh = lib.mkIf (config.machine_config.instance == "desktop") {
     enable = true;
     settings = {
       PasswordAuthentication = false;
