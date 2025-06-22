@@ -104,8 +104,6 @@
     unzip
     terminator
     pulseaudio
-    i3blocks
-    i3lock
     networkmanagerapplet
     scrot
     xclip

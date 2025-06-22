@@ -22,6 +22,8 @@
         discord
         spotify
         xidlehook
+        i3blocks
+        i3lock
       ];
     };
 
