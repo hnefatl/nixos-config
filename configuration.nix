@@ -12,6 +12,7 @@
       ./hibernate.nix
       ./machine_config.nix
       ./wireguard.nix
+      ./fingerprint.nix
     ];
 
   networking.hostName = config.machine_config.hostname;
@@ -29,46 +30,6 @@
   console = {
     keyMap = "uk";
     font = "Lat2-Terminus16";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    xkb = {
-      layout = "gb";
-      # cat $(nix-build --no-out-link '<nixpkgs>' -A xkeyboard_config)/etc/X11/xkb/rules/base.lst | less
-      options = "caps:hyper";
-    };
-
-    autoRepeatDelay = 200;
-    autoRepeatInterval = 17;
-
-    windowManager.i3 = {
-      enable = true;
-      extraSessionCommands = ''
-	# Desktop background colour
-        xsetroot -solid "#333333"
-      '';
-    };
-
-    # Configure initial monitor layout.
-    xrandrHeads = [{
-      output = "DP-0";
-      primary = true;
-      monitorConfig = ''
-        Option "Position" "0 331"
-      '';
-    } {
-      output = "HDMI-0";
-      monitorConfig = ''
-        Option "Rotate" "right"
-      '';
-    }];
-  };
-  services.displayManager.autoLogin = {
-    enable = true;
-    user = "keith";
   };
 
   # Enable sound.
@@ -178,6 +139,31 @@
       };
     };
   };
+
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      # Login without prompting password when booted.
+      initial_session = {
+        command = "${pkgs.sway}/bin/sway";
+        user = "keith";
+      };
+      default_session = initial_session;
+    };
+  };
+
+  # Configure swaylock for all invocations (e.g. manual, lid-close, hibernate, ...).
+  environment.etc."swaylock/config" = {
+    text = ''
+    show-failed-attempts
+    show-keyboard-layout
+    indicator-caps-lock
+    color=848884
+    '';
+  };
+
+  security.polkit.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # Copy the NixOS configuration file to /run/current-system/configuration.nix.
   system.copySystemConfiguration = true;

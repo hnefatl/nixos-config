@@ -1,7 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
+  #home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
+  # Specifically want https://github.com/nix-community/home-manager/commit/5675a9686851d9626560052a032c4e14e533c1fa
+  home-manager = builtins.fetchGit {
+    url = "https://github.com/nix-community/home-manager";
+    rev = "5675a9686851d9626560052a032c4e14e533c1fa";
+  };
 in
 {
   imports = [
