@@ -50,10 +50,10 @@
 	startup = [];
 
         fonts = {
-	  names = ["Noto Sans"];
-	  style = "Mono";
-	  size = "10";
-	};
+	      names = ["Noto Sans"];
+	      style = "Mono";
+	      size = "10";
+	    };
 
         input = {
           "type:keyboard" = {
@@ -69,14 +69,14 @@
         };
         output."*".adaptive_sync = "true";
 
-	window = {
+	    window = {
           border = 2;
-	  hideEdgeBorders = "smart";
-	};
-	focus = {
+	      hideEdgeBorders = "smart";
+	    };
+	    focus = {
           mouseWarping = "container";
-	  followMouse = false;
-	};
+	      followMouse = false;
+	    };
 
         bars = [{
           position = "top";
@@ -84,7 +84,7 @@
           statusCommand = "${pkgs.i3blocks}/bin/i3blocks";
         }];
 
-	keybindings = (import ./sway-keybindings.nix { inherit pkgs lib; });
+	    keybindings = (import ./sway-keybindings.nix { inherit pkgs lib; });
       };
     };
 
@@ -101,12 +101,12 @@
     programs.kitty = lib.mkForce {
       enable = true;
       settings = {
-	confirm_os_window_close = 0;
-	font_family = "family = 'Noto Mono'";
-	font_size = 12.0;
-	cursor = "#aaaaaa";
-	background = "#333333";
-	foreground = "#ffffff";
+	    confirm_os_window_close = 0;
+	    font_family = "family = 'Noto Mono'";
+	    font_size = 12.0;
+	    cursor = "#aaaaaa";
+	    background = "#333333";
+	    foreground = "#ffffff";
       };
     };
 
@@ -157,7 +157,7 @@
             # Wait for network to avoid "reconnecting" on startup.
 	    # TODO: doesn't seem to work, maybe network service isn't available in user mode?
             After = ["network-online.service"];
-	    Wants = ["graphical-session.target"];
+	        Wants = ["graphical-session.target"];
           };
           Service = {
             Type = "exec";
