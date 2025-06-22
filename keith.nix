@@ -153,6 +153,9 @@
         default-timeout = 10000;
         border-size = 0;
 
+        # Profile picture icons are big and distracting.
+        "app-name=discord".icons = 0;
+
         "urgency=low" = {
           background-color = "#222222";
           text-color = "#888888";
