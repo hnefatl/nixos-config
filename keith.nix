@@ -147,6 +147,34 @@
       nix-direnv.enable = true;
     };
 
+    services.mako = {
+      enable = true;
+      settings = {
+        actions = true;
+        markup = true;
+        default-timeout = 10000;
+        border-size = 0;
+
+        "urgency=low" = {
+          background-color = "#222222";
+          text-color = "#888888";
+          default-timeout = 5000;
+        };
+        "urgency=normal" = {
+          background-color = "#285577";
+          text-color = "#ffffff";
+          # Layer over fullscreen apps.
+          layer = "overlay";
+        };
+        "urgency=critical" = {
+          background-color = "#900000";
+          text-color = "#ffffff";
+          default-timeout = 0; # don't timeout
+          layer = "overlay";
+        };
+      };
+    };
+
     systemd.user = {
       enable = true;
 

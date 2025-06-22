@@ -104,6 +104,11 @@ in rec {
   "${mod}+i" = "resize grow height 5ppt";
   "${mod}+Shift+i" = "resize shrink height 5ppt";
 
+  "${mod}+x" = "exec ${pkgs.mako}/bin/makoctl dismiss";
+  "${mod}+Shift+x" = "exec ${pkgs.mako}/bin/makoctl restore";
+  # Handle actionable notifications
+  "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu dmenu";
+
   # TODO: printscreen
   # TODO: notification daemon closure, like dunst. mod+x
 }
