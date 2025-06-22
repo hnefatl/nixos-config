@@ -15,7 +15,7 @@ in rec {
   "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5% ; pkill -RTMIN+10 i3blocks";
   "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5% ; pkill -RTMIN+10 i3blocks";
   "XF86AudioMute" = "exec amixer set Master toggle ; pkill -RTMIN+10 i3blocks";
-  "XF86AudioPrev" = "exec playerctl -p spotify prev ; pkill -RTMIN+11 i3blocks";
+  "XF86AudioPrev" = "exec playerctl -p spotify previous ; pkill -RTMIN+11 i3blocks";
   "XF86AudioNext" = "exec playerctl -p spotify next ; pkill -RTMIN+11 i3blocks";
   # Spotify-specific, should maybe make generic player equivalents for e.g. youtube.
   # TODO: one of my devices has different output here, maybe PC?
