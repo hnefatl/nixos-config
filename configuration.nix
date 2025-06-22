@@ -86,24 +86,7 @@
   programs.firefox.enable = true;
   programs.zsh.enable = true;
 
-  # Allowlist for nonfree packages.
-  nixpkgs.config.allowUnfreePredicate = p: builtins.elem (lib.getName p) [
-    "spotify"
-    "discord"
-
-    "steam"
-    "steam-original"
-    "steam-unwrapped"
-    "steam-run"
-
-    "vscode"
-    "vscode-with-extensions"
-    "vscode-extension-ms-vscode-remote-remote-ssh"
-
-    "nvidia-x11"
-    "nvidia-settings"
-    "nvidia-persistenced"
-  ];
+  nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
