@@ -1,19 +1,14 @@
-{ config, pkgs, ... }:
+{ config, lib, ... }:
 
-{
+# TODO: get hibernation working on laptop, will need to configure a swapfile.
+lib.mkIf (config.machine_config.instance == "desktop") {
   powerManagement.enable = true;
 
-  systemd.sleep.extraConfig = ''
-    AllowHybridSleep=yes
-  '';
-
   services.logind = {
-    # Couldn't get hybrid-sleep working: NVIDIA errors about not using driver procfs suspend interface.
-    # Suspect that NixOS doesn't configure systemd-sleep correctly to interact with nvidia's systemd units.
-    powerKey = "suspend";
+    powerKey = if config.machine_config.form_factor == "desktop" then "suspend" else "hibernate";
     powerKeyLongPress = "poweroff";
-    # Configuring IdleAction and IdleActionSec didn't work: possibly i3wm not supporting idle detection.
-    # Instead worked around by adding a timer in i3 config.
+    # Idle detection here didn't seem to work in i3, instead added an exec to i3 config.
+    # TODO: figure out what to do on Sway.
   };
 }
 
