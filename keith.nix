@@ -42,6 +42,7 @@
     wayland.windowManager.sway = {
       enable = true;
       xwayland = true;
+      extraOptions = lib.mkIf (config.machine_config.instance == "desktop") ["--unsupported-gpu"];
       wrapperFeatures.gtk = true;
       config = rec {
         terminal = "kitty";

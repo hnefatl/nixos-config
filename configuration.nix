@@ -144,7 +144,7 @@
     settings = rec {
       # Login without prompting password when booted.
       initial_session = {
-        command = "${pkgs.sway}/bin/sway";
+        command = "${pkgs.sway}/bin/sway" + (if config.machine_config.instance == "desktop" then " --unsupported-gpu" else "");
         user = "keith";
       };
       default_session = initial_session;
