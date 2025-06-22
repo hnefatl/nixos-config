@@ -75,6 +75,7 @@
     gimp
     p7zip
     brightnessctl
+    nix-inspect
     (callPackage ./vscode.nix {})
   ];
 

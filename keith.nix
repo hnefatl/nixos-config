@@ -94,21 +94,19 @@
       show-failed-attempts
       show-keyboard-layout
       indicator-caps-lock
-      color=848884
+      color=101010
       '';
     };
 
     programs.kitty = lib.mkForce {
       enable = true;
       settings = {
+	confirm_os_window_close = 0;
 	font_family = "family = 'Noto Mono'";
 	font_size = 12.0;
 	cursor = "#aaaaaa";
 	background = "#333333";
 	foreground = "#ffffff";
-        dynamic_background_opacity = true;
-	background_opacity = 0.5;
-	background_blur = 5;
       };
     };
 
