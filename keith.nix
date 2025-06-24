@@ -66,6 +66,14 @@
           };
         };
         output."*".adaptive_sync = "true";
+        # Desktop screens
+        output."LG Electronics LG ULTRAGEAR 102MAMBHL915" = {
+          position = "0,0";
+        };
+        output."Samsung Electric Company LF24T35 H4LRC06671" = {
+          position = "2560,0";
+          transform = "90";
+        };
 
         window = {
           border = 2;
