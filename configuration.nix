@@ -76,6 +76,7 @@
     p7zip
     brightnessctl
     nix-inspect
+    jujutsu
     (callPackage ./vscode.nix {})
   ];
 
