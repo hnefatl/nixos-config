@@ -102,7 +102,7 @@
 
   services.fwupd.enable = true;
 
-  services.sunshine = lib.mkIf (config.machine_config.instance == "desktop") {
+  services.sunshine = {
     enable = true;
     autoStart = true;
     capSysAdmin = true;
