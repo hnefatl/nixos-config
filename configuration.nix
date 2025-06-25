@@ -13,6 +13,7 @@
       ./machine_config.nix
       ./wireguard.nix
       ./fingerprint.nix
+      ./bluetooth.nix
     ];
 
   networking.hostName = config.machine_config.hostname;
