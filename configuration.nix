@@ -95,6 +95,8 @@
     brightnessctl
     nix-inspect
     jujutsu
+    speedtest-cli
+    yubioath-flutter
     (callPackage ./vscode.nix {})
   ];
 
