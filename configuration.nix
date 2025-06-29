@@ -16,6 +16,21 @@
       ./bluetooth.nix
     ];
 
+  nix = {
+    optimise = {
+      automatic = true;
+      dates = ["Sat *-*-* 09:00:00"];
+    };
+    gc = {
+      automatic = true;
+      dates = "Sat *-*-* 08:00:00";
+      options = "--delete-older-than 30d";
+    };
+    settings = {
+      auto-optimise-store = true;
+    };
+  };
+
   networking.hostName = config.machine_config.hostname;
   networking.networkmanager.enable = true;
   # Don't wait for network startup, for faster boots: `systemd-analyze`
