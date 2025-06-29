@@ -46,6 +46,7 @@
       wrapperFeatures.gtk = true;
       config = rec {
         terminal = "kitty";
+        defaultWorkspace = "workspace number 1";
 
         fonts = {
           names = ["Noto Sans"];
