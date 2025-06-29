@@ -5,8 +5,7 @@ let
   caps = "Mod3"; # Caps lock rebound to Escape
 in rec {
   "${mod}+r" = "reload";
-  "${mod}+Shift+r" = "restart";
-  "${mod}+Shift+q" = "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'";
+  "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
 
   "${caps}+t" = "exec ${lib.getExe pkgs.kitty}";
   "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
