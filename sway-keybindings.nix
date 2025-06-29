@@ -111,4 +111,7 @@ in rec {
 
   "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify --cursor copy anything";
   "${mod}+Print" = "${Print} --wait $(echo '3\\n5' | dmenu -p 'Delay:')";
+
+  "${caps}+d" = "exec ${pkgs.discord}/bin/discord";
+  "${caps}+s" = "exec ${pkgs.spotify}/bin/spotify";
 }
