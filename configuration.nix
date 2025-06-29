@@ -28,6 +28,8 @@
     };
     settings = {
       auto-optimise-store = true;
+      # Required by `nh` at least.
+      experimental-features = ["nix-command"];
     };
   };
 
@@ -104,6 +106,8 @@
   };
 
   programs.git.enable = true;
+
+  programs.nh.enable = true;
 
   programs.steam = let
     isDesktop = config.machine_config.instance == "desktop";
