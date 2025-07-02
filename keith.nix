@@ -78,6 +78,7 @@
 
         window = {
           border = 2;
+          titlebar = false;
           hideEdgeBorders = "smart";
         };
         focus = {
