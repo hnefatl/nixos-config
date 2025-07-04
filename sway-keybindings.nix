@@ -98,10 +98,10 @@ in rec {
   "${mod}+Alt+Shift+j" = "move workspace to output down";
   "${mod}+Alt+Shift+k" = "move workspace to output up";
 
-  "${mod}+u" = "resize grow width 5ppt";
-  "${mod}+Shift+u" = "resize shrink width 5ppt";
-  "${mod}+i" = "resize grow height 5ppt";
-  "${mod}+Shift+i" = "resize shrink height 5ppt";
+  "${mod}+u" = "resize grow width 5px or 5ppt";
+  "${mod}+Shift+u" = "resize shrink width 5px or 5ppt";
+  "${mod}+i" = "resize grow height 5px or 5ppt";
+  "${mod}+Shift+i" = "resize shrink height 5px or 5ppt";
 
   "${mod}+x" = "exec ${pkgs.mako}/bin/makoctl dismiss";
   "${mod}+Shift+x" = "exec ${pkgs.mako}/bin/makoctl restore";
