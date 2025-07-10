@@ -5,18 +5,17 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
       ./boot.nix
       ./users.nix
       ./graphics.nix
       ./hibernate.nix
-      ./machine_config.nix
       ./wireguard.nix
       ./fingerprint.nix
       ./bluetooth.nix
     ];
 
   nix = {
+    package = pkgs.nixVersions.stable;
     optimise = {
       automatic = true;
       dates = ["Sat *-*-* 09:00:00"];
@@ -29,7 +28,7 @@
     settings = {
       auto-optimise-store = true;
       # Required by `nh` at least.
-      experimental-features = ["nix-command"];
+      experimental-features = ["nix-command" "flakes"];
     };
   };
 
@@ -177,9 +176,6 @@
 
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
-
-  # Copy the NixOS configuration file to /run/current-system/configuration.nix.
-  system.copySystemConfiguration = true;
 
   # DO NOT CHANGE: original NixOS version, for backcompat decisions.
   system.stateVersion = "24.11"; # Did you read the comment?

@@ -1,6 +1,4 @@
-{ lib, config, ... }: let
-  cfg = config.machine_config;
-in {
+{ lib, ... }: {
   # Schema for per-machine configs levers.
   options.machine_config = {
     instance = lib.mkOption {
@@ -19,7 +17,4 @@ in {
       type = lib.types.bool;
     };
   };
-
-  # The actual config for this machine, imported from a symlinked file.
-  config.machine_config = (import ./machine_config_instance.nix);
 }
