@@ -16,6 +16,14 @@
           ./machine_configs/personal-laptop-hardware.nix
         ];
       };
+      desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configuration.nix
+          ./machine_configs/desktop.nix
+          ./machine_configs/desktop-hardware.nix
+        ];
+      };
     };
   };
 }
