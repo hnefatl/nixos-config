@@ -27,7 +27,21 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    history.size = 10000;
+    history = {
+      size = 10000;
+      ignoreDups = true;
+    };
+    initContent = ''
+      # Necessary because vim keybindings disable this binding?
+      bindkey '^R' history-incremental-search-backward
+    '';
+    plugins = [
+      {
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+    ];
   };
 
   wayland.windowManager.sway = {
