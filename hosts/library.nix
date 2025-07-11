@@ -24,10 +24,5 @@
       type = lib.types.bool;
       description = "Whether the device is a work device.";
     };
-    # TODO: make consistent between devices then remove.
-    supportsSuspend = lib.mkOption {
-      type = lib.types.bool;
-      description = "Whether the device can be suspended.";
-    };
   };
 }

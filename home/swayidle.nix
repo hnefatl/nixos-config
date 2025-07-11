@@ -16,12 +16,8 @@
         command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
         resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
       }
-    ] ++ (
-      if config.machine_config.supportsSuspend then
-        # 30mins
-        [{ timeout = 1800; command = "${pkgs.systemd}/bin/systemctl suspend"; }]
-      else
-        []
-    );
+      # 30mins
+      { timeout = 1800; command = "${pkgs.systemd}/bin/systemctl suspend"; }
+    ];
   };
 }

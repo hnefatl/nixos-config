@@ -8,6 +8,5 @@
     hasFingerprintReader = false;
     autoLogin = true;  # Secure environment
     isWork = false;
-    supportsSuspend = true;
   };
 }
