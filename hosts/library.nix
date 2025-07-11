@@ -2,7 +2,7 @@
   # Schema for per-machine configs levers.
   options.machine_config = {
     instance = lib.mkOption {
-      type = lib.types.enum ["personal-laptop" "desktop" "work-laptop"];
+      type = lib.types.enum ["laptop" "desktop" "corp-laptop"];
       description = "The specific machine. Prefer depending on a machine archetype defined below, unless unwieldy.";
     };
     hostname = lib.mkOption {

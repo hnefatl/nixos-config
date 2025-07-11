@@ -8,12 +8,12 @@
 
   outputs = { self, nixpkgs }: {
     nixosConfigurations = {
-      personal-laptop = nixpkgs.lib.nixosSystem {
+      laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
-          ./hosts/personal-laptop.nix
-          ./hosts/personal-laptop-hardware.nix
+          ./hosts/laptop.nix
+          ./hosts/laptop-hardware.nix
         ];
       };
       desktop = nixpkgs.lib.nixosSystem {

@@ -2,7 +2,7 @@
   imports = [ ./library.nix ];
 
   config.machine_config = {
-    instance = "personal-laptop";
+    instance = "laptop";
     hostname = "laptop";
     formFactor = "laptop";
     hasFingerprintReader = true;
