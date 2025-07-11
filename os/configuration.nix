@@ -5,7 +5,6 @@
 {
   imports =
     [
-      ./boot.nix
       ./users/users.nix
       ./graphics/graphics.nix
       ./hibernate.nix
