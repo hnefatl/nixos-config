@@ -19,6 +19,13 @@
       # Breaks build for home-manager?
       #sway.enable = true;
     };
+
+    shellAliases = {
+      c = "clear";
+      cl = "clear ; ls";
+      nso = "nh os switch /etc/nixos/os";
+      nsh = "nh home switch /etc/nixos/home";
+    };
   };
   nixpkgs.config.allowUnfree = true;
 
