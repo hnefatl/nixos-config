@@ -12,16 +12,16 @@
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
-          ./hosts/laptop.nix
-          ./hosts/laptop-hardware.nix
+          ../hosts/laptop.nix
+          ../hosts/laptop-hardware.nix
         ];
       };
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
-          ./hosts/desktop.nix
-          ./hosts/desktop-hardware.nix
+          ../hosts/desktop.nix
+          ../hosts/desktop-hardware.nix
         ];
       };
     };

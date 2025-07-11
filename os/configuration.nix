@@ -6,8 +6,8 @@
   imports =
     [
       ./boot.nix
-      ./users.nix
-      ./graphics.nix
+      ./users/users.nix
+      ./graphics/graphics.nix
       ./hibernate.nix
       ./wireguard.nix
       ./fingerprint.nix
