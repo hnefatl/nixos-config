@@ -16,7 +16,8 @@
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
       size = 20;
-      sway.enable = true;
+      # Breaks build for home-manager?
+      #sway.enable = true;
     };
   };
   nixpkgs.config.allowUnfree = true;
