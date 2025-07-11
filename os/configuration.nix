@@ -46,7 +46,9 @@
   # TTY config
   console = {
     keyMap = "uk";
-    font = "Lat2-Terminus16";
+    # Font details: https://files.ax86.net/terminus-ttf/README.Terminus.txt
+    # 1 is codepage, 16 is size, n is normal style.
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-116n.psf.gz";
   };
 
   # Enable sound.
