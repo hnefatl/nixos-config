@@ -29,7 +29,12 @@ in
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices = [ ];
+  swapDevices = [{
+    device = "/swapfile";
+    # 64 GiB, enough for 2x RAM - not sure what happens if hibernate
+    # when there's not enough space here, but don't want to find out.
+    size = 64 * 1024;
+  }];
 
   fileSystems."/warthog/media" = warthogSamba "media";
   fileSystems."/warthog/transfer" = warthogSamba "transfer";
