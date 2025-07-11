@@ -6,5 +6,6 @@
     hostname = "desktop";
     formFactor = "desktop";
     hasFingerprintReader = false;
+    autoLogin = true;  # Secure environment
   };
 }

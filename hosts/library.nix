@@ -16,5 +16,9 @@
     hasFingerprintReader = lib.mkOption {
       type = lib.types.bool;
     };
+    autoLogin = lib.mkOption {
+      type = lib.types.bool;
+      description = "Whether to automatically login without asking for a password.";
+    };
   };
 }

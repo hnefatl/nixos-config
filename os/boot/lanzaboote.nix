@@ -3,19 +3,24 @@
 {
   imports = [ ./common.nix ];
 
-  boot.loader.systemd-boot = {
+  boot = {
+    initrd.systemd.enable = true;
+
     # Replaced by lanzaboote
-    # TODO: check whether remaining menu items have any effect
-    enable = lib.mkForce false;
-    editor = false;
-    netbootxyz.enable = true;
-    memtest86.enable = true;
+    loader.systemd-boot.enable = lib.mkForce false;
+
+    # Options in https://github.com/nix-community/lanzaboote/blob/master/nix/modules/lanzaboote.nix
+    lanzaboote = {
+      enable = true;
+      # Generated with `sbctl create-keys` per
+      # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+      pkiBundle = "/var/lib/sbctl";
+      # Prevents just changing the kernel command line to gain root.
+      settings.editor = false;
+    };
   };
-  boot.lanzaboote = {
-    enable = true;
-    # Generated with `sbctl create-keys` per
-    # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
-    pkiBundle = "/var/lib/sbctl";
-  };
+
+  # Once LUKS is configured and secureboot is set up, run this to enable disk auto-decryption.
+  # sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+2+7+12 --wipe-slot=tpm2 /dev/nvme0n1p2
 }
 
