@@ -182,6 +182,8 @@
     };
   };
 
+  services.tlp.enable = config.machine_config.formFactor == "laptop";
+
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
