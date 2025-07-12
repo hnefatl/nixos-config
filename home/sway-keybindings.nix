@@ -3,6 +3,8 @@
 let
   mod  = "Mod4"; # Super/Windows/Framework key
   caps = "Escape"; # Caps lock rebound to Escape
+  dmenu-emoji = pkgs.callPackage ./scripts/dmenu-emoji.nix { inherit pkgs; };
+  dmenu-audio = pkgs.callPackage ./scripts/dmenu-audio.nix { inherit pkgs; };
 in rec {
   "${mod}+r" = "reload";
   "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
@@ -29,8 +31,8 @@ in rec {
   "${mod}+numbersign" = XF86AudioNext;
 
   # TODO: replace with semantic paths once dotfiles are ported into home-manager?
-  "${mod}+slash" = "~/bin/dmenu-audio";
-  "${mod}+a" = "~/bin/dmenu-emoji";
+  "${mod}+slash" = "exec ${dmenu-audio}/bin/dmenu-audio";
+  "${mod}+a" = "exec ${dmenu-emoji}/bin/dmenu-emoji";
 
   "XF86MonBrightnessUp" = "exec brightnessctl set +5%";
   "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
