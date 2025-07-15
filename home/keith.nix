@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [
+    ./swayidle.nix
+  ];
+
   home = rec {
     username = "keith";
     homeDirectory = "/home/${username}";
