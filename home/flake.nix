@@ -25,6 +25,15 @@
           ../hosts/desktop.nix
         ];
       };
+      # Deliberately not using real user+hostname - select this explicitly on the command line
+      # like `nh home switch ~/nixos-config/home --configuration=keith@corp-laptop`.
+      "keith@corp-laptop" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./keith.nix
+          ../hosts/corp-laptop.nix
+        ];
+      };
     };
   };
 }

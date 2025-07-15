@@ -20,5 +20,9 @@
       type = lib.types.bool;
       description = "Whether to automatically login without asking for a password.";
     };
+    isWork = lib.mkOption {
+      type = lib.types.bool;
+      description = "Whether the device is a work device.";
+    };
   };
 }

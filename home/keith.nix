@@ -155,7 +155,7 @@
     '';
   };
 
-  programs.obs-studio = {
+  programs.obs-studio = lib.mkIf (config.machine_config.instance == "desktop") {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
       wlrobs
@@ -205,7 +205,7 @@
     enable = true;
 
     services = {
-      discord = {
+      discord = lib.mkIf (!config.machine_config.isWork) {
         Unit = {
           Description = "Start discord on login.";
           # Wait for network to avoid "reconnecting" on startup.

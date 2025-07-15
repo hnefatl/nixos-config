@@ -7,5 +7,6 @@
     formFactor = "laptop";
     hasFingerprintReader = true;
     autoLogin = false;  # Secure boot and assumed insecure environment
+    isWork = false;
   };
 }
