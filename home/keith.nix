@@ -1,9 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  home = {
+  home = rec {
     username = "keith";
-    homeDirectory = "/home/keith";
+    homeDirectory = "/home/${username}";
+
     packages = with pkgs; [
       discord
       spotify
@@ -11,6 +12,7 @@
       i3blocks
       i3lock
     ];
+
     pointerCursor = {
       enable = true;
       name = "Adwaita";
@@ -114,10 +116,10 @@
   # Configure swaylock for all invocations (e.g. manual, lid-close, hibernate, ...).
   home.file.".config/swaylock/config" = {
     text = ''
-    show-failed-attempts
-    show-keyboard-layout
-    indicator-caps-lock
-    color=101010
+      show-failed-attempts
+      show-keyboard-layout
+      indicator-caps-lock
+      color=101010
     '';
   };
 
