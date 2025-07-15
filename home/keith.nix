@@ -29,6 +29,9 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  programs.home-manager.enable = true;
+  programs.nh.enable = true;
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
