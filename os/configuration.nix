@@ -147,22 +147,8 @@
   };
   services.avahi.enable = true;
 
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-color-emoji
-    ];
-    fontDir.enable = true;
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = ["Noto Serif"];
-        sansSerif = ["Noto Sans"];
-        monospace = ["Noto Sans Mono"];
-        emoji = ["Noto Color Emoji"];
-      };
-    };
-  };
+  # Useful for debugging available fonts.
+  fonts.fontDir.enable = true;
 
   services.greetd = {
     enable = true;

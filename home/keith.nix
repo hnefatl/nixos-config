@@ -10,7 +10,11 @@
       spotify
       xidlehook
       i3blocks
-      i3lock
+      noto-fonts
+      noto-fonts-color-emoji
+      nerd-fonts.symbols-only
+      # Needed for e.g. blueman-applet icon.
+      hicolor-icon-theme
     ];
 
     pointerCursor = {
@@ -33,6 +37,18 @@
 
   programs.home-manager.enable = true;
   programs.nh.enable = true;
+
+  fonts = {
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = ["Noto Serif"];
+        sansSerif = ["Noto Sans"];
+        monospace = ["Noto Sans Mono"];
+        emoji = ["Noto Color Emoji"];
+      };
+    };
+  };
 
   programs.zsh = {
     enable = true;
