@@ -134,13 +134,14 @@
   };
 
   # Configure swaylock for all invocations (e.g. manual, lid-close, hibernate, ...).
-  home.file.".config/swaylock/config" = {
-    text = ''
-      show-failed-attempts
-      show-keyboard-layout
-      indicator-caps-lock
-      color=101010
-    '';
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      show-failed-attempts = true;
+      show-keyboard-layout = true;
+      indicator-caps-lock = true;
+      color = "101010";
+    };
   };
 
   programs.kitty = lib.mkForce {
