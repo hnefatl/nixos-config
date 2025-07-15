@@ -2,7 +2,7 @@
 
 let
   mod  = "Mod4"; # Super/Windows/Framework key
-  caps = "Mod3"; # Caps lock rebound to Escape
+  caps = "Escape"; # Caps lock rebound to Escape
 in rec {
   "${mod}+r" = "reload";
   "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
