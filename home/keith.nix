@@ -198,6 +198,8 @@
 
       # Profile picture icons are big and distracting.
       "app-name=discord".icons = 0;
+      # Similar for calendar. Maybe make smaller in the future since this also affects e.g. chat pfps?
+      "app-name=\"Google Chrome\"".icons = 0;
 
       "urgency=low" = {
         background-color = "#222222";
