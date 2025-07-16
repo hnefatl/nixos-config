@@ -38,7 +38,7 @@ in rec {
   "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
 
   # TODO: Separate path for work lockscreen?
-  "${mod}+${caps}+l" = "exec ${lib.getExe pkgs.swaylock}";
+  "${mod}+${caps}+l" = "exec ${lib.getExe pkgs.swaylock-effects}";
 
   # dmenu stdin are the prefilled options. Alternative names can be entered.
   "${mod}+Return" = "exec echo 'spotify\\nmisc' | ${lib.getExe pkgs.dmenu} -p 'Name:' | xargs swaymsg rename workspace to";
