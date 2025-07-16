@@ -144,6 +144,7 @@
       show-failed-attempts = true;
       show-keyboard-layout = true;
       indicator-caps-lock = true;
+      indicator-idle-visible = true;
       color = "101010";
       # Extra settings from the -effects fork.
       clock = true;
