@@ -101,6 +101,8 @@
         };
         "type:touchpad" = {
           tap = "enabled";
+          # Disable-while-typing
+          dwt = "enabled";
         };
       };
       output."*".adaptive_sync = "true";
