@@ -7,7 +7,7 @@
 
   home = rec {
     username = "keith";
-    homeDirectory = "/home/${username}";
+    homeDirectory = "/home/${config.home.username}";
 
     packages = with pkgs; [
       discord
