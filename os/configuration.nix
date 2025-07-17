@@ -155,6 +155,13 @@
 
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
+  # If using another lock program, will need to update this PAM service name.
+  security.pam.services.swaylock = {
+    # Necessary to allow lockscreens
+    text = ''
+      auth include login
+    '';
+  };
 
   # DO NOT CHANGE: original NixOS version, for backcompat decisions.
   system.stateVersion = "24.11"; # Did you read the comment?
