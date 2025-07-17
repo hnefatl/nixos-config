@@ -8,7 +8,7 @@
     in rec {
       # By default show a nice login UI
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd ${swayCommand}";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd \"${swayCommand}\"";
         user = "greeter";
       };
       # If autologin is enabled, just jump straight in
