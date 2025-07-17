@@ -10,7 +10,7 @@
     timeouts = [
       # 5mins
       # TODO: --fade-in doesn't work
-      { timeout = 300; command = "${lib.getExe pkgs.swaylock-effects} --daemonize --fade-in 3"; }
+      { timeout = 300; command = "${lib.getExe pkgs.swaylock-effects} --daemonize"; }
       {
         timeout = 310;
         command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
