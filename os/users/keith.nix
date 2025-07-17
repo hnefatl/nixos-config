@@ -3,7 +3,8 @@
 {
   users.users.keith = {
     isNormalUser = true;
-    hashedPassword = "**REDACTED**";
+    # Generate with `mkpasswd > secrets/keith_password`
+    hashedPasswordFile = "/etc/nixos/secrets/keith_password";
     extraGroups = [ "wheel" "video" ];
     shell = pkgs.zsh;
 
