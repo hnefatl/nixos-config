@@ -139,6 +139,10 @@
 
       keybindings = (import ./sway-keybindings.nix { inherit pkgs lib; });
     };
+    extraConfig = ''
+      # If a game is focused, disable idle
+      for_window [class="steam_app*"] inhibit_idle focus
+    '';
   };
 
   # Configure swaylock for all invocations (e.g. manual, lid-close, hibernate, ...).
