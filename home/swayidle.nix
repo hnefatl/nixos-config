@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   services.swayidle = {
@@ -16,9 +16,12 @@
         command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
         resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
       }
-      # 30mins
-      # TODO: enable once sleep/hibernate is working
-      #{ timeout = 1800; command = "${pkgs.systemd}/bin/systemctl sleep"; }
-    ];
+    ] ++ (
+      if config.machine_config.supportsSuspend then
+        # 30mins
+        [{ timeout = 1800; command = "${pkgs.systemd}/bin/systemctl suspend"; }]
+      else
+        []
+    );
   };
 }

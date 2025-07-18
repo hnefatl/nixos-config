@@ -8,6 +8,7 @@
     hasFingerprintReader = false;
     autoLogin = false;
     isWork = true;
+    supportsSuspend = false;
   };
 }
 
