@@ -1,9 +1,13 @@
-{ lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [ ./common.nix ];
 
   boot = {
+    # TODO: remove once no-op.
+    # Personal laptop's wifi chip driver has a bug preventing suspend/hibernate in currently-stable 6.12.
+    # Enforce oldest kernel 6.14.
+    kernelPackages = lib.mkIf (lib.versionOlder pkgs.linuxPackages.kernel.version "6.14") pkgs.pkgs.linuxPackages_6_14;
     initrd.systemd.enable = true;
 
     # Replaced by lanzaboote
