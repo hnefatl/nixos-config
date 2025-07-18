@@ -84,6 +84,8 @@
     config = rec {
       terminal = "kitty";
       defaultWorkspace = "workspace number 1";
+      # Cycle around containers in the same workspace.
+      focus.wrapping = "workspace";
 
       fonts = {
         names = ["Noto Sans"];
