@@ -51,7 +51,7 @@ in
   fileSystems."/tmp" =
     { device = "none";
       fsType = "tmpfs";
-      options = [ "size=2G" "noatime" ];
+      options = [ "size=4G" "noatime" ];
     };
 
   fileSystems."/games" =
