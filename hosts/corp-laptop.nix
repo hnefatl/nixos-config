@@ -8,6 +8,7 @@
     hasFingerprintReader = false;
     autoLogin = false;
     isWork = true;
+    primaryMonitor = "eDP-1";
   };
 }
 

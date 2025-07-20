@@ -24,5 +24,9 @@
       type = lib.types.bool;
       description = "Whether the device is a work device.";
     };
+    primaryMonitor = lib.mkOption {
+      type = lib.types.str;
+      description = "Primary monitor for the machine.";
+    };
   };
 }

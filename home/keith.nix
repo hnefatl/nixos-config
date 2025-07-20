@@ -84,6 +84,9 @@
     config = rec {
       terminal = "kitty";
       defaultWorkspace = "workspace number 1";
+      # Set the primary monitor in X11 for xwayland apps. Prevents e.g. games defaulting to wrong screen.
+      startup = [{ command = "${lib.getExe pkgs.xorg.xrandr} --output ${config.machine_config.primaryMonitor} --primary"; always = true; }];
+
       # Cycle around containers in the same workspace.
       focus.wrapping = "workspace";
 
