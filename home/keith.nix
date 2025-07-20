@@ -3,6 +3,7 @@
 {
   imports = [
     ./swayidle.nix
+    ./unfree.nix
   ];
 
   home = rec {
@@ -37,7 +38,6 @@
       nsh = "nh home switch /etc/nixos/home";
     };
   };
-  nixpkgs.config.allowUnfree = true;
 
   programs.home-manager.enable = true;
   programs.nh.enable = true;
