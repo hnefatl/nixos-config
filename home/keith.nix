@@ -4,6 +4,7 @@
   imports = [
     ./swayidle.nix
     ./unfree.nix
+    ./firefox.nix
   ];
 
   home = rec {
@@ -41,8 +42,6 @@
 
   programs.home-manager.enable = true;
   programs.nh.enable = true;
-
-  programs.firefox.enable = true;
 
   fonts = {
     fontconfig = {
