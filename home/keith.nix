@@ -42,6 +42,8 @@
   programs.home-manager.enable = true;
   programs.nh.enable = true;
 
+  programs.firefox.enable = true;
+
   fonts = {
     fontconfig = {
       enable = true;
