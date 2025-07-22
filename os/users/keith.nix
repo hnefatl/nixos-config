@@ -5,7 +5,7 @@
     isNormalUser = true;
     # Generate with `mkpasswd > secrets/keith_password`
     hashedPasswordFile = "/etc/nixos/secrets/keith_password";
-    extraGroups = [ "wheel" "video" ];
+    extraGroups = [ "wheel" "video" "gamemode" ];
     shell = pkgs.zsh;
 
     openssh.authorizedKeys.keys = lib.mkIf (config.machine_config.instance == "desktop") [
