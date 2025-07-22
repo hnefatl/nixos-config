@@ -89,7 +89,8 @@
       startup = [{ command = "${lib.getExe pkgs.xorg.xrandr} --output ${config.machine_config.primaryMonitor} --primary"; always = true; }];
 
       # Cycle around containers in the same workspace.
-      focus.wrapping = "workspace";
+      # TODO: Still need something like i3-cycle to define "horizontal-only" workspace wrapping (or like tabbed-workspace-direction-only).
+      # focus.wrapping = "workspace";
 
       fonts = {
         names = ["Noto Sans"];
@@ -130,6 +131,7 @@
         titlebar = false;
         hideEdgeBorders = "smart";
       };
+      gaps.smartBorders = "on";
       focus = {
         mouseWarping = "container";
         followMouse = false;
