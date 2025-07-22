@@ -11,18 +11,16 @@
     profiles.keith = {
       search = {
         force = true;
-        # TODO: enable
-        #default = "kagi";
-        #privateDefault = "ddg";
-        #order = ["kagi" "ddg" "google"];
-        #engines = {
-        #  kagi = {
-        #    name = "Kagi";
-        #    urls = [{template = "https://kagi.com/search?q={searchTerms}";}];
-        #    icon = "https://kagi.com/favicon.ico";
-        #  };
-        #  bing.metaData.hidden = true;
-        #};
+        default = "kagi";
+        order = ["kagi" "ddg" "google"];
+        engines = {
+          kagi = {
+            name = "Kagi";
+            urls = [{template = "https://kagi.com/search?q={searchTerms}";}];
+            icon = "https://kagi.com/favicon.ico";
+          };
+          bing.metaData.hidden = true;
+        };
       };
       extensions = {
         force = true;
