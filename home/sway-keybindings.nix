@@ -11,6 +11,7 @@ in rec {
 
   "${caps}+t" = "exec ${lib.getExe pkgs.kitty}";
   "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
+  "${caps}+f" = "exec ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.ranger}";
   "${mod}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
 
   "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5% ; pkill -RTMIN+10 i3blocks";
