@@ -4,7 +4,6 @@
   imports = [
     ./swayidle.nix
     ./unfree.nix
-    ./firefox.nix
   ];
 
   home = rec {

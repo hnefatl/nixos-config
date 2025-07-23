@@ -21,6 +21,7 @@
         inherit pkgs;
         modules = [
           ./keith.nix
+          ./firefox.nix
           ../hosts/laptop.nix
         ];
         extraSpecialArgs = { inherit firefox-addons; };
@@ -29,6 +30,7 @@
         inherit pkgs;
         modules = [
           ./keith.nix
+          ./firefox.nix
           ../hosts/desktop.nix
         ];
         extraSpecialArgs = { inherit firefox-addons; };
