@@ -4,6 +4,8 @@
   imports = [
     ./swayidle.nix
     ./unfree.nix
+    ./feh.nix
+    ./mpv.nix
   ];
 
   home = rec {
