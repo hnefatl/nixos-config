@@ -55,7 +55,8 @@
         "startup.homepage_welcome_url" = "";
         "startup.homepage_override_url" = "";
 
-        "browser.download.useDownloadDir" = true;  # Often want /tmp
+        # Don't use the "downloads" directory, always ask - often I want to stick stuff in /tmp.
+        "browser.download.useDownloadDir" = false;
 
         "browser.newtabpage.activity-stream.feeds.topsites" = false;
         "browser.newtabpage.activity-stream.feeds.section.highlights" = false;
