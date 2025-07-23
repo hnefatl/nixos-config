@@ -75,4 +75,12 @@
     };
     profiles."tmp".id = 1;
   };
+
+  xdg.mimeApps = {
+    defaultApplications = {
+      "x-scheme-handler/https" = ["firefox.desktop"];
+      "x-scheme-handler/http" = ["firefox.desktop"];
+      "x-scheme-handler/mailto" = ["firefox.desktop"];
+    };
+  };
 }

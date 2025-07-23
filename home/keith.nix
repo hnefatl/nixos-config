@@ -251,6 +251,8 @@
     };
   };
 
+  xdg.mimeApps.enable = true;
+
   systemd.user = {
     enable = true;
 
