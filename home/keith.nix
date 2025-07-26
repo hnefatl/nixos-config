@@ -254,6 +254,11 @@
   };
 
   xdg.mimeApps.enable = true;
+  xdg.portal = {
+    enable = true;
+    configPackages = [pkgs.xdg-desktop-portal-wlr];
+    extraPortals = [pkgs.xdg-desktop-portal-wlr];
+  };
 
   systemd.user = {
     enable = true;
