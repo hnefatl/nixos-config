@@ -130,7 +130,7 @@
       window = {
         border = 2;
         titlebar = false;
-        hideEdgeBorders = "smart";
+        hideEdgeBorders = "--i3 smart";
       };
       gaps.smartBorders = "on";
       focus = {
