@@ -27,6 +27,9 @@ in rec {
   # TODO: one of my devices has different output here, maybe PC?
   "XF86AudioPlay" = "exec playerctl -p spotify play-pause ; pkill -RTMIN+11 i3blocks";
   "XF86AudioPause" = "exec playerctl -p spotify pause ; pkill -RTMIN+11 i3blocks";
+  # Testing generic media play/pause
+  "${mod}+XF86AudioPlay" = "exec playerctl play-pause ; pkill -RTMIN+11 i3blocks";
+  "${mod}+XF86AudioPause" = "exec playerctl pause ; pkill -RTMIN+11 i3blocks";
 
   # These aren't key rebindings, it's just getting the value of the Nix variables above.
   "${mod}+bracketleft" = XF86AudioLowerVolume;
