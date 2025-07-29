@@ -14,6 +14,10 @@ in rec {
   "${caps}+f" = "exec ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.ranger}";
   "${mod}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
 
+  # Wayland global keybind -> Discord in XWayland workaround.
+  "Alt+e" = "exec ${pkgs.xdotool}/bin/xdotool key alt+e";
+  "Alt+q" = "exec ${pkgs.xdotool}/bin/xdotool key alt+q";
+
   "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5% ; pkill -RTMIN+10 i3blocks";
   "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5% ; pkill -RTMIN+10 i3blocks";
   "XF86AudioMute" = "exec amixer set Master toggle ; pkill -RTMIN+10 i3blocks";
