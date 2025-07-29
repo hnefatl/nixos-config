@@ -12,6 +12,7 @@
       ./fingerprint.nix
       ./bluetooth.nix
       ./greetd.nix
+      ./audio.nix
       ./gaming.nix
     ];
 
@@ -50,16 +51,6 @@
     # Font details: https://files.ax86.net/terminus-ttf/README.Terminus.txt
     # 1 is codepage, 16 is size, n is normal style.
     font = "${pkgs.terminus_font}/share/consolefonts/ter-116n.psf.gz";
-  };
-
-  # Enable sound.
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    # Pulseaudio compatability layer.
-    pulse.enable = true;
   };
 
   services.autorandr.enable = true;
