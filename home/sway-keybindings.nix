@@ -12,6 +12,7 @@ in rec {
   "${caps}+t" = "exec ${lib.getExe pkgs.kitty}";
   "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
   "${caps}+f" = "exec ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.ranger}";
+  "${caps}+h" = "exec ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.htop}";
   "${mod}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
 
   # Wayland global keybind -> Discord in XWayland workaround.
