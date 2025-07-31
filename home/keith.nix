@@ -22,7 +22,10 @@
       nerd-fonts.symbols-only
       # Needed for e.g. blueman-applet icon.
       hicolor-icon-theme
-    ];
+    ] ++ (
+      # Remote desktop
+      if config.machine_config.instance == "laptop" then [moonlight-qt] else []
+    );
 
     pointerCursor = {
       enable = true;
