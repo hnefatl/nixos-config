@@ -6,6 +6,7 @@
     config = {
       profile = "gpu-hq";
       hwdec = "auto";
+      gpu-api = "opengl";
       ytdl-format = "bestvideo+bestaudio";
     };
   };
