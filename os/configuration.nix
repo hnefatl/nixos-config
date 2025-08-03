@@ -8,8 +8,7 @@
       ./users/users.nix
       ./graphics/graphics.nix
       ./hibernate.nix
-      # TODO: figure out how to make vpn reconnect cleanly
-      #./wireguard.nix
+      ./wireguard.nix
       ./fingerprint.nix
       ./bluetooth.nix
       ./greetd.nix

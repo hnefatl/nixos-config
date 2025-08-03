@@ -20,6 +20,7 @@
       noto-fonts
       noto-fonts-color-emoji
       nerd-fonts.symbols-only
+      wireguard-tools
       # Needed for e.g. blueman-applet icon.
       hicolor-icon-theme
     ] ++ (
