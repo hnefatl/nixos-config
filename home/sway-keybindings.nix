@@ -5,6 +5,8 @@ let
   caps = "Escape"; # Caps lock rebound to Escape
   dmenu-emoji = pkgs.callPackage ./scripts/dmenu-emoji.nix { inherit pkgs; };
   dmenu-audio = pkgs.callPackage ./scripts/dmenu-audio.nix { inherit pkgs; };
+  pactl = "${pkgs.pulseaudio}/bin/pactl";
+  playerctl = "${lib.getExe pkgs.playerctl}";
 in rec {
   "${mod}+r" = "reload";
   "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
@@ -19,18 +21,18 @@ in rec {
   "Alt+e" = "exec ${pkgs.xdotool}/bin/xdotool key alt+e";
   "Alt+q" = "exec ${pkgs.xdotool}/bin/xdotool key alt+q";
 
-  "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5% ; pkill -RTMIN+10 i3blocks";
-  "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5% ; pkill -RTMIN+10 i3blocks";
-  "XF86AudioMute" = "exec amixer set Master toggle ; pkill -RTMIN+10 i3blocks";
-  "XF86AudioPrev" = "exec playerctl -p spotify previous ; pkill -RTMIN+11 i3blocks";
-  "XF86AudioNext" = "exec playerctl -p spotify next ; pkill -RTMIN+11 i3blocks";
+  "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -5% , exec pkill -SIGRTMIN+10 i3blocks";
+  "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +5% , exec pkill -SIGRTMIN+10 i3blocks";
+  "XF86AudioMute" = "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle , exec pkill -SIGRTMIN+10 i3blocks";
+  "XF86AudioPrev" = "exec ${playerctl} -p spotify previous , exec pkill -SIGRTMIN+11 i3blocks";
+  "XF86AudioNext" = "exec ${playerctl} -p spotify next , exec pkill -SIGRTMIN+11 i3blocks";
   # Spotify-specific, should maybe make generic player equivalents for e.g. youtube.
   # TODO: one of my devices has different output here, maybe PC?
-  "XF86AudioPlay" = "exec playerctl -p spotify play-pause ; pkill -RTMIN+11 i3blocks";
-  "XF86AudioPause" = "exec playerctl -p spotify pause ; pkill -RTMIN+11 i3blocks";
+  "XF86AudioPlay" = "exec ${playerctl} -p spotify play-pause , exec pkill -SIGRTMIN+11 i3blocks";
+  "XF86AudioPause" = "exec ${playerctl} -p spotify pause , exec pkill -SIGRTMIN+11 i3blocks";
   # Testing generic media play/pause
-  "${mod}+XF86AudioPlay" = "exec playerctl play-pause ; pkill -RTMIN+11 i3blocks";
-  "${mod}+XF86AudioPause" = "exec playerctl pause ; pkill -RTMIN+11 i3blocks";
+  "${mod}+XF86AudioPlay" = "exec ${playerctl} play-pause , exec pkill -SIGRTMIN+11 i3blocks";
+  "${mod}+XF86AudioPause" = "exec ${playerctl} pause , exec pkill -SIGRTMIN+11 i3blocks";
 
   # These aren't key rebindings, it's just getting the value of the Nix variables above.
   "${mod}+bracketleft" = XF86AudioLowerVolume;
