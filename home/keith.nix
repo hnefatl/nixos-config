@@ -42,6 +42,7 @@
       cl = "clear ; ls";
       nso = "nh os switch /etc/nixos/os";
       nsh = "nh home switch /etc/nixos/home";
+      alert = "echo -e '\\a'";
     };
   };
 
