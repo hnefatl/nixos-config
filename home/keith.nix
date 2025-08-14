@@ -23,6 +23,8 @@
       wireguard-tools
       # Needed for e.g. blueman-applet icon.
       hicolor-icon-theme
+      # File explorer
+      xfce.thunar
     ] ++ (
       # Remote desktop
       if config.machine_config.instance == "laptop" then [moonlight-qt] else []
