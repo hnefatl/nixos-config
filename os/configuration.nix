@@ -13,6 +13,7 @@
       ./bluetooth.nix
       ./greetd.nix
       ./gaming.nix
+      ./vscode.nix
     ];
 
   nix = {
@@ -98,7 +99,6 @@
     jujutsu
     speedtest-cli
     yubioath-flutter
-    (callPackage ./vscode.nix {})
   ];
 
   programs.neovim = {
