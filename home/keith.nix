@@ -225,6 +225,10 @@
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
+    config = {
+      # Lower verbosity output
+      hide_env_diff = true;
+    };
   };
 
   services.mako = {
