@@ -6,6 +6,7 @@
     ./unfree.nix
     ./feh.nix
     ./mpv.nix
+    ./vscode.nix
   ];
 
   home = rec {

@@ -13,7 +13,6 @@
       ./bluetooth.nix
       ./greetd.nix
       ./gaming.nix
-      ./vscode.nix
     ];
 
   nix = {
