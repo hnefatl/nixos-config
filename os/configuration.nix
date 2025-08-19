@@ -120,7 +120,6 @@
     openFirewall = true;
   };
 
-  programs.ssh.startAgent = true;
   services.openssh = lib.mkIf (config.machine_config.instance == "desktop") {
     enable = true;
     settings = {

@@ -7,6 +7,7 @@
     ./feh.nix
     ./mpv.nix
     ./vscode.nix
+    ./ssh.nix
   ];
 
   home = rec {
