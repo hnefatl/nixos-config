@@ -27,6 +27,9 @@
       hicolor-icon-theme
       # File explorer
       xfce.thunar
+
+      # Utility scripts
+      (pkgs.callPackage ./scripts/nix-init.nix { inherit pkgs; })
     ] ++ (
       # Remote desktop
       if config.machine_config.instance == "laptop" then [moonlight-qt] else []
