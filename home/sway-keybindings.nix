@@ -15,7 +15,7 @@ in rec {
   "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
   "${caps}+f" = "exec ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.ranger}";
   "${caps}+h" = "exec ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.htop}";
-  "${mod}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
+  "${mod}+d" = "exec ${lib.getExe pkgs.fuzzel}";
 
   # Wayland global keybind -> Discord in XWayland workaround.
   "Alt+e" = "exec ${pkgs.xdotool}/bin/xdotool key alt+e";
@@ -52,7 +52,7 @@ in rec {
   "${mod}+${caps}+l" = "exec ${lib.getExe pkgs.swaylock-effects}";
 
   # dmenu stdin are the prefilled options. Alternative names can be entered.
-  "${mod}+Return" = "exec echo 'spotify\\nmisc' | ${lib.getExe pkgs.dmenu} -p 'Name:' | xargs swaymsg rename workspace to";
+  "${mod}+Return" = "exec echo 'spotify\\nmisc' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Name:' | xargs swaymsg rename workspace to";
 
   "${mod}+q" = "kill";
 
@@ -119,10 +119,10 @@ in rec {
   "${mod}+x" = "exec ${pkgs.mako}/bin/makoctl dismiss";
   "${mod}+Shift+x" = "exec ${pkgs.mako}/bin/makoctl restore";
   # Handle actionable notifications
-  "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu dmenu";
+  "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu ${lib.getExe pkgs.fuzzel} --dmenu";
 
   "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify --cursor copy anything";
-  "${mod}+Print" = "${Print} --wait $(echo '3\\n5' | dmenu -p 'Delay:')";
+  "${mod}+Print" = "${Print} --wait $(echo '3\\n5' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Delay:')";
 
   "${caps}+d" = "exec ${pkgs.discord}/bin/discord";
   "${caps}+s" = "exec ${pkgs.spotify}/bin/spotify";

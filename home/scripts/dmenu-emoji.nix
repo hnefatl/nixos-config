@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   emojis = ''
@@ -1437,7 +1437,7 @@ in
     name = "dmenu-emoji";
     text = ''
       # Trim to the last double-space, treated as a marker before the emoji
-      emoji=''$(printf "${emojis}" | ${pkgs.dmenu}/bin/dmenu -i -l 30 | sed 's/.*  //')
+      emoji=''$(printf "${emojis}" | ${lib.getExe pkgs.fuzzel} --dmenu -i -l 30 | sed 's/.*  //')
       ${pkgs.libnotify}/bin/notify-send -t 1000 "$emoji copied!"
       ${pkgs.wl-clipboard}/bin/wl-copy "$emoji"
     '';

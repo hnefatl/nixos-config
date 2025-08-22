@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 pkgs.writeShellApplication {
   name = "dmenu-audio";
   text = let
     pactl = "${pkgs.pulseaudio}/bin/pactl";
-    dmenu = "${pkgs.dmenu}/bin/dmenu";
+    dmenu = "${lib.getExe pkgs.fuzzel} --dmenu";
   in ''
     # Don't use monitor speakers on any machine.
     exclude='HDMI|hdmi'

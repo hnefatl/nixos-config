@@ -8,6 +8,7 @@
     ./mpv.nix
     ./vscode.nix
     ./ssh.nix
+    ./fuzzel.nix
   ];
 
   home = rec {
