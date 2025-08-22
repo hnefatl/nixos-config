@@ -15,10 +15,10 @@
           # Shorthand config for audio device renaming.
           # For some reason these have to be separate files per device.
           #
-          # Use `wpctl status` and `wpctl inspect <num>` to find properties.
+          # Use `wpctl status` and `wpctl inspect <num>` to find the node name, then remove the profile suffix.
           # This matches on ALSA nodes, not devices, because changing e.g. the PC onboard audio device to "speakers"
           # makes the rear mic port show as "speakers microphone"...
-          # Uses regexes to catch the device name part of the sink, regardless of
+          # Uses regexes to catch the device name part of the sink, regardless of the profile.
           #
           # Renaming: https://unix.stackexchange.com/questions/648666/rename-devices-in-pipewire
           # Disabling: https://linuxmusicians.com/viewtopic.php?t=27008
@@ -59,6 +59,29 @@
                 "node.description" = "Webcam";
                 "device.form-factor" = "webcam";
                 "device.icon-name" = "audio-webcam-symbolic";
+              };
+            };
+
+            "laptop_speakers" = {
+              node = "alsa_output.pci-0000_c1_00.6";
+              update = {
+                "node.description" = "Speakers";
+                "device.form-factor" = "speakers";
+                "device.icon-name" = "audio-speakers-symbolic";
+              };
+            };
+            "laptop_microphone" = {
+              node = "alsa_input.pci-0000_c1_00.6";
+              update = {
+                "node.description" = "Microphone";
+                "device.form-factor" = "webcam";
+                "device.icon-name" = "audio-webcam-symbolic";
+              };
+            };
+            "laptop_jack_maybe" = {
+              node = "alsa_input.pci-0000_c1_00.5-platform-acp-pdm-mach";
+              update = {
+                "node.disabled" = true;
               };
             };
           };
