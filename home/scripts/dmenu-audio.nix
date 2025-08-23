@@ -4,11 +4,11 @@ pkgs.writeShellApplication {
   name = "dmenu-audio";
   text = let
     pactl = "${pkgs.pulseaudio}/bin/pactl";
-    dmenu = "${lib.getExe pkgs.fuzzel} --dmenu";
+    fuzzel = lib.getExe pkgs.fuzzel;
+    pw-dump = "${pkgs.pipewire}/bin/pw-dump";
+    jq = lib.getExe pkgs.jq;
   in ''
-    # Don't use monitor speakers on any machine.
-    exclude='HDMI|hdmi'
-    sinkname="$(${pactl} list short sinks | grep -vE "$exclude" | awk '{print $2}' | sort | ${dmenu})"
+    sinkname=$(${pw-dump} | ${jq} -r '.[] | select(.type == "PipeWire:Interface:Node" and .info.props."port.group" == "playback") | [.info.props."node.name", .info.props."node.description"] | join("\t")' | ${fuzzel} --dmenu --with-nth=2 --accept-nth=1)
 
     if [[ -n "$sinkname" ]] ; then
         ${pactl} set-default-sink "$sinkname"
