@@ -84,17 +84,29 @@
                 "node.disabled" = true;
               };
             };
+
+            "bluetooth_speakers" = {
+              node = "bluez_output.EC_81_93_54_DF_99";
+              update = {
+                "node.description" = "Bluetooth Speakers";
+                "device.form-factor" = "speakers";
+                "device.icon-name" = "audio-speakers-bluetooth";
+              };
+            };
           };
 
           makeDeviceUpdate =
-            name: config:
+            name: config: let
+            # E.g. alsa_..., bluez_...
+            monitor = builtins.elemAt (builtins.match "^([a-z]+)_.*" config.node) 0;
+            in
             lib.attrsets.nameValuePair "rename_${name}" {
-              "monitor.alsa.rules" = [
+              "monitor.${monitor}.rules" = [
                 {
                   matches = [
                     {
                       # Match any profile appended to the device name.
-                      "node.name" = "~${lib.strings.escapeRegex config.node}\\..*";
+                      "node.name" = "~${lib.strings.escapeRegex config.node}.*";
                     }
                   ];
                   actions = {
