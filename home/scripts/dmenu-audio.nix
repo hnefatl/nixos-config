@@ -8,7 +8,7 @@ pkgs.writeShellApplication {
     pw-dump = "${pkgs.pipewire}/bin/pw-dump";
     jq = lib.getExe pkgs.jq;
   in ''
-    sinkname=$(${pw-dump} | ${jq} -r '.[] | select(.type == "PipeWire:Interface:Node" and .info.props."port.group" == "playback") | [.info.props."node.name", .info.props."node.description"] | join("\t")' | ${fuzzel} --dmenu --with-nth=2 --accept-nth=1)
+    sinkname=$(${pw-dump} | ${jq} -r '.[] | select(.info.props."media.class" == "Audio/Sink") | [.info.props."node.name", .info.props."node.description"] | join("\t")' | ${fuzzel} --dmenu --with-nth=2 --accept-nth=1 --lines=5)
 
     if [[ -n "$sinkname" ]] ; then
         ${pactl} set-default-sink "$sinkname"
