@@ -77,6 +77,9 @@
     history = {
       size = 10000;
       ignoreDups = true;
+      # Don't update a terminal with the latest commands from other terminals.
+      # Causes confusing "up arrow is the last command run in any zsh, not this zsh".
+      share = false;
     };
     initContent = ''
       # Necessary because vim keybindings disable this binding?
