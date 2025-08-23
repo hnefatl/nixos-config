@@ -9,4 +9,3 @@
     lidSwitch = "suspend";
   };
 }
-

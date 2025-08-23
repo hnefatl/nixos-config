@@ -1,13 +1,14 @@
 { pkgs, lib, ... }:
 
 let
-  mod  = "Mod4"; # Super/Windows/Framework key
+  mod = "Mod4"; # Super/Windows/Framework key
   caps = "Escape"; # Caps lock rebound to Escape
   dmenu-emoji = pkgs.callPackage ./scripts/dmenu-emoji.nix { inherit pkgs; };
   dmenu-audio = pkgs.callPackage ./scripts/dmenu-audio.nix { inherit pkgs; };
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   playerctl = "${lib.getExe pkgs.playerctl}";
-in rec {
+in
+rec {
   "${mod}+r" = "reload";
   "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
 
@@ -52,7 +53,8 @@ in rec {
   "${mod}+${caps}+l" = "exec ${lib.getExe pkgs.swaylock-effects}";
 
   # dmenu stdin are the prefilled options. Alternative names can be entered.
-  "${mod}+Return" = "exec echo 'spotify\\nmisc' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Name:' | xargs swaymsg rename workspace to";
+  "${mod}+Return" =
+    "exec echo 'spotify\\nmisc' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Name:' | xargs swaymsg rename workspace to";
 
   "${mod}+q" = "kill";
 

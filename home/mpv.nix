@@ -21,6 +21,6 @@
   };
 
   xdg.mimeApps.defaultApplications = {
-    "video/*" = ["mpv.desktop"];
+    "video/*" = [ "mpv.desktop" ];
   };
 }

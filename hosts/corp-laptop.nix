@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   imports = [ ./library.nix ];
 
   config.machine_config = {
@@ -11,4 +12,3 @@
     primaryMonitor = "eDP-1";
   };
 }
-

@@ -1,26 +1,30 @@
 # Use e.g. `nixos-option services.fprintd.enable` to query the value of the current config.
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./users/users.nix
-      ./graphics/graphics.nix
-      ./hibernate.nix
-      ./wireguard.nix
-      ./fingerprint.nix
-      ./bluetooth.nix
-      ./greetd.nix
-      ./audio.nix
-      ./gaming.nix
-    ];
+  imports = [
+    ./users/users.nix
+    ./graphics/graphics.nix
+    ./hibernate.nix
+    ./wireguard.nix
+    ./fingerprint.nix
+    ./bluetooth.nix
+    ./greetd.nix
+    ./audio.nix
+    ./gaming.nix
+  ];
 
   nix = {
     package = pkgs.nixVersions.stable;
     optimise = {
       automatic = true;
-      dates = ["Sat *-*-* 09:00:00"];
+      dates = [ "Sat *-*-* 09:00:00" ];
     };
     gc = {
       automatic = true;
@@ -30,7 +34,10 @@
     settings = {
       auto-optimise-store = true;
       # Required by `nh` at least.
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
@@ -39,7 +46,7 @@
   # Don't wait for network startup, for faster boots: `systemd-analyze`
   # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a
   systemd = {
-    services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce [];  # Normally ["network-online.target"]
+    services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce [ ]; # Normally ["network-online.target"]
   };
 
   time.timeZone = "Europe/London";
@@ -144,4 +151,3 @@
   # DO NOT CHANGE: original NixOS version, for backcompat decisions.
   system.stateVersion = "24.11"; # Did you read the comment?
 }
-

@@ -96,9 +96,10 @@
           };
 
           makeDeviceUpdate =
-            name: config: let
-            # E.g. alsa_..., bluez_...
-            monitor = builtins.elemAt (builtins.match "^([a-z]+)_.*" config.node) 0;
+            name: config:
+            let
+              # E.g. alsa_..., bluez_...
+              monitor = builtins.elemAt (builtins.match "^([a-z]+)_.*" config.node) 0;
             in
             lib.attrsets.nameValuePair "rename_${name}" {
               "monitor.${monitor}.rules" = [

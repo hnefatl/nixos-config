@@ -1,4 +1,10 @@
-{ config, pkgs, lib, firefox-addons, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  firefox-addons,
+  ...
+}:
 
 {
   nixpkgs.overlays = [
@@ -12,11 +18,15 @@
       search = {
         force = true;
         default = "kagi";
-        order = ["kagi" "ddg" "google"];
+        order = [
+          "kagi"
+          "ddg"
+          "google"
+        ];
         engines = {
           kagi = {
             name = "Kagi";
-            urls = [{template = "https://kagi.com/search?q={searchTerms}";}];
+            urls = [ { template = "https://kagi.com/search?q={searchTerms}"; } ];
             icon = "https://kagi.com/favicon.ico";
           };
           bing.metaData.hidden = true;
@@ -31,7 +41,7 @@
           vimium
         ];
       };
-      bookmarks = {};
+      bookmarks = { };
       # about:config
       settings = {
         # Allow auto-enabling extensions.
@@ -66,7 +76,7 @@
         "browser.newtabpage.activity-stream.showSponsored" = false;
 
         "identity.fxaccounts.enabled" = false;
-        "signon.rememberSignons" = false;  # Password manager
+        "signon.rememberSignons" = false; # Password manager
         "privacy.trackingprotection.enabled" = true;
         "privacy.trackingprotection.pbmode.enabled" = true;
         "privacy.trackingprotection.cryptomining.enabled" = true;
@@ -78,9 +88,9 @@
 
   xdg.mimeApps = {
     defaultApplications = {
-      "x-scheme-handler/https" = ["firefox.desktop"];
-      "x-scheme-handler/http" = ["firefox.desktop"];
-      "x-scheme-handler/mailto" = ["firefox.desktop"];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/mailto" = [ "firefox.desktop" ];
     };
   };
 }

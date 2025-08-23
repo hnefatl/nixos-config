@@ -4,4 +4,3 @@ lib.mkIf (config.machine_config.formFactor == "laptop") {
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 }
-

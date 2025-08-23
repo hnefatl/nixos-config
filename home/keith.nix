@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -15,26 +20,29 @@
     username = "keith";
     homeDirectory = "/home/${config.home.username}";
 
-    packages = with pkgs; [
-      discord
-      spotify
-      xidlehook
-      i3blocks
-      noto-fonts
-      noto-fonts-color-emoji
-      nerd-fonts.symbols-only
-      wireguard-tools
-      # Needed for e.g. blueman-applet icon.
-      hicolor-icon-theme
-      # File explorer
-      xfce.thunar
+    packages =
+      with pkgs;
+      [
+        discord
+        spotify
+        xidlehook
+        i3blocks
+        noto-fonts
+        noto-fonts-color-emoji
+        nerd-fonts.symbols-only
+        wireguard-tools
+        # Needed for e.g. blueman-applet icon.
+        hicolor-icon-theme
+        # File explorer
+        xfce.thunar
 
-      # Utility scripts
-      (pkgs.callPackage ./scripts/nix-init.nix { inherit pkgs; })
-    ] ++ (
-      # Remote desktop
-      if config.machine_config.instance == "laptop" then [moonlight-qt] else []
-    );
+        # Utility scripts
+        (pkgs.callPackage ./scripts/nix-init.nix { inherit pkgs; })
+      ]
+      ++ (
+        # Remote desktop
+        if config.machine_config.instance == "laptop" then [ moonlight-qt ] else [ ]
+      );
 
     pointerCursor = {
       enable = true;
@@ -61,10 +69,10 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = ["Noto Serif"];
-        sansSerif = ["Noto Sans"];
-        monospace = ["Noto Sans Mono"];
-        emoji = ["Noto Color Emoji"];
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" ];
+        monospace = [ "Noto Sans Mono" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };
@@ -97,20 +105,25 @@
   wayland.windowManager.sway = {
     enable = true;
     xwayland = true;
-    extraOptions = lib.mkIf (config.machine_config.instance == "desktop") ["--unsupported-gpu"];
+    extraOptions = lib.mkIf (config.machine_config.instance == "desktop") [ "--unsupported-gpu" ];
     wrapperFeatures.gtk = true;
     config = rec {
       terminal = "kitty";
       defaultWorkspace = "workspace number 1";
       # Set the primary monitor in X11 for xwayland apps. Prevents e.g. games defaulting to wrong screen.
-      startup = [{ command = "${lib.getExe pkgs.xorg.xrandr} --output ${config.machine_config.primaryMonitor} --primary"; always = true; }];
+      startup = [
+        {
+          command = "${lib.getExe pkgs.xorg.xrandr} --output ${config.machine_config.primaryMonitor} --primary";
+          always = true;
+        }
+      ];
 
       # Cycle around containers in the same workspace.
       # TODO: Still need something like i3-cycle to define "horizontal-only" workspace wrapping (or like tabbed-workspace-direction-only).
       # focus.wrapping = "workspace";
 
       fonts = {
-        names = ["Noto Sans"];
+        names = [ "Noto Sans" ];
         style = "Mono";
         size = "10";
       };
@@ -154,11 +167,13 @@
         followMouse = false;
       };
 
-      bars = [{
-        position = "top";
-        trayOutput = "primary";
-        statusCommand = "${pkgs.i3blocks}/bin/i3blocks";
-      }];
+      bars = [
+        {
+          position = "top";
+          trayOutput = "primary";
+          statusCommand = "${pkgs.i3blocks}/bin/i3blocks";
+        }
+      ];
 
       keybindings = (import ./sway-keybindings.nix { inherit pkgs lib; });
     };
@@ -276,8 +291,8 @@
   xdg.mimeApps.enable = true;
   xdg.portal = {
     enable = true;
-    configPackages = [pkgs.xdg-desktop-portal-wlr];
-    extraPortals = [pkgs.xdg-desktop-portal-wlr];
+    configPackages = [ pkgs.xdg-desktop-portal-wlr ];
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
   };
 
   systemd.user = {
@@ -289,16 +304,16 @@
           Description = "Start discord on login.";
           # Wait for network to avoid "reconnecting" on startup.
           # TODO: doesn't seem to work, maybe network service isn't available in user mode?
-          After = ["network-online.service"];
-          Wants = ["graphical-session.target"];
+          After = [ "network-online.service" ];
+          Wants = [ "graphical-session.target" ];
         };
         Service = {
           Type = "exec";
           RemainAfterExit = true;
-          ExecStart= "${pkgs.discord}/bin/discord --start-minimized";
+          ExecStart = "${pkgs.discord}/bin/discord --start-minimized";
         };
         Install = {
-          WantedBy = ["graphical-session.target"];
+          WantedBy = [ "graphical-session.target" ];
         };
       };
     };

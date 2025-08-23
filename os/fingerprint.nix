@@ -15,4 +15,3 @@ lib.mkIf config.machine_config.hasFingerprintReader {
     '';
   };
 }
-

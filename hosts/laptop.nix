@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   imports = [ ./library.nix ];
 
   config.machine_config = {
@@ -6,7 +7,7 @@
     hostname = "laptop";
     formFactor = "laptop";
     hasFingerprintReader = true;
-    autoLogin = false;  # Secure boot and assumed insecure environment
+    autoLogin = false; # Secure boot and assumed insecure environment
     isWork = false;
     primaryMonitor = "eDP-1";
   };

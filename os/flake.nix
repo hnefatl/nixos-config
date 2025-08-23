@@ -10,27 +10,33 @@
     };
   };
 
-  outputs = { self, nixpkgs, lanzaboote }: {
-    nixosConfigurations = {
-      laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./boot/lanzaboote.nix
-          ./configuration.nix
-          ../hosts/laptop.nix
-          ../hosts/laptop-hardware.nix
-          lanzaboote.nixosModules.lanzaboote
-        ];
-      };
-      desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./boot/grub.nix
-          ./configuration.nix
-          ../hosts/desktop.nix
-          ../hosts/desktop-hardware.nix
-        ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      lanzaboote,
+    }:
+    {
+      nixosConfigurations = {
+        laptop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./boot/lanzaboote.nix
+            ./configuration.nix
+            ../hosts/laptop.nix
+            ../hosts/laptop-hardware.nix
+            lanzaboote.nixosModules.lanzaboote
+          ];
+        };
+        desktop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./boot/grub.nix
+            ./configuration.nix
+            ../hosts/desktop.nix
+            ../hosts/desktop-hardware.nix
+          ];
+        };
       };
     };
-  };
 }
