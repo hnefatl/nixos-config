@@ -35,6 +35,8 @@
         hicolor-icon-theme
         # File explorer
         xfce.thunar
+        xfce.tumbler
+        ffmpegthumbnailer
 
         # Utility scripts
         (pkgs.callPackage ./scripts/nix-init.nix { inherit pkgs; })
