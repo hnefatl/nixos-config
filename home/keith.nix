@@ -213,6 +213,8 @@
       cursor = "#aaaaaa";
       background = "#333333";
       foreground = "#ffffff";
+      # Lose some kitty functionality for much better interop on remote machines w/out kitty installed.
+      term = "xterm-256color";
     };
   };
 
