@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 pkgs.writeShellApplication {
   name = "nix-init";
-  text = ./nix-init.sh;
+  text = lib.readFile ./nix-init.sh;
 }
 

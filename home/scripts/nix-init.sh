@@ -15,10 +15,20 @@ done
 cat >flake.nix <<EOF
 {
   inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
   };
-  outputs = { self, nixpkgs }: {
-    packages.x86_64-linux.default = {};
-  };
+  outputs =
+    { self, nixpkgs }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+    in
+    {
+      formatter."\${system}" = pkgs.nixfmt-tree;
+      packages."\${system}" = {
+        default = pkgs.hello;
+      };
+    };
 }
 EOF
 
