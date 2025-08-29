@@ -14,6 +14,11 @@
         hostname = "10.20.0.1";
         user = "root";
       };
+      "pikvm" = {
+        host = "pikvm";
+        hostname = "10.20.1.5";
+        user = "root";
+      };
       "router_remote" = {
         host = "router_remote";
         hostname = "vpn.keith.collister.xyz";
