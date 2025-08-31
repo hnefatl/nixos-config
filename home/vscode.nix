@@ -12,6 +12,7 @@
         ms-vscode-remote.remote-ssh
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
+        vscode-extensions.github.copilot
       ];
     })
     nixfmt-rfc-style
