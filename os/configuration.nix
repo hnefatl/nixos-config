@@ -18,6 +18,7 @@
     ./greetd.nix
     ./audio.nix
     ./gaming.nix
+    ./zfs.nix
   ];
 
   nix = {
