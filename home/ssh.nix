@@ -7,7 +7,6 @@
       "warthog" = {
         host = "warthog";
         hostname = "10.20.1.3";
-        user = "root";
       };
       "router" = {
         host = "router";
