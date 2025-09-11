@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   users.users.root = {
@@ -7,4 +12,3 @@
     hashedPasswordFile = "/etc/nixos/secrets/root_password";
   };
 }
-

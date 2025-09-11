@@ -21,11 +21,16 @@ let
     "Alt+e" = "exec ${pkgs.xdotool}/bin/xdotool key alt+e";
     "Alt+q" = "exec ${pkgs.xdotool}/bin/xdotool key alt+q";
 
-    "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -5% , exec pkill -SIGRTMIN+10 i3blocks";
-    "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +5% , exec pkill -SIGRTMIN+10 i3blocks";
-    "Shift+XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -1% , exec pkill -SIGRTMIN+10 i3blocks";
-    "Shift+XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +1% , exec pkill -SIGRTMIN+10 i3blocks";
-    "XF86AudioMute" = "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle , exec pkill -SIGRTMIN+10 i3blocks";
+    "XF86AudioLowerVolume" =
+      "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -5% , exec pkill -SIGRTMIN+10 i3blocks";
+    "XF86AudioRaiseVolume" =
+      "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +5% , exec pkill -SIGRTMIN+10 i3blocks";
+    "Shift+XF86AudioLowerVolume" =
+      "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -1% , exec pkill -SIGRTMIN+10 i3blocks";
+    "Shift+XF86AudioRaiseVolume" =
+      "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +1% , exec pkill -SIGRTMIN+10 i3blocks";
+    "XF86AudioMute" =
+      "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle , exec pkill -SIGRTMIN+10 i3blocks";
     "XF86AudioPrev" = "exec ${playerctl} -p spotify previous , exec pkill -SIGRTMIN+11 i3blocks";
     "XF86AudioNext" = "exec ${playerctl} -p spotify next , exec pkill -SIGRTMIN+11 i3blocks";
     # Spotify-specific, should maybe make generic player equivalents for e.g. youtube.
@@ -127,7 +132,8 @@ let
     "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu ${lib.getExe pkgs.fuzzel} --dmenu";
 
     "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify --cursor copy anything";
-    "${mod}+Print" = "${self.Print} --wait $(echo '3\\n5' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Delay:')";
+    "${mod}+Print" =
+      "${self.Print} --wait $(echo '3\\n5' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Delay:')";
 
     "${caps}+d" = "exec ${pkgs.discord}/bin/discord";
     "${caps}+s" = "exec ${pkgs.spotify}/bin/spotify";
