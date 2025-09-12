@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  imports = [ ./library.nix ];
+  imports = [ ../library.nix ];
 
   config.machine_config = {
     instance = "desktop";

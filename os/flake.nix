@@ -23,8 +23,8 @@
           modules = [
             ./boot/lanzaboote.nix
             ./configuration.nix
-            ../hosts/laptop.nix
-            ../hosts/laptop-hardware.nix
+            ../hosts/laptop/config.nix
+            ../hosts/laptop/hardware.nix
             lanzaboote.nixosModules.lanzaboote
           ];
         };
@@ -33,8 +33,8 @@
           modules = [
             ./boot/grub.nix
             ./configuration.nix
-            ../hosts/desktop.nix
-            ../hosts/desktop-hardware.nix
+            ../hosts/desktop/config.nix
+            ../hosts/desktop/hardware.nix
           ];
         };
       };
