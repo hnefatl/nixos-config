@@ -1,18 +1,16 @@
 {
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
-
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs =
@@ -21,6 +19,7 @@
       nixpkgs,
       lanzaboote,
       sops-nix,
+      impermanence,
     }:
     {
       nixosConfigurations = {
@@ -61,6 +60,14 @@
             ./modules/spotify.nix
             ./modules/swaylock.nix
             ./modules/gaming.nix
+          ];
+        };
+        warthog = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ../hosts/warthog/config.nix
+            ../hosts/warthog/hardware.nix
+            impermanence.nixosModules.impermanence
           ];
         };
       };
