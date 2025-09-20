@@ -69,8 +69,6 @@
     device = "zpoolgames/games";
     fsType = "zfs";
     options = [
-      "noatime"
-      "exec"
       # Don't mount on boot, only when accessed.
       "noauto"
       "x-systemd.automount"
