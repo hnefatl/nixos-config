@@ -14,8 +14,9 @@
     extraGroups = [
       "wheel"
       "video"
-      "gamemode"
-    ];
+    ]
+    ++ lib.optionals config.programs.gamemode.enable [ "gamemode" ];
+
     shell = pkgs.zsh;
 
     openssh.authorizedKeys.keys = lib.mkIf (config.machine_config.instance == "desktop") [

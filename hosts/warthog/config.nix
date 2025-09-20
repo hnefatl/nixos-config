@@ -4,7 +4,7 @@
     ./boot.nix
     ./impermanence.nix
     ./ssh.nix
-    ./keith.nix
+    ../../os/users/keith.nix
     ./services.nix
   ];
 
