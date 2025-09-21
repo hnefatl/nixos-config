@@ -22,9 +22,12 @@
 keys:
   - &laptop age1ehphlf0jfvxy2855xu0jdgxsnpeq5uprj3rzyd9jmt2hv44gfues5mf5qs
   - &desktop age17shlrylte78cmpw4zefcyue2a4wnd2vjnqwq5axlxh5606uvqcxqtx7pyd
+  - &warthog age1psr2mawpcu5u43tc4l4n0l4a07tf27stk30ae8fhc8t8j7zvuylqxll8z3
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
     - age:
       - *laptop
       - *desktop
+      - *warthog
+
