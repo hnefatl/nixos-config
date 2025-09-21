@@ -15,6 +15,29 @@
         "type": "github"
       }
     },
+    "firefox-addons": {
+      "inputs": {
+        "nixpkgs": [
+          "home",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1755246238,
+        "narHash": "sha256-KVPjWo/RVQBQe6N03cNbSVM/xNCv2506wE4A8wL73sk=",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "rev": "e6c2e889b34f5f623a7749a46e2aa5ea6e7256a0",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "type": "gitlab"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -74,16 +97,35 @@
         "type": "github"
       }
     },
-    "home-manager": {
+    "home": {
       "inputs": {
+        "firefox-addons": "firefox-addons",
+        "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1758463745,
-        "narHash": "sha256-uhzsV0Q0I9j2y/rfweWeGif5AWe0MGrgZ/3TjpDYdGA=",
+        "path": "./../home",
+        "type": "path"
+      },
+      "original": {
+        "path": "./../home",
+        "type": "path"
+      },
+      "parent": []
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "home",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753592768,
+        "narHash": "sha256-oV695RvbAE4+R9pcsT9shmp6zE/+IZe6evHWX63f2Qg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3b955f5f0a942f9f60cdc9cacb7844335d0f21c3",
+        "rev": "fc3add429f21450359369af74c2375cb34a2d204",
         "type": "github"
       },
       "original": {
@@ -136,15 +178,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1758346548,
-        "narHash": "sha256-afXE7AJ7MY6wY1pg/Y6UPHNYPy5GtUKeBkrZZ/gC71E=",
-        "owner": "NixOS",
+        "lastModified": 1755471983,
+        "narHash": "sha256-axUoWcm4cNQ36jOlnkD9D40LTfSQgk8ExfHSRm3rTtg=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b2a3852bd078e68dd2b3dfa8c00c67af1f0a7d20",
+        "rev": "48f4c982de68d966421d2b6f1ddbeb6227cc5ceb",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-25.05",
         "repo": "nixpkgs",
         "type": "github"
@@ -211,7 +253,7 @@
     },
     "root": {
       "inputs": {
-        "home-manager": "home-manager",
+        "home": "home",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs_2",
