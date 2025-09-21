@@ -1,7 +1,5 @@
-{ config, lib, modulesPath, ...  }:
+{ lib, ...  }:
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
@@ -19,5 +17,5 @@
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = true;
 }
