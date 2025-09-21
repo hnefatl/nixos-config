@@ -67,10 +67,12 @@
           modules = [
             sops-nix.nixosModules.sops
             impermanence.nixosModules.impermanence
-
             ../hosts/warthog/config.nix
+
             ../hosts/warthog/hardware.nix
-	    ./modules/sops.nix
+            ./users/users.nix
+            ./modules/sops.nix
+            ./modules/sshd.nix
           ];
         };
       };

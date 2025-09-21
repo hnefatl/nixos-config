@@ -2,6 +2,9 @@
 {
   imports = [
     ./model.nix
+    ./hardware.nix
+    ./filesystems.nix
+
     ./boot.nix
     ./impermanence.nix
     ./ssh.nix
