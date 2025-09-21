@@ -73,7 +73,7 @@
         }
       ];
 
-      keybindings = (import ./sway-keybindings.nix { inherit pkgs lib; });
+      keybindings = (import ./keybindings.nix { inherit pkgs lib; });
     };
     extraConfig = ''
       # If a game is focused, disable idle

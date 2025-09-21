@@ -32,18 +32,22 @@
           "keith@laptop" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [
-              ./keith.nix
-              ./firefox.nix
               ../hosts/laptop/model.nix
+
+              ./classes/standard.nix
+              ./modules/firefox.nix
+              ./modules/moonlight.nix
             ];
             extraSpecialArgs = { inherit firefox-addons; };
           };
           "keith@desktop" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [
-              ./keith.nix
-              ./firefox.nix
               ../hosts/desktop/model.nix
+
+              ./classes/standard.nix
+              ./modules/firefox.nix
+              ./modules/obs.nix
             ];
             extraSpecialArgs = { inherit firefox-addons; };
           };
@@ -52,8 +56,9 @@
           "keith@corp-laptop" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [
-              ./keith.nix
               ../hosts/corp-laptop/model.nix
+
+              ./classes/standard.nix
             ];
           };
         };
