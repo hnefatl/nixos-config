@@ -1,6 +1,9 @@
 { pkgs, lib, ... }:
 
 {
+  # Fix for wayland blurriness.
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
+
   home.packages = with pkgs; [
     (pkgs.vscode-with-extensions.override {
       vscodeExtensions = with pkgs.vscode-extensions; [
