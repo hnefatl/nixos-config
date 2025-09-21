@@ -1,7 +1,5 @@
-# Ignore the AGE material used for per-machine configs.
-# This is a conventional location because I don't like storing the
-# key material in home directory when it's a system-wide thing.
-secrets/age.key
+secrets/*.key
+secrets/*.pub
 
 # The output symlink from e.g. `nixos-rebuild dry-activate`.
 result

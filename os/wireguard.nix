@@ -36,7 +36,7 @@ lib.mkIf (config.machine_config.formFactor == "laptop") {
       dns = [ "10.20.0.1" ];
       listenPort = 51820;
 
-      privateKeyFile = "/etc/nixos/secrets/wireguard_private";
+      privateKeyFile = "/etc/nixos/secrets/wireguard.key";
 
       peers = [
         {
