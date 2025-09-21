@@ -21,4 +21,6 @@
   };
 
   # TODO: syncoid?
+  # TODO: rust wrapper around `man zpool events` that sends discord notifications on events?
+  # TODO: MOTD-style banner on server login?
 }
