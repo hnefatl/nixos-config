@@ -12,9 +12,5 @@
       linkConfig.RequiredForOnline = "routable";
     };
   };
-  networking = {
-    hostName = "warthog";
-    hostId = "d818a96b";
-    useDHCP = false;
-  };
+  networking.useDHCP = false;
 }

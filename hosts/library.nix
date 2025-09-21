@@ -15,6 +15,11 @@
       type = lib.types.str;
       description = "Hostname for the machine.";
     };
+    # `head -c4 /dev/urandom | od -A none -t x4`
+    hostid = lib.mkOption {
+      type = lib.types.str;
+      description = "Host ID for ZFS (and perhaps networking?). Generate with `head -c4 /dev/urandom | od -A none -t x4`";
+    };
     formFactor = lib.mkOption {
       type = lib.types.enum [
         "laptop"

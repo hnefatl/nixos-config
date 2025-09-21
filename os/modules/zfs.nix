@@ -1,14 +1,7 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ config, ... }:
 {
   boot.supportedFilesystems.zfs = true;
-  # TODO: move this into host section? should be unique per-machine
-  # `head -c4 /dev/urandom | od -A none -t x4`
-  networking.hostId = "35e976f0";
+  networking.hostId = config.machine_config.hostid;
   # https://openzfs.github.io/openzfs-docs/Getting%20Started/NixOS/index.html
   boot.zfs.forceImportRoot = false;
 
@@ -21,11 +14,9 @@
     };
     autoScrub = {
       enable = true;
-      # TODO
-      pools = [ ];
       interval = "weekly";
     };
   };
 
-  # TODO: syncoid/sanoid/...?
+  # TODO: syncoid?
 }
