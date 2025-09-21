@@ -1,13 +1,10 @@
-{ config, ... }:
 {
-  imports = [ ../library.nix ];
+  imports = [
+    ./model.nix
+    ./hardware.nix
+    ./filesystems.nix
+  ];
 
-  config.machine_config = {
-    instance = "laptop";
-    hostname = "laptop";
-    formFactor = "laptop";
-    autoLogin = false; # Secure boot and assumed insecure environment
-    isWork = false;
-    primaryMonitor = "eDP-1";
-  };
+  # DO NOT CHANGE: original NixOS version, for backcompat decisions.
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

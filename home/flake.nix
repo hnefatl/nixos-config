@@ -34,7 +34,7 @@
             modules = [
               ./keith.nix
               ./firefox.nix
-              ../hosts/laptop/config.nix
+              ../hosts/laptop/model.nix
             ];
             extraSpecialArgs = { inherit firefox-addons; };
           };
@@ -43,7 +43,7 @@
             modules = [
               ./keith.nix
               ./firefox.nix
-              ../hosts/desktop/config.nix
+              ../hosts/desktop/model.nix
             ];
             extraSpecialArgs = { inherit firefox-addons; };
           };
@@ -53,7 +53,7 @@
             inherit pkgs;
             modules = [
               ./keith.nix
-              ../hosts/corp-laptop/config.nix
+              ../hosts/corp-laptop/model.nix
             ];
           };
         };

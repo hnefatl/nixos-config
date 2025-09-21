@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}:
-
+{ config, lib, modulesPath, ...  }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
@@ -18,35 +11,13 @@
   ];
   boot.kernelModules = [ "kvm-amd" ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/1ef8f835-086d-4f54-8226-40fcfb22bec2";
-    fsType = "btrfs";
-    options = [ "subvol=@" ];
+  networking.networkmanager.enable = true;
+  # Don't wait for network startup, for faster boots: `systemd-analyze`
+  # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a
+  systemd = {
+    services.NetworkManager-wait-online.wantedBy = lib.mkForce [ ]; # Normally ["network-online.target"]
   };
 
-  boot.initrd.luks.devices."luks-338b49cc-7793-41d8-ba2b-fb96794f3748".device =
-    "/dev/disk/by-uuid/338b49cc-7793-41d8-ba2b-fb96794f3748";
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/A575-1C33";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
-  };
-
-  swapDevices = [
-    {
-      device = "/swapfile";
-      # 64 GiB, enough for 2x RAM - not sure what happens if hibernate
-      # when there's not enough space here, but don't want to find out.
-      size = 64 * 1024;
-    }
-  ];
-
-  networking.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  nixpkgs.hostPlatform = "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
 }

@@ -1,15 +1,6 @@
+{ config, lib, modulesPath, ...  }:
 {
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}:
-
-{
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
@@ -17,71 +8,14 @@
     "usbhid"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5633-785D";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
+  networking.networkmanager.enable = true;
+  # Don't wait for network startup, for faster boots: `systemd-analyze`
+  # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a
+  systemd = {
+    services.NetworkManager-wait-online.wantedBy = lib.mkForce [ ]; # Normally ["network-online.target"]
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/44090b89-b355-4498-b272-4264d3d94ae8"; } ];
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/fb594a2d-ba40-4ed3-bc91-b1f53966b4e5";
-    fsType = "btrfs";
-    options = [ "subvol=root" ];
-    neededForBoot = true;
-  };
-
-  fileSystems."/home/keith" = {
-    device = "/dev/disk/by-uuid/fb594a2d-ba40-4ed3-bc91-b1f53966b4e5";
-    fsType = "btrfs";
-    options = [ "subvol=home/keith" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/fb594a2d-ba40-4ed3-bc91-b1f53966b4e5";
-    fsType = "btrfs";
-    options = [
-      "subvol=nix"
-      "noatime"
-    ];
-    # Maybe?
-    neededForBoot = true;
-  };
-
-  fileSystems."/tmp" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = [
-      "size=4G"
-      "noatime"
-    ];
-  };
-
-  fileSystems."/games" = {
-    device = "zpoolgames/games";
-    fsType = "zfs";
-    options = [
-      # Don't mount on boot, only when accessed.
-      "noauto"
-      "x-systemd.automount"
-    ];
-  };
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  nixpkgs.hostPlatform = "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 }

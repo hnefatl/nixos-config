@@ -30,12 +30,10 @@
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
             ../hosts/laptop/config.nix
-            ../hosts/laptop/hardware.nix
 
             ./classes/base.nix
             ./classes/graphical.nix
             ./boot/lanzaboote.nix
-            ./configuration.nix
 
             ./modules/tlp.nix
             ./modules/bluetooth.nix
@@ -51,12 +49,10 @@
           modules = [
             sops-nix.nixosModules.sops
             ../hosts/desktop/config.nix
-            ../hosts/desktop/hardware.nix
 
             ./classes/base.nix
             ./classes/graphical.nix
             ./boot/grub.nix
-            ./configuration.nix
 
             ./modules/zfs.nix
             ./modules/sshd.nix
