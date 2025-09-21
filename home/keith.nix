@@ -27,6 +27,7 @@
       with pkgs;
       [
         spotify
+        playerctl
         xidlehook
         i3blocks
         noto-fonts

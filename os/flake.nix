@@ -27,22 +27,35 @@
         laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./boot/lanzaboote.nix
-            ./configuration.nix
-            ../hosts/laptop/config.nix
-            ../hosts/laptop/hardware.nix
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
+            ../hosts/laptop/config.nix
+            ../hosts/laptop/hardware.nix
+
+            ./base.nix
+            ./boot/lanzaboote.nix
+            ./configuration.nix
+
+            ./tlp.nix
+            ./spotify.nix
+            ./swaylock.nix
           ];
         };
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./boot/grub.nix
-            ./configuration.nix
+            sops-nix.nixosModules.sops
             ../hosts/desktop/config.nix
             ../hosts/desktop/hardware.nix
-            sops-nix.nixosModules.sops
+
+            ./base.nix
+            ./boot/grub.nix
+            ./configuration.nix
+
+            ./sunshine.nix
+            ./sshd.nix
+            ./spotify.nix
+            ./swaylock.nix
           ];
         };
       };
