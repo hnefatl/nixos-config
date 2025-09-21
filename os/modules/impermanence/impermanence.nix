@@ -39,18 +39,5 @@
     files = [
       "/etc/machine-id"
     ];
-    users.root = {
-      home = "/root";
-      files = [
-        ".zsh_history"
-      ];
-    };
-    users.keith = {
-      files = [
-        ".zsh_history"
-        ".git-credentials"
-        ".gitconfig"
-      ];
-    };
   };
 }

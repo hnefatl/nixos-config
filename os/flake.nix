@@ -11,6 +11,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
+    # Could consider importing the home/ flake by path, then referring to home-manager
+    # inside it, to ensure the version stays aligned with non-impermanence setups?
+    home-manager.url = "github:nix-community/home-manager?ref=release-25.05";
   };
 
   outputs =
@@ -20,6 +23,7 @@
       lanzaboote,
       sops-nix,
       impermanence,
+      home-manager,
     }:
     {
       nixosConfigurations = {
@@ -74,9 +78,11 @@
 
             ./modules/zfs.nix
             ./modules/sshd.nix
-            ./modules/impermanence.nix
+            ./modules/impermanence/impermanence.nix
+            ./modules/impermanence/keith.nix
             ../hosts/warthog/modules/services.nix
           ];
+	  specialArgs = { inherit impermanence home-manager; };
         };
       };
     };

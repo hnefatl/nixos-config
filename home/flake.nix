@@ -61,14 +61,9 @@
               ./classes/standard.nix
             ];
           };
-          "keith@warthog" = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [
-              ../hosts/warthog/model.nix
 
-              ./classes/base.nix
-            ];
-          };
+	  # Users on impermanence-based setups are located in
+	  # os/modules/impermanence/...
         };
     };
 }
