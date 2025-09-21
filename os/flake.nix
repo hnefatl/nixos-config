@@ -65,9 +65,12 @@
         warthog = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            sops-nix.nixosModules.sops
+            impermanence.nixosModules.impermanence
+
             ../hosts/warthog/config.nix
             ../hosts/warthog/hardware.nix
-            impermanence.nixosModules.impermanence
+	    ./modules/sops.nix
           ];
         };
       };

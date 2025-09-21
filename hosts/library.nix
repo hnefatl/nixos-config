@@ -7,6 +7,7 @@
         "laptop"
         "desktop"
         "corp-laptop"
+        "warthog"
       ];
       description = "The specific machine. Prefer depending on a machine archetype defined below, unless unwieldy.";
     };
@@ -18,6 +19,7 @@
       type = lib.types.enum [
         "laptop"
         "desktop"
+        "server"
       ];
       description = "The physical form-factor of the machine. To be used for common portability decisions (e.g. WiFi, Bluetooth, VPN, ...).";
     };
