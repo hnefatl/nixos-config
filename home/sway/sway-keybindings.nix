@@ -129,8 +129,9 @@ let
     "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify --cursor copy anything";
     "${mod}+Print" = "${self.Print} --wait $(echo '3\\n5' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Delay:')";
 
-    "${caps}+d" = "exec ${pkgs.discord}/bin/discord";
-    "${caps}+s" = "exec ${pkgs.spotify}/bin/spotify";
+    # Flags prevent blurry apps with Wayland.
+    "${caps}+d" = "exec ${pkgs.discord}/bin/discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto";
+    "${caps}+s" = "exec ${pkgs.spotify}/bin/spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto";
   };
 in
 self

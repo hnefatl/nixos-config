@@ -16,6 +16,7 @@
     ./vscode.nix
     ./ssh.nix
     ./fuzzel.nix
+    ./discord.nix
   ];
 
   home = rec {
@@ -25,7 +26,6 @@
     packages =
       with pkgs;
       [
-        discord
         spotify
         xidlehook
         i3blocks
@@ -201,29 +201,7 @@
     extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
   };
 
-  systemd.user = {
-    enable = true;
-
-    services = {
-      discord = lib.mkIf (!config.machine_config.isWork) {
-        Unit = {
-          Description = "Start discord on login.";
-          # Wait for network to avoid "reconnecting" on startup.
-          # TODO: doesn't seem to work, maybe network service isn't available in user mode?
-          After = [ "network-online.service" ];
-          Wants = [ "graphical-session.target" ];
-        };
-        Service = {
-          Type = "exec";
-          RemainAfterExit = true;
-          ExecStart = "${pkgs.discord}/bin/discord --start-minimized";
-        };
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
-        };
-      };
-    };
-  };
+  systemd.user.enable = true;
 
   home.stateVersion = "24.11";
 }
