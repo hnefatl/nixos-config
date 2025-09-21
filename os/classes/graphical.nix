@@ -28,4 +28,6 @@
     enable = true;
     enable32Bit = true;
   };
+
+  services.gnome.gnome-keyring.enable = true;
 }
