@@ -6,17 +6,6 @@
   ...
 }:
 
-let
-  warthogSamba = path: {
-    device = "//10.20.1.3/" + path;
-    fsType = "cifs";
-    options =
-      let
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in
-      [ "${automount_opts},credentials=/etc/nixos/secrets/warthog_samba.key,uid=1000,gid=100" ];
-  };
-in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -87,10 +76,6 @@ in
       "x-systemd.automount"
     ];
   };
-
-  fileSystems."/warthog/media" = warthogSamba "media";
-  fileSystems."/warthog/transfer" = warthogSamba "transfer";
-  fileSystems."/warthog/docker_configs" = warthogSamba "docker_configs";
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
