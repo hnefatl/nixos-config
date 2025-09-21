@@ -7,7 +7,6 @@
 
     ./boot.nix
     ./impermanence.nix
-    ./ssh.nix
     ../../os/users/keith.nix
     ../../os/modules/nix.nix
     ./services.nix
