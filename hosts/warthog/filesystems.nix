@@ -23,6 +23,9 @@
       fsType = "zfs";
       neededForBoot = true;
     };
+  # Required so that impermanence has the filesystem available for setting user passwords:
+  # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
+  fileSystems."/etc/nixos".neededForBoot = true;
 
   fileSystems."/pool/services" =
     { device = "zfast/enc/snap/services";

@@ -62,8 +62,8 @@
             ];
           };
 
-	  # Users on impermanence-based setups are located in
-	  # os/modules/impermanence/...
+          # Users on impermanence-based setups are located in
+          # os/modules/impermanence/...
         };
     };
 }
