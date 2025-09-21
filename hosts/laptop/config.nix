@@ -3,6 +3,7 @@
     ./model.nix
     ./hardware.nix
     ./filesystems.nix
+    ./networking.nix
   ];
 
   # DO NOT CHANGE: original NixOS version, for backcompat decisions.
