@@ -1,9 +1,11 @@
 { config, ... }:
 {
-  boot.supportedFilesystems.zfs = true;
+  boot = {
+    supportedFilesystems.zfs = true;
+    # https://openzfs.github.io/openzfs-docs/Getting%20Started/NixOS/index.html
+    zfs.forceImportRoot = false;
+  };
   networking.hostId = config.machine_config.hostid;
-  # https://openzfs.github.io/openzfs-docs/Getting%20Started/NixOS/index.html
-  boot.zfs.forceImportRoot = false;
 
   services.zfs = {
     autoSnapshot = {

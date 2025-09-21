@@ -4,7 +4,7 @@
   boot.initrd.systemd.services.zfs-rollback-root = {
     description = "ZFS rollback root to empty.";
 
-    wantedBy = [ "initrd.target" ]; 
+    wantedBy = [ "initrd.target" ];
     # zpoolroot must match the name of the root zpool.
     after = [ "zfs-import-zpoolroot.service" ];
     before = [ "sysroot.mount" ];
@@ -22,7 +22,12 @@
     enable = true;
     hideMounts = true;
     directories = [
-      { directory = "/etc/nixos"; user = "keith"; group = "users"; mode = "u=rwx,g=rx,o="; }
+      {
+        directory = "/etc/nixos";
+        user = "keith";
+        group = "users";
+        mode = "u=rwx,g=rx,o=";
+      }
       "/var/log"
       "/var/lib/nixos"
       "/etc/ssh/"
@@ -43,8 +48,8 @@
     users.keith = {
       files = [
         ".zsh_history"
-	".git-credentials"
-	".gitconfig"
+        ".git-credentials"
+        ".gitconfig"
       ];
     };
   };
