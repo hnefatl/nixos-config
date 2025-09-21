@@ -69,10 +69,12 @@
             impermanence.nixosModules.impermanence
             ../hosts/warthog/config.nix
 
-            ../hosts/warthog/hardware.nix
-            ./users/users.nix
-            ./modules/sops.nix
+            ./classes/base.nix
+            ../hosts/warthog/boot.nix
+
             ./modules/sshd.nix
+            ../hosts/warthog/impermanence.nix
+            ../hosts/warthog/services.nix
           ];
         };
       };

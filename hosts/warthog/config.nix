@@ -4,15 +4,9 @@
     ./model.nix
     ./hardware.nix
     ./filesystems.nix
-
-    ./boot.nix
-    ./impermanence.nix
-    ../../os/users/keith.nix
-    ../../os/modules/nix.nix
-    ./services.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  system.stateVersion = "25.05";
 
   nixpkgs.config.nvidia.acceptLicense = true;
   hardware.nvidia = {
@@ -41,32 +35,6 @@
     useDHCP = false;
   };
 
-  time.timeZone = "Europe/London";
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  # TTY config
-  console.keyMap = "uk";
-
-  environment.systemPackages = with pkgs; [
-    wget
-    ncdu
-    htop
-    acpi
-    sysstat
-  ];
-
-  programs.git = {
-    enable = true;
-  };
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
-  programs.nh.enable = true;
-
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
@@ -91,6 +59,4 @@
       nso = "nh os switch /etc/nixos";
     };
   };
-
-  system.stateVersion = "25.05";
 }
