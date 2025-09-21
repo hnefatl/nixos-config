@@ -6,10 +6,11 @@
 }:
 
 {
+  sops.secrets."user_passwords/keith".neededForUsers = true;
+
   users.users.keith = {
     isNormalUser = true;
-    # Generate with `mkpasswd > secrets/keith_password`
-    hashedPasswordFile = "/etc/nixos/secrets/keith_password";
+    hashedPasswordFile = "/run/secrets-for-users/user_passwords/keith";
     extraGroups = [
       "wheel"
       "video"

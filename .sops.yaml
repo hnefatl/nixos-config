@@ -1,0 +1,30 @@
+# There's (at least) one AGE key per machine, used to decrypt secrets for that
+# machine. I'm keeping them under `/root/.config/sops/age/keys.txt` because
+# then it's not tied to a user, is clearly root-protected (and equivalent to
+# root access), and has a relatively well known fixed path. The nix daemon can
+# read the file as root thankfully.
+#
+# Ciphertexts are stored encrypted with _each_ of the machine private keys, so
+# each machine has a copy of all the values.
+#
+# If a machine key is lost due to e.g. bad disk, then a healthy machine can be
+# used to re-encrypt the secrets for the affected machine by changing the
+# public key below then regenerating the ciphertext file.
+
+# Edit the plaintext secrets on an authorized machine using:
+#   $ ./edit_secrets.sh
+# Generate a new key for a host using:
+#   $ nix shell nixpkgs#age --command age-keygen -o /etc/nixos/secrets/age.key
+# Update secrets after adding a new host using:
+#   $ SOPS_AGE_KEY_FILE=/etc/nixos/secrets/age.key nix run nixpkgs#sops updatekeys <filename>
+# or:
+
+keys:
+  - &laptop age1ehphlf0jfvxy2855xu0jdgxsnpeq5uprj3rzyd9jmt2hv44gfues5mf5qs
+  - &desktop age17shlrylte78cmpw4zefcyue2a4wnd2vjnqwq5axlxh5606uvqcxqtx7pyd
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+    - age:
+      - *laptop
+      - *desktop

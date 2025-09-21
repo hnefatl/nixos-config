@@ -1,7 +1,7 @@
-warthog_samba_secrets
-# Symlink to a version-controlled machine config definition. This is symlinked for a specific install, so shouldn't be version controlled.
-machine_config_instance.nix
-secrets/
+# Ignore the AGE material used for per-machine configs.
+# This is a conventional location because I don't like storing the
+# key material in home directory when it's a system-wide thing.
+secrets/age.key
+
 # The output symlink from e.g. `nixos-rebuild dry-activate`.
 result
-

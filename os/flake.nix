@@ -8,6 +8,11 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -15,6 +20,7 @@
       self,
       nixpkgs,
       lanzaboote,
+      sops-nix,
     }:
     {
       nixosConfigurations = {
@@ -26,6 +32,7 @@
             ../hosts/laptop/config.nix
             ../hosts/laptop/hardware.nix
             lanzaboote.nixosModules.lanzaboote
+            sops-nix.nixosModules.sops
           ];
         };
         desktop = nixpkgs.lib.nixosSystem {
@@ -35,6 +42,7 @@
             ./configuration.nix
             ../hosts/desktop/config.nix
             ../hosts/desktop/hardware.nix
+            sops-nix.nixosModules.sops
           ];
         };
       };
