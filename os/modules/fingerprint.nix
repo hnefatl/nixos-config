@@ -1,6 +1,6 @@
 { config, lib, ... }:
 
-lib.mkIf config.machine_config.hasFingerprintReader {
+{
   services.fprintd.enable = true;
   systemd.services.fprintd = {
     wantedBy = [ "multi-user.target" ];

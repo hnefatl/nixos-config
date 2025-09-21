@@ -3,10 +3,10 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./sops.nix
-    ./users/users.nix
-    ./nix.nix
-    ./neovim.nix
+    ../modules/sops.nix
+    ../users/users.nix
+    ../modules/nix.nix
+    ../modules/neovim.nix
   ];
 
   networking.hostName = config.machine_config.hostname;

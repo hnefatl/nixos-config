@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.mkIf (config.machine_config.instance == "desktop") {
+{
   hardware.graphics = {
     extraPackages = [ pkgs.nvidia-vaapi-driver ];
   };

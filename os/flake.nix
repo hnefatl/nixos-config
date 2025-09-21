@@ -32,13 +32,18 @@
             ../hosts/laptop/config.nix
             ../hosts/laptop/hardware.nix
 
-            ./base.nix
+            ./classes/base.nix
+            ./classes/graphical.nix
             ./boot/lanzaboote.nix
             ./configuration.nix
 
-            ./tlp.nix
-            ./spotify.nix
-            ./swaylock.nix
+            ./modules/tlp.nix
+            ./modules/bluetooth.nix
+            ./modules/spotify.nix
+            ./modules/fingerprint.nix
+            ./modules/wireguard.nix
+            ./modules/swaylock.nix
+            ./modules/gaming.nix
           ];
         };
         desktop = nixpkgs.lib.nixosSystem {
@@ -48,14 +53,18 @@
             ../hosts/desktop/config.nix
             ../hosts/desktop/hardware.nix
 
-            ./base.nix
+            ./classes/base.nix
+            ./classes/graphical.nix
             ./boot/grub.nix
             ./configuration.nix
 
-            ./sunshine.nix
-            ./sshd.nix
-            ./spotify.nix
-            ./swaylock.nix
+            ./modules/zfs.nix
+            ./modules/sshd.nix
+            ./modules/nvidia-graphics.nix
+            ./modules/sunshine.nix
+            ./modules/spotify.nix
+            ./modules/swaylock.nix
+            ./modules/gaming.nix
           ];
         };
       };

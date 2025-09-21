@@ -6,7 +6,6 @@
     instance = "desktop";
     hostname = "desktop";
     formFactor = "desktop";
-    hasFingerprintReader = false;
     autoLogin = true; # Secure environment
     isWork = false;
     primaryMonitor = "DP-1";

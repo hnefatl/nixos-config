@@ -8,19 +8,6 @@
 }:
 
 {
-  imports = [
-    ./graphics/graphics.nix
-    ./hibernate.nix
-    ./wireguard.nix
-    ./fingerprint.nix
-    ./bluetooth.nix
-    ./greetd.nix
-    ./audio.nix
-    ./gaming.nix
-    ./graphical.nix
-    ./zfs.nix
-  ];
-
   networking.networkmanager.enable = true;
   # Don't wait for network startup, for faster boots: `systemd-analyze`
   # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a

@@ -4,7 +4,7 @@
   config,
   ...
 }:
-lib.mkIf (config.machine_config.instance == "desktop") {
+{
   boot.supportedFilesystems.zfs = true;
   # TODO: move this into host section? should be unique per-machine
   # `head -c4 /dev/urandom | od -A none -t x4`
