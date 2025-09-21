@@ -1,9 +1,18 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   programs.ssh = {
     enable = true;
     addKeysToAgent = "12h";
+
     matchBlocks = {
+      "desktop" = {
+        host = "desktop";
+        hostname = "10.20.2.5";
+      };
+      "pc" = {
+        host = "pc";
+        hostname = "10.20.2.5";
+      };
       "warthog" = {
         host = "warthog";
         hostname = "10.20.1.3";
