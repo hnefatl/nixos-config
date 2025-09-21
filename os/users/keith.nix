@@ -10,7 +10,7 @@
 
   users.users.keith = {
     isNormalUser = true;
-    hashedPasswordFile = "/run/secrets-for-users/user_passwords/keith";
+    hashedPasswordFile = config.sops.secrets."user_passwords/keith".path;
     extraGroups = [
       "wheel"
       "video"
