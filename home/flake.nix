@@ -61,6 +61,14 @@
               ./classes/standard.nix
             ];
           };
+          "keith@warthog" = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              ../hosts/warthog/model.nix
+
+              ./classes/base.nix
+            ];
+          };
         };
     };
 }
