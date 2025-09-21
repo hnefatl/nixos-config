@@ -27,8 +27,11 @@
   };
 
   networking.firewall = {
+    # home-assistant
     allowedTCPPorts = [ 8123 ];
   };
+  # Required to let home-assistant find google cast and other mDNS devices.
+  services.avahi.enable = true;
 
   environment.systemPackages = [
     pkgs.docker-compose
