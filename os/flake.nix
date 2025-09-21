@@ -76,6 +76,7 @@
 
             ./modules/zfs.nix
             ./modules/sshd.nix
+            ./modules/tlp.nix
             ./modules/impermanence/impermanence.nix
             ./modules/impermanence/keith.nix
             ../hosts/warthog/modules/services.nix
