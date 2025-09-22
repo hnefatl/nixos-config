@@ -3,6 +3,7 @@
   imports = [
     ../modules/unfree.nix
     ../modules/ssh.nix
+    ../modules/git.nix
   ];
 
   home = {
