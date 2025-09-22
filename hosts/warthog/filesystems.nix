@@ -32,6 +32,11 @@
       fsType = "zfs";
     };
 
+  fileSystems."/pool/services/docker_configs/vintagestory" =
+    { device = "zfast/enc/snap/services/vintagestory";
+      fsType = "zfs";
+    };
+
   fileSystems."/pool/backup" =
     { device = "zslow/enc/snap/backup";
       fsType = "zfs";
