@@ -1,13 +1,14 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ../modules/unfree.nix
     ../modules/ssh.nix
   ];
 
-  home = rec {
+  home = {
     username = "keith";
-    homeDirectory = "/home/${username}";
+    # Need to use `config...` rather than just `username` to get lazy evaluation.
+    homeDirectory = "/home/${config.home.username}";
 
     packages = [
       # Utility scripts
