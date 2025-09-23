@@ -43,6 +43,7 @@
             ./modules/wireguard.nix
             ./modules/swaylock.nix
             ./modules/gaming.nix
+            ./modules/warthog-nfs.nix
           ];
         };
         desktop = nixpkgs.lib.nixosSystem {
@@ -62,6 +63,7 @@
             ./modules/spotify.nix
             ./modules/swaylock.nix
             ./modules/gaming.nix
+            ./modules/warthog-nfs.nix
           ];
         };
         warthog = nixpkgs.lib.nixosSystem {
@@ -82,6 +84,7 @@
             ./modules/impermanence/impermanence.nix
             ./modules/impermanence/keith.nix
             ../hosts/warthog/modules/services.nix
+            ../hosts/warthog/modules/nfs-server.nix
           ];
           specialArgs = {
             inherit impermanence;
