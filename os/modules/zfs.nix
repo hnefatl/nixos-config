@@ -1,5 +1,11 @@
 { config, ... }:
 {
+  imports = [
+    # Any machine running ZFS is also serious enough to care about these.
+    ./zed.nix
+    ./smartd.nix
+  ];
+
   boot = {
     supportedFilesystems.zfs = true;
     # https://openzfs.github.io/openzfs-docs/Getting%20Started/NixOS/index.html

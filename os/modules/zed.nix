@@ -1,5 +1,7 @@
 { pkgs, lib, ... }:
 {
+  imports = [ ./msmtp.nix ];
+
   services.zfs.zed = {
     settings = {
       # At least for testing

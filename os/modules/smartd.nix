@@ -1,11 +1,13 @@
 { pkgs, lib, ... }:
 {
+  imports = [ ./msmtp.nix ];
+
   services.smartd = {
     enable = true;
     autodetect = true;
     notifications = {
       # For testing if mail works.
-      test = true;
+      # test = true;
       mail = {
         enable = true;
         mailer = lib.getExe pkgs.msmtp;

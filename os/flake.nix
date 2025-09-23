@@ -75,7 +75,6 @@
             ../hosts/warthog/boot.nix
 
             ./modules/zfs.nix
-            ./modules/zed.nix
             ./modules/sshd.nix
             ./modules/tlp.nix
             ./modules/msmtp.nix
