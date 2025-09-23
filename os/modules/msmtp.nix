@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   sops.secrets."email_accounts/password" = {
     owner = config.users.users.keith.name;
@@ -17,7 +17,7 @@
       tls_starttls   off
       from           hnefatl@gmail.com
       user           hnefatl
-      passwordeval   "cat /run/secrets/email_accounts/password"
+      passwordeval   "${pkgs.coreutils}/bin/cat /run/secrets/email_accounts/password"
     '';
   };
 }
