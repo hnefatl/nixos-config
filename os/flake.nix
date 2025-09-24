@@ -81,6 +81,7 @@
             ./modules/tlp.nix
             ./modules/msmtp.nix
             ./modules/smartd.nix
+            ./modules/bluetooth.nix
             ./modules/impermanence/impermanence.nix
             ./modules/impermanence/keith.nix
             ../hosts/warthog/modules/services.nix

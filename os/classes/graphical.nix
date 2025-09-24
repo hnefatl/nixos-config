@@ -1,6 +1,6 @@
 # "Graphical" machines - not headless, expected to have some "normal" desktop environment.
 
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ../modules/hibernate.nix
@@ -30,4 +30,6 @@
   };
 
   services.gnome.gnome-keyring.enable = true;
+
+  services.blueman.enable = config.hardware.bluetooth.enable;
 }
