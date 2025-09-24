@@ -23,7 +23,7 @@
   home.file.".config/git/allowed_signers".text = ''
     * ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ46ZX6zJQrMOdffEZqJk5bbgZpTnaExEprMDS9aQUpa keith@laptop
     * ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILVXUPyteZDsBXLsiFSVpW8Qr9qXi4wY7NkEQLeADAim keith@desktop
-    * ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII2sX9AdwN3BJEueF6T51VX75gNUc3MEw1+kc+Ak/PkI keith@warthog
+    * ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE1VS+gQeX5ldWyIoWPT0qJ1QKK5dM2DbMEiQiTemSWc keith@warthog
     * ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFwVu5wURjrYYBrXhuX1L/Bdi0fliXs1ldSI16QEHcjd kcollister@kcollister
   '';
 }
