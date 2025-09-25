@@ -64,6 +64,7 @@
             ./modules/swaylock.nix
             ./modules/gaming.nix
             ./modules/warthog-nfs.nix
+            ./modules/virtualisation.nix
           ];
         };
         warthog = nixpkgs.lib.nixosSystem {
