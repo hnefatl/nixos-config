@@ -30,8 +30,6 @@
       "subvol=nix"
       "noatime"
     ];
-    # Maybe?
-    neededForBoot = true;
   };
 
   fileSystems."/tmp" = {
