@@ -5,4 +5,10 @@
     warthog = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINH2aSRfXbucOu8ZxBUFEGv8BfeYG0ZOsHfVJcznpwKY keith@warthog";
     corp-laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFwVu5wURjrYYBrXhuX1L/Bdi0fliXs1ldSI16QEHcjd kcollister@kcollister";
   };
+  warthog = {
+    # The sshd public key.
+    host = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAa8oRXZv+6fecKfOrNaSLaWx9ZaTRF6xOVCGyxXX6pq root@warthog";
+    # The initrd sshd public key (for rescue mode SSH).
+    initrd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8ksquPJwkR0CQe/sJkdjpkE0Pd8TGgtQEliNfMRyyv root@warthog";
+  };
 }
