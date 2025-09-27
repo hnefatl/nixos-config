@@ -5,8 +5,8 @@
     description = "ZFS rollback root to empty.";
 
     wantedBy = [ "initrd.target" ];
-    # zpoolroot must match the name of the root zpool.
-    after = [ "zfs-import-zpoolroot.service" ];
+    # zroot must match the name of the root zpool.
+    after = [ "zfs-import-zroot.service" ];
     before = [ "sysroot.mount" ];
 
     path = [ pkgs.zfs ];
@@ -14,7 +14,7 @@
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
     script = ''
-      zfs rollback -r zpoolroot/ephemeral/root@empty && echo "rollback complete"
+      zfs rollback -r zroot/ephemeral/root@empty && echo "rollback complete"
     '';
   };
 

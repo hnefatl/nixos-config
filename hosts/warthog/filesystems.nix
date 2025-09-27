@@ -9,17 +9,17 @@
   };
 
   fileSystems."/" = {
-    device = "zpoolroot/ephemeral/root";
+    device = "zroot/ephemeral/root";
     fsType = "zfs";
   };
 
   fileSystems."/nix" = {
-    device = "zpoolroot/nix";
+    device = "zroot/nix";
     fsType = "zfs";
   };
 
   fileSystems."/persist" = {
-    device = "zpoolroot/persist";
+    device = "zroot/persist";
     fsType = "zfs";
     neededForBoot = true;
   };
