@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 {
   # Configure swaylock for all invocations (e.g. manual, lid-close, hibernate, ...).
   programs.swaylock = {

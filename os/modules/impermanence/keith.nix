@@ -1,4 +1,9 @@
-{ lib, home-manager, impermanence, ... }:
+{
+  lib,
+  home-manager,
+  impermanence,
+  ...
+}:
 {
   imports = [ home-manager.nixosModules.home-manager ];
 

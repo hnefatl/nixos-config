@@ -17,7 +17,10 @@
   systemd.services.start-services = {
     description = "Start server services";
     script = "./up ; echo 'Server services started'";
-    path = [ pkgs.bash pkgs.docker-compose ];
+    path = [
+      pkgs.bash
+      pkgs.docker-compose
+    ];
 
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {

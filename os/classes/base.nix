@@ -1,6 +1,11 @@
 # Common configuration for all machines. Should be low-dep.
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ../modules/sops.nix
