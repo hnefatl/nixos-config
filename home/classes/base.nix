@@ -43,6 +43,8 @@
     initContent = ''
       # Necessary because vim keybindings disable this binding?
       bindkey '^R' history-incremental-search-backward
+      # Allow `#foo` to not run foo.
+      setopt interactivecomments
     '';
     plugins = [
       {
