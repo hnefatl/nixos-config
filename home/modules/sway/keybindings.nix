@@ -124,7 +124,7 @@ let
     "${mod}+x" = "exec ${pkgs.mako}/bin/makoctl dismiss";
     "${mod}+Shift+x" = "exec ${pkgs.mako}/bin/makoctl restore";
     # Handle actionable notifications
-    "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu ${lib.getExe pkgs.fuzzel} --dmenu";
+    "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu -- ${lib.getExe pkgs.fuzzel} --dmenu";
 
     "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify --cursor copy anything";
     "${mod}+Print" = "${self.Print} --wait $(echo '3\\n5' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Delay:')";
