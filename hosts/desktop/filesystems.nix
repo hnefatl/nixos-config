@@ -1,13 +1,24 @@
 {
-  boot.initrd.luks.devices = {
-    "zfskeys" = {
-      device = "/dev/disk/by-partuuid/99a5dcba-1b59-49bc-8a51-5661d21d180b";
+  boot.initrd = {
+    luks.devices = {
+      "zfskeys".device = "/dev/disk/by-partuuid/99a5dcba-1b59-49bc-8a51-5661d21d180b";
+      "swap".device = "/dev/disk/by-partuuid/6218dca0-7296-49c4-9f53-297fac74fbd7";
+    };
+
+    systemd.services.zfskeybootstrap = {
+      wantedBy = [ "initrd.target" ];
+      after = [ "cryptsetup.target" ];
+      # Finish loading keys to the pools before starting the ZFS mounts
+      before = [ "zfs-import-zroot.service" "sysroot.mount" ];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+
       # We need to make these available before the root filesystem mount, because
       # the root filesystem is encrypted using these keys.
       #
       # The LUKS device remains opened, which makes it clearer what the partition
       # is and allows easier mounting if new keys are needed.
-      postOpenCommands = ''
+      script = ''
         echo "Loading bootstrap keys"
         zpool import zfskeys
         zpool scrub -w zfskeys
@@ -23,7 +34,6 @@
         zpool export zfskeys
       '';
     };
-    "swap".device = "/dev/disk/by-partuuid/6218dca0-7296-49c4-9f53-297fac74fbd7";
   };
 
   swapDevices = [ { device = "/dev/mapper/swap"; } ];

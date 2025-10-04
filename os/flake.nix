@@ -54,7 +54,7 @@
 
             ./classes/base.nix
             ./classes/graphical.nix
-            ./boot/grub.nix
+            ./boot/systemd.nix
 
             ./modules/zfs.nix
             ./modules/sshd.nix
