@@ -49,12 +49,13 @@
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
             ../hosts/desktop/config.nix
 
             ./classes/base.nix
             ./classes/graphical.nix
-            ./boot/systemd.nix
+            ./boot/lanzaboote.nix
 
             ./modules/zfs.nix
             ./modules/sshd.nix
