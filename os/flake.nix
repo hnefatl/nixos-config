@@ -75,7 +75,7 @@
             ../hosts/warthog/config.nix
 
             ./classes/base.nix
-            ../hosts/warthog/boot.nix
+            ../os/boot/systemd.nix
 
             ./modules/zfs.nix
             ./modules/sshd.nix
