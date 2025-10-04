@@ -5,15 +5,22 @@
       # We need to make these available before the root filesystem mount, because
       # the root filesystem is encrypted using these keys.
       #
-      # This mountpoint "vanishes" when stage 1 init completes, because it's mounted
-      # into the initramfs rather than the "real" stage 2 root. Which is good, means
-      # it's not hanging around.
-      # The LUKS device remains opened though, which makes it clearer what the
-      # partition is and allows mounting if new keys are needed.
+      # The LUKS device remains opened, which makes it clearer what the partition
+      # is and allows easier mounting if new keys are needed.
       postOpenCommands = ''
-        zpool import -f zfskeys
+        echo "Loading bootstrap keys"
+        zpool import zfskeys
+        zpool scrub -w zfskeys
         mkdir /zfskeys
         mount -t zfs -o ro zfskeys /zfskeys
+
+        echo "Loading ZFS pools and keys"
+        zpool import -a
+        zfs load-key -a
+
+        echo "Unloading bootstrap keys"
+        umount /zfskeys
+        zpool export zfskeys
       '';
     };
     "swap".device = "/dev/disk/by-partuuid/6218dca0-7296-49c4-9f53-297fac74fbd7";
