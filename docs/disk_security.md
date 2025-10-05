@@ -46,27 +46,78 @@ The small LUKS partition next to a non-LUKS ZFS partition is a weird setup. My r
 
 Finally, the ZFS encryption keys need to be backed up offsite but in a different place to the encrypted ZFS dataset snapshots: otherwise an attacker in the remote backups has both the datasets and the keys. I'm just using Dashlane's secure notes for this.
 
-### Configure LUKS
+## Setup
+
+### Partitioning
+
+```sh
+# Use fdisk to layout disk with:
+# - 10GB boot partition
+# - 1GB zfskeys partition
+# - <remaining space> data partition
+# - 32GB swap partition
+$ fdisk ...
+
+# Make swap
+$ cryptsetup luksFormat /dev/...
+$ systemd-cryptsetup attach swap /dev/...
+# Enter password, don't bother with TPM yet.
+$ mkswap /dev/mapper/swap
+$ swapon /dev/mapper/swap
+
+# Make zfskeys
+$ cryptsetup luksFormat /dev/...
+$ systemd-cryptsetup attach zfskeys /dev/...
+$ zpool create -o ashift=12 -O atime=off -O compression=on -O mountpoint=legacy zfskeys /dev/mapper/zfskeys
+# Location is important, it's where the initrd will look for the keys during stage 1 boot.
+$ mkdir /zfskeys
+$ mount -tzfs zfskeys /zfskeys
+# Generate root zfs password
+$ tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 20 | tee /zfskeys/zroot-enc.priv
+$ chmod u=r,go= /zfskeys/zroot-enc.priv
+
+# Make data partition
+$ zpool create -o ashift=12 -O atime=off -O compression=on -O mountpoint=legacy zfskeys -O acltype=posix -O xattr=sa /dev/...
+# Make encrypted dataset
+$ zfs create -o encryption=on -o keyformat=passphrase -o keylocation=file:///persist/secrets/zfs/zslow.priv zslow
+
+# Make other datasets e.g. /nix, /home/keith, /root
+# Mount them to /mnt/... as they should be structured.
+# Set autosnapshot property with:
+# zfs set com.sun:auto-snapshot=true zroot/enc/snap
+```
+
+### OS installation
+
+Work with `/mnt` and `nixos-install` etc.
+
+### Secure Boot
+
+Follow https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md.
+
+### Autounlock disks on boot
 
 TODO: check compliance with https://oddlama.org/blog/bypassing-disk-encryption-with-tpm2-unlock/. Deterministic disk unlock order sounds tricky? Looks like missing `tpm2-measure-pcr=yes`
 
+This works even on devices without secure boot, if you omit the `--tpm2-pcrs=...` flag and use systemd.
+
+If using secure boot, this needs to be done once inside the secure-booted OS.
+
 ```sh
-# Create the SWAP LUKS volume (use a simple temporary passphrase)
-$ cryptsetup luksFormat /dev/...
-# Create a key in the TPM for the volume
+# See what LUKS passphrases currently exist
+$ systemd-cryptenroll /dev/...
+SLOT TYPE
+   0 password
+
+# Create a passphrase in the TPM
 $ systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+2+7+12 /dev/...
-# Double-check result
 $ systemd-cryptenroll /dev/...
 SLOT TYPE
    0 password
    1 tpm2
 
-# Should autounlock based on TPM.
+# Should autounlock based on TPM, if booted in secure boot.
 $ systemd-cryptsetup attach foo /dev/...
 $ ls /dev/mapper/foo
 /dev/mapper/foo
-
-# Optional:
-# Remove the temporary passphrase
-$ systemd-cryptenroll --wipe-slot=password /dev/...
 ```
