@@ -21,7 +21,7 @@ TL;DR: use ZFS native encryption where possible, it's nice for supporting increm
 - Boot disk (GPT partition table)
   - Unencrypted FAT32 `/boot` partition (ideally secure-booted)
   - LUKS partition (autounlocked via TPM)
-    - `zkeys` ZFS pool: contains just the keys for encrypted ZFS datasets on the machine. ZFS used here for the checksumming. Individual dataset keys are backed up to a Dashlane secure note.
+    - `zfskeys` ZFS pool: contains just the keys for encrypted ZFS datasets on the machine. ZFS used here for the checksumming. Individual dataset keys are backed up to a Dashlane secure note.
   - `zroot` main ZFS pool partition
     - `zroot/enc`: encrypted parent dataset.
       - `zroot/enc/...`: general encrypted datasets.
