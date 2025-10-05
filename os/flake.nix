@@ -36,6 +36,7 @@
             ./classes/graphical.nix
             ./boot/lanzaboote.nix
 
+            ./modules/zfs.nix
             ./modules/tlp.nix
             ./modules/bluetooth.nix
             ./modules/spotify.nix
