@@ -21,4 +21,7 @@
     # Attempt to use systemd experimental suspend/resume control. Doesn't seem to support hybrid-sleep.
     powerManagement.enable = true;
   };
+
+  # Enable hardware encoding for OBS/Sunshine/Jellyfin/...
+  nixpkgs.config.cudaSupport = true;
 }
