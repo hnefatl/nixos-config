@@ -8,7 +8,7 @@
   };
 
   fileSystems."/games" = {
-    device = "zpoolgames/games";
+    device = "zgames/games";
     fsType = "zfs";
     options = [
       # Don't mount on boot, only when accessed.
