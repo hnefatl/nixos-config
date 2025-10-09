@@ -13,6 +13,7 @@
     };
     extraConfig = {
       gpg.ssh.allowedSignersFile = "${config.home.homeDirectory}/.config/git/allowed_signers";
+      credential.helper = "store";
     };
   };
 
