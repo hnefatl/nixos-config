@@ -72,12 +72,13 @@
         warthog = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
             impermanence.nixosModules.impermanence
             ../hosts/warthog/config.nix
 
             ./classes/base.nix
-            ../os/boot/systemd.nix
+            ../os/boot/lanzaboote.nix
 
             ./modules/zfs.nix
             ./modules/sshd.nix

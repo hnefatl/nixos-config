@@ -56,6 +56,8 @@ in
       "/var/db/sudo/lectured/"
       # Don't pull docker images from scratch each time.
       "/var/lib/docker/"
+      # Secure boot keys
+      "/var/lib/sbctl/"
     ];
     files = [
       "/etc/machine-id"
