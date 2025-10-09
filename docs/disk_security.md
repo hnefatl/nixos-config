@@ -77,9 +77,9 @@ $ tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 20 | tee /zfskeys/zroot-enc.pr
 $ chmod u=r,go= /zfskeys/zroot-enc.priv
 
 # Make data partition
-$ zpool create -o ashift=12 -O atime=off -O compression=on -O mountpoint=legacy zfskeys -O acltype=posix -O xattr=sa /dev/...
+$ zpool create -o ashift=12 -O atime=off -O compression=on -O mountpoint=legacy -O acltype=posix -O xattr=sa zroot /dev/...
 # Make encrypted dataset
-$ zfs create -o encryption=on -o keyformat=passphrase -o keylocation=file:///persist/secrets/zfs/zslow.priv zslow
+$ zfs create -o encryption=on -o keyformat=passphrase -o keylocation=file:///zfskeys/zroot-enc.priv zroot/enc
 
 # Make other datasets e.g. /nix, /home/keith, /root
 # Mount them to /mnt/... as they should be structured.
@@ -94,6 +94,19 @@ Work with `/mnt` and `nixos-install` etc.
 ### Secure Boot
 
 Follow https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md.
+
+```sh
+# Check whether current images are signed.
+$ sbctl verify
+
+# Boot into BIOS, start "secure boot setup" or similar.
+
+# Boot back into OS, enroll.
+$ sbctl enroll-keys --microsoft
+
+# Reboot again, then check all's well.
+$ bootctl status
+```
 
 ### Autounlock disks on boot
 
