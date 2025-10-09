@@ -87,6 +87,14 @@ $ zfs create -o encryption=on -o keyformat=passphrase -o keylocation=file:///zfs
 # zfs set com.sun:auto-snapshot=true zroot/enc/snap
 ```
 
+### Impermanent installation
+
+Make an empty root snapshot, e.g.
+
+```sh
+zfs snapshot zroot/enc/impermanentroot@empty
+```
+
 ### OS installation
 
 Work with `/mnt` and `nixos-install` etc.
@@ -96,6 +104,10 @@ Work with `/mnt` and `nixos-install` etc.
 Follow https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md.
 
 ```sh
+# Prepare OS for secure boot.
+$ sudo sbctl create-keys
+# Switch NixOS config to lanzaboote and build.
+
 # Check whether current images are signed.
 $ sbctl verify
 

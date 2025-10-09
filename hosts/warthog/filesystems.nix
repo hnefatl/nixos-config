@@ -1,31 +1,11 @@
 {
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/EC4A-F86F";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
-  };
+  imports = [ ../standard-filesystems.nix ];
 
-  fileSystems."/" = {
-    device = "zroot/ephemeral/root";
-    fsType = "zfs";
+  standard_filesystems.partuuids = {
+    zfskeys = "967c71b3-c11d-431b-a3f6-cf60da272015";
+    swap = "98f0a952-5e59-486b-aa38-a43e384bc19c";
+    boot = "2fd6326a-3cbb-4cbe-ba46-59b72f80094c";
   };
-
-  fileSystems."/nix" = {
-    device = "zroot/nix";
-    fsType = "zfs";
-  };
-
-  fileSystems."/persist" = {
-    device = "zroot/persist";
-    fsType = "zfs";
-    neededForBoot = true;
-  };
-  # Required so that impermanence has the filesystem available for setting user passwords:
-  # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
-  fileSystems."/etc/nixos".neededForBoot = true;
 
   fileSystems."/pool/services" = {
     device = "zfast/enc/snap/services";
@@ -84,8 +64,4 @@
     device = "zslow/enc/media";
     fsType = "zfs";
   };
-
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/71d49f75-93a1-44f6-ab19-4a31ffc16508"; }
-  ];
 }

@@ -1,8 +1,5 @@
-# There's (at least) one AGE key per machine, used to decrypt secrets for that
-# machine. I'm keeping them under `/root/.config/sops/age/keys.txt` because
-# then it's not tied to a user, is clearly root-protected (and equivalent to
-# root access), and has a relatively well known fixed path. The nix daemon can
-# read the file as root thankfully.
+# There's one AGE key per machine in /etc/nixos/secrets/age.key, used to
+# decrypt secrets for that machine.
 #
 # Ciphertexts are stored encrypted with _each_ of the machine private keys, so
 # each machine has a copy of all the values.
@@ -16,13 +13,12 @@
 # Generate a new key for a host using:
 #   $ nix shell nixpkgs#age --command age-keygen -o /etc/nixos/secrets/age.key
 # Update secrets after adding a new host using:
-#   $ SOPS_AGE_KEY_FILE=/etc/nixos/secrets/age.key nix run nixpkgs#sops updatekeys <filename>
-# or:
+#   $ ./update.sh
 
 keys:
   - &laptop age1ehphlf0jfvxy2855xu0jdgxsnpeq5uprj3rzyd9jmt2hv44gfues5mf5qs
   - &desktop age17shlrylte78cmpw4zefcyue2a4wnd2vjnqwq5axlxh5606uvqcxqtx7pyd
-  - &warthog age1psr2mawpcu5u43tc4l4n0l4a07tf27stk30ae8fhc8t8j7zvuylqxll8z3
+  - &warthog age16ps64mq2qfjgje66y28x7pf0mr6gxh0nthp7hzju6yda23ryxdwq5f5tup
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:

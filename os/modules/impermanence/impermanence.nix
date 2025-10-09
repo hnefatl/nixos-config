@@ -1,12 +1,33 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
+let
+  impermanent_root_dataset = "${config.standard_filesystems.pool_names.root}/enc/ephemeralroot";
+  persistent_root_dataset = "${config.standard_filesystems.pool_names.root}/enc/snap/persistentroot";
+in
 {
+  # This config relies on values set in this module, and assumes the machine is using this layout.
+  imports = [ ../../../hosts/standard-filesystems.nix ];
+
+  fileSystems = {
+    # Impermanent systems use a different root dataset than normal, because it doesn't need autosnapshots.
+    "/".device = lib.mkForce impermanent_root_dataset;
+
+    "/persist" = {
+      device = persistent_root_dataset;
+      fsType = "zfs";
+      neededForBoot = true;
+    };
+
+    # Required so that impermanence has the filesystem available for setting user passwords:
+    # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
+    "/etc/nixos".neededForBoot = true;
+  };
+
   # Rollback to empty root once devices are available and before mounted.
   boot.initrd.systemd.services.zfs-rollback-root = {
     description = "ZFS rollback root to empty.";
 
     wantedBy = [ "initrd.target" ];
-    # zroot must match the name of the root zpool.
-    after = [ "zfs-import-zroot.service" ];
+    after = [ "zfs-import-${config.standard_filesystems.pool_names.root}.service" ];
     before = [ "sysroot.mount" ];
 
     path = [ pkgs.zfs ];
@@ -14,7 +35,7 @@
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
     script = ''
-      zfs rollback -r zroot/ephemeral/root@empty && echo "rollback complete"
+      zfs rollback -r ${impermanent_root_dataset}@empty && echo "rollback complete"
     '';
   };
 

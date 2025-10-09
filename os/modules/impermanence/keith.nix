@@ -25,7 +25,6 @@
       files = [
         ".zsh_history"
         ".git-credentials"
-        ".gitconfig"
         ".ssh/id_ed25519"
         ".ssh/id_ed25519.pub"
       ];

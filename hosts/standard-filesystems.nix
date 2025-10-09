@@ -131,10 +131,12 @@ in
           # into:
           #   "mount -tzfs foo/nix /os/nix"
           # for the specific volumes we care about.
+          # This logic makes the "include /persist" if it exists case neater.
           volumesToMount = [
             "/"
             "/nix"
             "/home/keith"
+            "/persist"
             "/boot"
           ];
           requiredMounts = lib.attrsets.filterAttrs (p: _: builtins.elem p volumesToMount) config.fileSystems;
