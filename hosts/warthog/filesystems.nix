@@ -22,19 +22,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/pool/backup/devices" = {
-    device = "zslow/enc/snap/backup/devices";
-    fsType = "zfs";
-  };
-  fileSystems."/pool/backup/devices/desktop" = {
-    device = "zslow/enc/snap/backup/devices/desktop";
-    fsType = "zfs";
-  };
-  fileSystems."/pool/backup/devices/laptop" = {
-    device = "zslow/enc/snap/backup/devices/laptop";
-    fsType = "zfs";
-  };
-
   fileSystems."/pool/old_disks" = {
     device = "zslow/enc/old_disks";
     fsType = "zfs";

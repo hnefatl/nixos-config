@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 {
-  imports = [ ./msmtp.nix ];
+  imports = [ ../msmtp.nix ];
 
   services.zfs.zed = {
     settings = {
