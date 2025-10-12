@@ -45,6 +45,10 @@
       bindkey '^R' history-incremental-search-backward
       # Allow `#foo` to not run foo.
       setopt interactivecomments
+
+      function nos() {
+        nix eval /etc/nixos/os#nixosConfigurations.$HOST.config.$1
+      }
     '';
     plugins = [
       {
