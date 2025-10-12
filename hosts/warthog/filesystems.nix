@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 let
   poolMounts = {
     "/pool/services" = "zfast/enc/snap/services";
@@ -31,4 +31,43 @@ in
   };
 
   fileSystems = poolFilesystems;
+
+  # TODO: this is pretty messy, partly because sanoid's not been very nix-ified, partly because
+  # I should probably write a proper opinionated wrapper around it.
+  services.sanoid = {
+    # Run every 5mins, to reliably catch the 10min gameserver snapshots below.
+    interval = lib.mkForce "*-*-* *:0/5:00";
+    datasets =
+      let
+        # Copied from "zroot/enc/snap" configuration for now.
+        standard = {
+          recursive = "zfs";
+          autosnap = true;
+          autoprune = true;
+          hourly = 48;
+          daily = 28;
+          weekly = 8;
+          monthly = 0;
+          yearly = 0;
+        };
+      in
+      {
+        # Take regular "standard" snapshots of the pool datasets.
+        "zslow/enc/snap" = standard;
+        "zfast/enc/snap" = standard;
+
+        "zfast/enc/snap/services/vintagestory" = {
+          autoprune = true;
+          # Take a snapshot every 10mins for gameserver files, keep 4hrs of granular snapshots.
+          frequent_period = 10;
+          frequently = 24;
+          # Keep a week of medium granularity.
+          hourly = 72;
+          daily = 7;
+          weekly = 0;
+          monthly = 0;
+          yearly = 0;
+        };
+      };
+  };
 }

@@ -25,6 +25,7 @@
   services.sanoid = {
     enable = true;
     interval = "hourly";
+    extraArgs = [ "verbose" ];
 
     datasets."zroot/enc/snap" = {
       # Use `zfs snapshot -r` for an atomic snapshot of the whole tree. This lets us transfer the
