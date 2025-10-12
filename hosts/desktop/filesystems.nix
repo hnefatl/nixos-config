@@ -11,8 +11,8 @@
     device = "zgames/games";
     fsType = "zfs";
     options = [
-      # Don't mount on boot, only when accessed.
-      "noauto"
+      "nofail" # Don't fail to boot if this disk goes away.
+      "noauto" # Don't mount on boot, only when accessed.
       "x-systemd.automount"
     ];
   };
