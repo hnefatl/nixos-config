@@ -1,3 +1,26 @@
+{ lib, ... }:
+let
+  poolMounts = {
+    "/pool/services" = "zfast/enc/snap/services";
+    "/pool/services/docker_configs/vintagestory" = "zfast/enc/snap/services/vintagestory";
+    "/pool/backup" = "zslow/enc/snap/backup";
+    "/pool/old_disks" = "zslow/enc/old_disks";
+    "/pool/jellyfin" = "zfast/enc/jellyfin";
+    "/pool/plex" = "zfast/enc/plex";
+    "/pool/immich" = "zslow/enc/immich";
+    "/pool/transfer" = "zslow/enc/transfer";
+    "/pool/media" = "zslow/enc/media";
+  };
+  poolFilesystem = mount: dataset: {
+    device = dataset;
+    fsType = "zfs";
+    # Pool filesystems aren't critical to boot, don't drop to an emergency shell if I make a typo when renaming one.
+    # TODO: make a `pool-fs.target` systemd entity for tracking pool mounts, like `local-fs` tracks root mounts (and maybe pool mounts but nofail?).
+    # Should allow for blocking services on their relevant filesystem?
+    options = [ "nofail" ];
+  };
+  poolFilesystems = lib.mapAttrs poolFilesystem poolMounts;
+in
 {
   imports = [ ../standard-filesystems.nix ];
 
@@ -7,58 +30,5 @@
     boot = "2fd6326a-3cbb-4cbe-ba46-59b72f80094c";
   };
 
-  # TODO: make a `pool-fs.target` systemd entity for tracking pool mounts.
-  fileSystems."/pool/services" = {
-    device = "zfast/enc/snap/services";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
-
-  fileSystems."/pool/services/docker_configs/vintagestory" = {
-    device = "zfast/enc/snap/services/vintagestory";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
-
-  fileSystems."/pool/backup" = {
-    device = "zslow/enc/snap/backup";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
-
-  fileSystems."/pool/old_disks" = {
-    device = "zslow/enc/old_disks";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
-
-  fileSystems."/pool/jellyfin" = {
-    device = "zfast/enc/jellyfin";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
-
-  fileSystems."/pool/plex" = {
-    device = "zfast/enc/plex";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
-
-  fileSystems."/pool/immich" = {
-    device = "zslow/enc/immich";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
-
-  fileSystems."/pool/transfer" = {
-    device = "zslow/enc/transfer";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
-
-  fileSystems."/pool/media" = {
-    device = "zslow/enc/media";
-    fsType = "zfs";
-    options = [ "nofail" ];
-  };
+  fileSystems = poolFilesystems;
 }
