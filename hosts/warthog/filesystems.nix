@@ -2,7 +2,7 @@
 let
   poolMounts = {
     "/pool/services" = "zfast/enc/snap/services";
-    "/pool/services/docker_configs/vintagestory" = "zfast/enc/snap/services/vintagestory";
+    "/pool/services/docker_configs/vintagestory" = "zfast/enc/freqsnap/vintagestory";
     "/pool/backup" = "zslow/enc/snap/backup";
     "/pool/old_disks" = "zslow/enc/old_disks";
     "/pool/jellyfin" = "zfast/enc/jellyfin";
@@ -56,12 +56,17 @@ in
         "zslow/enc/snap" = standard;
         "zfast/enc/snap" = standard;
 
-        "zfast/enc/snap/services/vintagestory" = {
+        # Short-term high-frequency snapshots for e.g. game server files.
+        # This can't be under `snap/...` because apparently sanoid skips recursive-in-recursive dataset configs, even if the settings are different :/
+        # TODO: fix upstream?
+        "zfast/enc/freqsnap" = {
+          recursive = "zfs";
+          autosnap = true;
           autoprune = true;
-          # Take a snapshot every 10mins for gameserver files, keep 4hrs of granular snapshots.
+          # Every 10 mins for 4 hours.
           frequent_period = 10;
           frequently = 24;
-          # Keep a week of medium granularity.
+          # Then downsample to a week of medium granularity.
           hourly = 72;
           daily = 7;
           weekly = 0;
