@@ -7,6 +7,8 @@ let
   dmenu-audio = pkgs.callPackage ../../scripts/dmenu-audio.nix { inherit pkgs; };
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   playerctl = "${lib.getExe pkgs.playerctl}";
+  screencap = pkgs.callPackage ../../scripts/screencap.nix { inherit pkgs; };
+
   self = {
     "${mod}+r" = "reload";
     "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
@@ -126,8 +128,9 @@ let
     # Handle actionable notifications
     "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu -- ${lib.getExe pkgs.fuzzel} --dmenu";
 
-    "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot --notify --cursor copy anything";
-    "${mod}+Print" = "${self.Print} --wait $(echo '3\\n5' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Delay:')";
+    "Print" = "exec ${screencap}/bin/screencap printscreen";
+    "Alt+Print" = "exec ${screencap}/bin/screencap delay_printscreen";
+    "${mod}+Print" = "exec ${screencap}/bin/screencap record";
 
     # Flags prevent blurry apps with Wayland.
     "${caps}+d" = "exec ${pkgs.discord}/bin/discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto";
