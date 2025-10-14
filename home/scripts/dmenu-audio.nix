@@ -10,7 +10,7 @@ pkgs.writeShellApplication {
       jq = lib.getExe pkgs.jq;
     in
     ''
-      sinkname=$(${pw-dump} | ${jq} -r '.[] | select(.info.props."media.class" == "Audio/Sink") | [.info.props."node.name", .info.props."node.description"] | join("\t")' | ${fuzzel} --dmenu --with-nth=2 --accept-nth=1 --lines=5)
+      sinkname=$(${pw-dump} | ${jq} -r '.[] | select(.info.props."media.class" == "Audio/Sink") | [.info.props."node.name", .info.props."node.description"] | join("\t")' | sort -u -k2 | ${fuzzel} --dmenu --with-nth=2 --accept-nth=1 --lines=5)
 
       if [[ -n "$sinkname" ]] ; then
           ${pactl} set-default-sink "$sinkname"
