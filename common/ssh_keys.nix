@@ -10,5 +10,5 @@
   hosts = {
     warthog = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN4jIgx+67E0XCzKHKQ0WxEYZoMYB8011JQOArGWvWY2 warthog";
   };
-  syncoid = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPzNe+/idMWvukllAbesse5AGU26QeBTNNaHt9THmHXH syncoid";
+  zfsreplicator = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPzNe+/idMWvukllAbesse5AGU26QeBTNNaHt9THmHXH zfsreplicator";
 }

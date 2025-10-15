@@ -37,7 +37,7 @@
             ./boot/lanzaboote.nix
 
             ./modules/zfs/zfs.nix
-            ./modules/zfs/syncoid/client.nix
+            ./modules/zfs/replicator/client.nix
             ./modules/tlp.nix
             ./modules/bluetooth.nix
             ./modules/spotify.nix
@@ -60,7 +60,7 @@
             ./boot/lanzaboote.nix
 
             ./modules/zfs/zfs.nix
-            ./modules/zfs/syncoid/client.nix
+            ./modules/zfs/replicator/client.nix
             ./modules/sshd.nix
             ./modules/nvidia-graphics.nix
             ./modules/sunshine.nix
@@ -83,7 +83,7 @@
             ../os/boot/lanzaboote.nix
 
             ./modules/zfs/zfs.nix
-            ./modules/zfs/syncoid/server.nix
+            ./modules/zfs/replicator/server.nix
             ./modules/sshd.nix
             ./modules/tlp.nix
             ./modules/msmtp.nix
