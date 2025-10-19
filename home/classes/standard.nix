@@ -10,6 +10,7 @@
     ../modules/vscode.nix
     ../modules/fuzzel.nix
     ../modules/discord.nix
+    ../modules/gammastep.nix
   ];
 
   home = {
