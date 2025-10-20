@@ -81,7 +81,8 @@
       keybindings = (import ./keybindings.nix { inherit pkgs lib; });
     };
     extraConfig = ''
-      # If a game is focused, disable idle
+      # Disable idle for fullscreen apps and steam games.
+      for_window [all] inhibit_idle fullscreen
       for_window [class="steam_app*"] inhibit_idle focus
     '';
   };
