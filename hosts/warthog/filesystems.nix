@@ -30,6 +30,13 @@ in
     boot = "2fd6326a-3cbb-4cbe-ba46-59b72f80094c";
   };
 
+  # Explicitly enumerate datasets to decrypt, to avoid trying to decrypt backup datasets that warthog doesn't have keys for.
+  boot.zfs.requestEncryptionCredentials = [
+    "zroot/enc"
+    "zslow/enc"
+    "zfast/enc"
+  ];
+
   fileSystems = poolFilesystems;
 
   # TODO: this is pretty messy, partly because sanoid's not been very nix-ified, partly because
