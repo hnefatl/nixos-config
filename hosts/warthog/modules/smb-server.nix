@@ -1,8 +1,6 @@
+{ config, pkgs, ... }:
 {
-  # Requires manual user password configuration:
-  #   $ sudo smbpasswd -a keith
-  #
-  # TODO: use a systemd service to configure this from a committed secret.
+  sops.secrets."samba_passwords/keith" = {};
 
   services.samba = {
     enable = true;
@@ -25,6 +23,25 @@
         "directory mask" = "0755";
       };
     };
+  };
+
+  systemd.services.set-samba-user-passwords = {
+    description = "Set Samba user passwords.";
+    after = [ "samba.target" ];
+    wantedBy = [ "samba-smbd.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = "yes";
+    };
+
+    # smbpasswd asks for password then same password as confirmation.
+    script = ''
+      set -x
+      (for x in 1 2 ; do
+        cat ${config.sops.secrets."samba_passwords/keith".path}
+        echo
+      done) | ${pkgs.samba}/bin/smbpasswd -a keith
+    '';
   };
 }
 
