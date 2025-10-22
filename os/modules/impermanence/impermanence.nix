@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   impermanent_root_dataset = "${config.standard_filesystems.pool_names.root}/enc/ephemeralroot";
   persistent_root_dataset = "${config.standard_filesystems.pool_names.root}/enc/snap/persistentroot";
