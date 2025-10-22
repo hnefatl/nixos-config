@@ -20,8 +20,8 @@
     };
   };
 
-  # Automatic snapshots.
-  # TODO: finish moving old snapshotted things (`zfs list -o name,com.sun:auto-snapshot`) to opt-in per device.
+  # Automatic snapshots for standard `zroot/enc/snap` dataset. Devices with additional disks might configure
+  # additional snapshots.
   services.sanoid = {
     enable = true;
     interval = "hourly";
