@@ -89,6 +89,7 @@
             ./modules/impermanence/keith.nix
             ../hosts/warthog/modules/services.nix
             ../hosts/warthog/modules/nfs-server.nix
+            ../hosts/warthog/modules/smb-server.nix
           ];
           specialArgs = {
             inherit impermanence;
