@@ -1,5 +1,6 @@
 {
   inputs = {
+    self.submodules = true;
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";

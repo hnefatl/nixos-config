@@ -1,5 +1,2 @@
-secrets/*.key
-secrets/*.pub
-
 # The output symlink from e.g. `nixos-rebuild dry-activate`.
 result
