@@ -1,11 +1,4 @@
 {
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-
-lib.mkIf (config.machine_config.formFactor == "laptop") {
   networking = {
     firewall = {
       allowedUDPPorts = [ 51820 ];
@@ -36,10 +29,12 @@ lib.mkIf (config.machine_config.formFactor == "laptop") {
       dns = [ "10.20.0.1" ];
       listenPort = 51820;
 
+      generatePrivateKeyFile = true;
       privateKeyFile = "/etc/nixos/secrets/wireguard.key";
 
       peers = [
         {
+          # Router wireguard public key.
           publicKey = "yKqPGe+9olnRGu8GSGVb+lOEefWJLoQjk5WqVBK8OVk=";
           endpoint = "vpn.keith.collister.xyz:5746";
           allowedIPs = [ "0.0.0.0/0" ];
