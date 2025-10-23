@@ -1,0 +1,9 @@
+# Scan using:
+#   $ nix run nixpkgs#gitleaks -- git -v
+
+[[rules]]
+id = "nix-secrets"
+# Match any single-line quoted string of reasonable characters.
+regex = '''(?m)['"]([^'"\s\n]+)['"]'''
+# All the secret keys I use are actually strong secrets, so have high entropy.
+entropy = 4.5
