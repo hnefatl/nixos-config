@@ -7,3 +7,9 @@ id = "nix-secrets"
 regex = '''(?m)['"]([^'"\s\n]+)['"]'''
 # All the secret keys I use are actually strong secrets, so have high entropy.
 entropy = 4.5
+
+# Allowlist here means "allow there to be secrets", i.e. ignore.
+[allowlist]
+paths = [
+  '.*flake\.lock$'
+]
