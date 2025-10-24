@@ -61,7 +61,7 @@
 
             ./modules/zfs/zfs.nix
             ./modules/sshd.nix
-            ./modules/nvidia-graphics.nix
+            ./modules/amd-graphics.nix
             ./modules/sunshine.nix
             ./modules/spotify.nix
             ./modules/swaylock.nix
