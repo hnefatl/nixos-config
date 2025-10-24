@@ -10,7 +10,7 @@
     xwayland = true;
     extraOptions = lib.mkIf (config.machine_config.instance == "desktop") [ "--unsupported-gpu" ];
     wrapperFeatures.gtk = true;
-    config = {
+    config = rec {
       terminal = "kitty";
       defaultWorkspace = "workspace number 1";
       # Set the primary monitor in X11 for xwayland apps. Prevents e.g. games defaulting to wrong screen.
@@ -28,7 +28,7 @@
       fonts = {
         names = [ "Noto Sans" ];
         style = "Mono";
-        size = 10.0;
+        size = "10";
       };
 
       input = {
@@ -74,7 +74,6 @@
         {
           position = "top";
           trayOutput = "primary";
-          fonts = config.wayland.windowManager.sway.config.fonts;
           statusCommand = "${pkgs.i3blocks}/bin/i3blocks";
         }
       ];
