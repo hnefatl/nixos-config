@@ -37,6 +37,8 @@
     python3
     unzip
     p7zip
+    usbutils
+    smartmontools
     nix-inspect
     jujutsu
   ];
