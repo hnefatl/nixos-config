@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  sops.secrets."samba_passwords/keith" = {};
+  sops.secrets."samba_passwords/keith" = { };
 
   services.samba = {
     enable = true;
@@ -44,4 +44,3 @@
     '';
   };
 }
-
