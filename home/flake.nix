@@ -52,16 +52,6 @@
             ];
             extraSpecialArgs = { inherit firefox-addons; };
           };
-          # Deliberately not using real user+hostname - select this explicitly on the command line
-          # like `nh home switch ~/nixos-config/home --configuration=keith@corp-laptop`.
-          "keith@corp-laptop" = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [
-              ../hosts/corp-laptop/model.nix
-
-              ./classes/standard.nix
-            ];
-          };
 
           # Users on impermanence-based setups are located in
           # os/modules/impermanence/...
