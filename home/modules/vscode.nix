@@ -19,12 +19,12 @@
           ms-python.python
           ms-pyright.pyright
           ms-python.black-formatter
-          ms-vscode-remote.remote-ssh
-          rust-lang.rust-analyzer
-          tamasfe.even-better-toml
         ]
         ++ lib.optionals (!config.machine_config.isWork) [
           vscode-extensions.github.copilot
+          rust-lang.rust-analyzer
+          tamasfe.even-better-toml
+          ms-vscode-remote.remote-ssh
         ];
     })
     nixfmt-rfc-style
