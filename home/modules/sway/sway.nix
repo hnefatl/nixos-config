@@ -34,7 +34,7 @@
       input = {
         "type:keyboard" = {
           xkb_layout = "gb";
-          xkb_options = "caps:escape";
+          xkb_options = "caps:hyper";
           repeat_delay = "200";
           repeat_rate = "58";
           xkb_numlock = "true";
