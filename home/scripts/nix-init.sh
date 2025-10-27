@@ -25,6 +25,9 @@ cat >flake.nix <<EOF
     in
     {
       formatter."\${system}" = pkgs.nixfmt-tree;
+      devShells."\${system}".default = pkgs.mkShell {
+        packages = [ pkgs.bashInteractive ];
+      };
       packages."\${system}" = {
         default = pkgs.hello;
       };
