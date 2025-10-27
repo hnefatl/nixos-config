@@ -11,6 +11,7 @@
 
   home.packages = with pkgs; [
     (pkgs.vscode-with-extensions.override {
+      # https://search.nixos.org/packages?channel=25.05&query=vscode-extensions
       vscodeExtensions =
         with pkgs.vscode-extensions;
         [
@@ -25,6 +26,7 @@
           rust-lang.rust-analyzer
           tamasfe.even-better-toml
           ms-vscode-remote.remote-ssh
+          hashicorp.terraform
         ];
     })
     nixfmt-rfc-style
