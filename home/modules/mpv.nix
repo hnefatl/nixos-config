@@ -8,7 +8,10 @@
       hwdec = "auto";
       gpu-api = "opengl";
       ytdl-format = "bestvideo+bestaudio";
+      # Allow subs to go outside the movie render area.
+      stretch-image-subs-to-screen = "yes";
     };
+    # Also remember that r+t adjusts subtitle height.
     bindings = {
       # YouTube-style controls
       "j" = "seek -10";
