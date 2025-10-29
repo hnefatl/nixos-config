@@ -46,6 +46,7 @@
             ./modules/swaylock.nix
             ./modules/gaming.nix
             ./modules/warthog-nfs.nix
+            ./modules/cross-compile-aarch64.nix
           ];
         };
         desktop = nixpkgs.lib.nixosSystem {
