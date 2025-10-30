@@ -2,7 +2,7 @@
 
 let
   mod = "Mod4"; # Super/Windows/Framework key
-  caps = "Mod3"; # Caps lock
+  caps = "Mod5"; # Caps lock
   dmenu-emoji = pkgs.callPackage ../../scripts/dmenu-emoji.nix { inherit pkgs; };
   dmenu-audio = pkgs.callPackage ../../scripts/dmenu-audio.nix { inherit pkgs; };
   pactl = "${pkgs.pulseaudio}/bin/pactl";

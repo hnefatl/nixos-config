@@ -34,7 +34,9 @@
       input = {
         "type:keyboard" = {
           xkb_layout = "gb";
-          xkb_options = "caps:hyper";
+          # Make caps lock function as the lvl3 shift modifier key: can't use Hyper on work laptop
+          # because Ubuntu/Debian make super+hyper both Mod3.
+          xkb_options = "lv3:caps_switch";
           repeat_delay = "200";
           repeat_rate = "58";
           xkb_numlock = "true";
