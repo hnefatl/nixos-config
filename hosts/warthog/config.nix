@@ -5,6 +5,7 @@
     ./hardware.nix
     ./filesystems.nix
     ./networking.nix
+    ./topology.nix
   ];
 
   system.stateVersion = "25.05";

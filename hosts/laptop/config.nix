@@ -5,6 +5,7 @@
     ./hardware.nix
     ./filesystems.nix
     ./networking.nix
+    ./topology.nix
   ];
 
   # TODO: remove once NixOS selects a new LTS kernel as default (pkgs.linuxPackages.kernel.version is an LTS release).
