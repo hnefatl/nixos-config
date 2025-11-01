@@ -12,6 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
+    nix-topology = {
+      url = "github:oddlama/nix-topology";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home.url = "path:./../home";
   };
 
@@ -22,6 +26,7 @@
       lanzaboote,
       sops-nix,
       impermanence,
+      nix-topology,
       home,
     }:
     {
@@ -31,6 +36,7 @@
           modules = [
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
+            nix-topology.nixosModules.default
             ../hosts/laptop/config.nix
 
             ./classes/base.nix
@@ -54,6 +60,7 @@
           modules = [
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
+            nix-topology.nixosModules.default
             ../hosts/desktop/config.nix
 
             ./classes/base.nix
@@ -76,6 +83,7 @@
           modules = [
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
+            nix-topology.nixosModules.default
             impermanence.nixosModules.impermanence
             ../hosts/warthog/config.nix
 
@@ -98,6 +106,18 @@
             inherit (home.inputs) home-manager;
           };
         };
+      };
+
+      # Configure topology diagrams.
+      topology."x86_64-linux" = import nix-topology {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          overlays = [ nix-topology.overlays.default ];
+        };
+        modules = [
+          { nixosConfigurations = self.nixosConfigurations; }
+          ./custom-topology.nix
+        ];
       };
     };
 }
