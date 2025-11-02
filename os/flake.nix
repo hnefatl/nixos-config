@@ -74,6 +74,7 @@
             ./modules/spotify.nix
             ./modules/swaylock.nix
             ./modules/gaming.nix
+            ./modules/obs.nix
             ./modules/warthog-nfs.nix
             ./modules/virtualisation.nix
           ];

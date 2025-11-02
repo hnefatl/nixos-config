@@ -48,7 +48,6 @@
 
               ./classes/standard.nix
               ./modules/firefox.nix
-              ./modules/obs.nix
             ];
             extraSpecialArgs = { inherit firefox-addons; };
           };
