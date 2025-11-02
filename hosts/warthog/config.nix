@@ -19,6 +19,11 @@
     open = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    tmux
+    e2fsprogs
+  ];
+
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
