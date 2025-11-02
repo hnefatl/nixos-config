@@ -43,6 +43,7 @@
             ./classes/graphical.nix
             ./boot/lanzaboote.nix
 
+            ./modules/attic.nix
             ./modules/zfs/zfs.nix
             ./modules/tlp.nix
             ./modules/bluetooth.nix
@@ -67,6 +68,7 @@
             ./classes/graphical.nix
             ./boot/lanzaboote.nix
 
+            ./modules/attic.nix
             ./modules/zfs/zfs.nix
             ./modules/sshd.nix
             ./modules/amd-graphics.nix
@@ -99,6 +101,7 @@
             ../hosts/warthog/modules/services.nix
             ../hosts/warthog/modules/nfs-server.nix
             ../hosts/warthog/modules/smb-server.nix
+            ../hosts/warthog/modules/atticd.nix
           ];
           specialArgs = {
             inherit impermanence;
