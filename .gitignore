@@ -1,2 +1,4 @@
 # The output symlink from e.g. `nixos-rebuild dry-activate`.
 result
+# Contains per-machine keys.
+machine_secrets/

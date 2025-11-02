@@ -1,6 +1,6 @@
 {
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
-  sops.age.keyFile = "/etc/nixos/secrets/age.key";
+  sops.age.keyFile = "/etc/nixos/machine_secrets/age.key";
 
   # Needs other manual steps anyway, this makes it clearer what's happening.
   sops.age.generateKey = false;
