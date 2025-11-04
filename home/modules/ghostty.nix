@@ -1,16 +1,18 @@
+{ pkgs-unstable, ... }:
 {
   programs.ghostty = {
     enable = true;
     enableZshIntegration = true;
+    package = pkgs-unstable.ghostty;
+
     # https://ghostty.org/docs/config/reference
     settings = {
       font-family = "Noto";
       font-style = "Mono";
       font-size = 12.0;
       theme = "kdefault";
-      # TODO: switch to unstable ghostty to support this.
       # Copy terminfo to hosts on first SSH: fallback to xterm-256color if not possible.
-      #shell-integration-features = "ssh-terminfo,ssh-env";
+      shell-integration-features = "ssh-terminfo,ssh-env";
     };
     # https://ghostty.org/docs/features/theme#authoring-a-custom-theme
     # This theme based on Kitty.

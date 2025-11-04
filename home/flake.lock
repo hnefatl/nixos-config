@@ -59,11 +59,27 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1762258343,
+        "narHash": "sha256-e4QP/kpvIAldIg1Tk3h42JEiVMoHnSh+1oxRSaev+qw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "10582d3c0799731a0ad3276a6b4ed4bb16fbd023",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     }
   },

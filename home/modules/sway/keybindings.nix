@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   mod = "Mod4"; # Super/Windows/Framework key
@@ -13,10 +13,10 @@ let
     "${mod}+r" = "reload";
     "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
 
-    "${caps}+t" = "exec ${lib.getExe pkgs.ghostty}";
+    "${caps}+t" = "exec ${lib.getExe config.programs.ghostty.package}";
     "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
-    "${caps}+f" = "exec ${lib.getExe pkgs.ghostty} ${lib.getExe pkgs.ranger}";
-    "${caps}+h" = "exec ${lib.getExe pkgs.ghostty} ${lib.getExe pkgs.htop}";
+    "${caps}+f" = "exec ${lib.getExe config.programs.ghostty.package} ${lib.getExe pkgs.ranger}";
+    "${caps}+h" = "exec ${lib.getExe config.programs.ghostty.package} ${lib.getExe pkgs.htop}";
     "${mod}+d" = "exec ${lib.getExe pkgs.fuzzel}";
 
     # Wayland global keybind -> Discord in XWayland workaround.

@@ -80,7 +80,7 @@
         }
       ];
 
-      keybindings = (import ./keybindings.nix { inherit pkgs lib; });
+      keybindings = (import ./keybindings.nix { inherit config pkgs lib; });
     };
     extraConfig = ''
       # Disable idle for fullscreen apps and steam games.

@@ -2,6 +2,7 @@
   inputs = {
     self.submodules = true;
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,6 +17,7 @@
     inputs@{
       self,
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       firefox-addons,
     }:
@@ -24,6 +26,10 @@
         let
           system = "x86_64-linux";
           pkgs = import nixpkgs {
+            inherit system;
+            allowUnfree = true;
+          };
+          pkgs-unstable = import nixpkgs-unstable {
             inherit system;
             allowUnfree = true;
           };
@@ -39,7 +45,7 @@
               ./modules/firefox.nix
               ./modules/moonlight.nix
             ];
-            extraSpecialArgs = { inherit firefox-addons; };
+            extraSpecialArgs = { inherit firefox-addons; inherit pkgs-unstable; };
           };
           "keith@desktop" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
@@ -49,7 +55,7 @@
               ./classes/standard.nix
               ./modules/firefox.nix
             ];
-            extraSpecialArgs = { inherit firefox-addons; };
+            extraSpecialArgs = { inherit firefox-addons; inherit pkgs-unstable; };
           };
 
           # Users on impermanence-based setups are located in
