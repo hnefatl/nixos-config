@@ -11,7 +11,7 @@
     extraOptions = lib.mkIf (config.machine_config.instance == "desktop") [ "--unsupported-gpu" ];
     wrapperFeatures.gtk = true;
     config = rec {
-      terminal = "kitty";
+      terminal = "ghostty";
       defaultWorkspace = "workspace number 1";
       # Set the primary monitor in X11 for xwayland apps. Prevents e.g. games defaulting to wrong screen.
       startup = [

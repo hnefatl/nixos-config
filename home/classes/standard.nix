@@ -2,6 +2,7 @@
 {
   imports = [
     ./base.nix
+    ../modules/ghostty.nix
     ../modules/sway/sway.nix
     ../modules/sway/swaylock.nix
     ../modules/sway/swayidle.nix
@@ -50,20 +51,6 @@
         monospace = [ "Noto Sans Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
-    };
-  };
-
-  programs.kitty = lib.mkForce {
-    enable = true;
-    settings = {
-      confirm_os_window_close = 0;
-      font_family = "family = 'Noto Mono'";
-      font_size = 12.0;
-      cursor = "#aaaaaa";
-      background = "#333333";
-      foreground = "#ffffff";
-      # Lose some kitty functionality for much better interop on remote machines w/out kitty installed.
-      term = "xterm-256color";
     };
   };
 
