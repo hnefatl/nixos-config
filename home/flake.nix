@@ -54,6 +54,7 @@
 
               ./classes/standard.nix
               ./modules/firefox.nix
+              ./modules/ffxiv.nix
             ];
             extraSpecialArgs = { inherit firefox-addons; inherit pkgs-unstable; };
           };
