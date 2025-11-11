@@ -24,7 +24,7 @@
           else
             [
               {
-                timeout = 300;
+                timeout = 300; # 5mins
                 command = "${lib.getExe pkgs.swaylock-effects} --daemonize";
               }
             ];
@@ -32,13 +32,13 @@
       lockIfNotDesktop
       ++ [
         {
-          timeout = 310;
+          timeout = 310; # 5m10s
           command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
-          resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+          # Reloading mako is a workaround for mako not showing notifications after resume :/
+          resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on' ; ${pkgs.mako}/bin/makoctl reload";
         }
-        # 30mins
         {
-          timeout = 1800;
+          timeout = 1800; # 30mins
           command = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
