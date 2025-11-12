@@ -8,6 +8,7 @@ let
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   playerctl = "${lib.getExe pkgs.playerctl}";
   screencap = pkgs.callPackage ../../scripts/screencap.nix { inherit pkgs; };
+  systemctl = "${pkgs.systemd}/bin/systemctl";
 
   self = {
     "${mod}+r" = "reload";
@@ -17,6 +18,7 @@ let
     "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
     "${caps}+f" = "exec ${lib.getExe config.programs.ghostty.package} ${lib.getExe pkgs.ranger}";
     "${caps}+h" = "exec ${lib.getExe config.programs.ghostty.package} ${lib.getExe pkgs.htop}";
+    "${caps}+g" = "exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep";
     "${mod}+d" = "exec ${lib.getExe pkgs.fuzzel}";
 
     # Wayland global keybind -> Discord in XWayland workaround.
