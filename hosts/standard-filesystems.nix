@@ -1,6 +1,8 @@
 # Standardised filesystem layout.
 # Assumes standardised naming documented in /docs/disk_security.md.
 
+# TODO: disable default zpool logic, do explicit zpool imports to avoid e.g. `import -a`, `load-keys -a` which break on e.g. clones of encrypted datasets.
+
 { lib, config, ... }:
 let
   cfg = config.standard_filesystems;
@@ -61,17 +63,19 @@ in
         # is and allows easier mounting if new keys are needed.
         script = ''
           echo "Loading bootstrap keys"
-          zpool import ${cfg.pool_names.zfskeys}
+          zpool import -f ${cfg.pool_names.zfskeys}
           zpool scrub -w ${cfg.pool_names.zfskeys}
-          mkdir /zfskeys
+          mkdir -p /zfskeys
           mount -t zfs -o ro ${cfg.pool_names.zfskeys} /zfskeys
 
           echo "Loading ZFS pools and keys"
-          zpool import -a
+          zpool import -f -a
           zfs load-key -a
 
           echo "Unloading bootstrap keys"
           umount /zfskeys
+          # This shouldn't fail the script.
+          rmdir /zfskeys || echo "Dirty zfskeys directory"
           zpool export ${cfg.pool_names.zfskeys}
         '';
       };
@@ -137,7 +141,6 @@ in
             "/nix"
             "/home/keith"
             "/persist"
-            "/boot"
           ];
           requiredMounts = lib.attrsets.filterAttrs (p: _: builtins.elem p volumesToMount) config.fileSystems;
           toMountCommand = mountpoint: attrs: "mount -tzfs ${attrs.device} /os${mountpoint}";
@@ -154,18 +157,19 @@ in
 
           # Unlock the LUKS volume containing ZFS keys.
           systemd-cryptsetup attach ${cfg.pool_names.zfskeys} '/dev/disk/by-partuuid/${cfg.partuuids.zfskeys}'
-          zpool import ${cfg.pool_names.zfskeys}
+          zpool import -f ${cfg.pool_names.zfskeys}
           # Make sure the partition is healthy.
           zpool scrub -w ${cfg.pool_names.zfskeys}
           mkdir -p /zfskeys
           mount -t zfs -o ro ${cfg.pool_names.zfskeys} /zfskeys
 
-          # Import all the other pools.
-          zpool import -a -f
-          zfs load-key -a
+          # Import root
+          zpool import -f zroot
+          zfs load-key zroot/enc
 
           # Mount everything on /os
           mkdir -p /os
+          mount "/dev/disk/by-partuuid/${cfg.partuuids.boot}" /os/boot
           ${mountCommands}
           echo 'System mounted on /os'
           EOF

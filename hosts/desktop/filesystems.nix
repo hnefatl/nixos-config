@@ -2,9 +2,9 @@
   imports = [ ../standard-filesystems.nix ];
 
   standard_filesystems.partuuids = {
-    zfskeys = "99a5dcba-1b59-49bc-8a51-5661d21d180b";
-    swap = "6218dca0-7296-49c4-9f53-297fac74fbd7";
-    boot = "88b38164-72bb-460c-83f6-218fb879aca8";
+    zfskeys = "e323cc57-c29f-4f55-b58c-26846ea70b87";
+    swap = "43e06eaf-4467-4c62-87c8-ca4166995983";
+    boot = "89d515e1-28b0-4268-a3e8-e3066cae6ad8";
   };
 
   fileSystems."/games" = {
