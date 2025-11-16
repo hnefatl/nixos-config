@@ -18,7 +18,7 @@ elif [[ "$1" == "delay_printscreen" ]] ; then
 elif [[ "$1" == "record" ]] ; then
     area="$(slurp -d)"
     notify-send -t 2000 'Recording started' 'Hit printscreen to stop.'
-    exec wf-recorder -g "$area" -f /tmp/recording.mp4 -y
+    exec wf-recorder -a -g "$area" -f /tmp/recording.mp4 -y
 else
     echo "Unknown command: '$1'"
     exit 1
