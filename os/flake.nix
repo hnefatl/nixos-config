@@ -77,6 +77,7 @@
             ./modules/obs.nix
             ./modules/warthog-nfs.nix
             ./modules/virtualisation.nix
+            ./modules/cross-compile-aarch64.nix
           ];
         };
         warthog = nixpkgs.lib.nixosSystem {
