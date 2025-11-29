@@ -19,6 +19,7 @@
       options = "--delete-older-than 30d";
     };
     settings = {
+      trusted-users = [ "@wheel" ];
       auto-optimise-store = true;
       # Required by `nh` at least.
       experimental-features = [
