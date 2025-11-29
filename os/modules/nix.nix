@@ -2,6 +2,13 @@
 {
   nix = {
     package = pkgs.nixVersions.stable;
+
+    # Only run daemon operations when there's CPU capacity.
+    # Good for my machines, which rarely run at 100% CPU, but could starve
+    # nix operations on machines with no spare resources.
+    daemonCPUSchedPolicy = "idle";
+    daemonIOSchedClass = "idle";
+
     optimise = {
       automatic = true;
       dates = [ "Sat *-*-* 09:00:00" ];
