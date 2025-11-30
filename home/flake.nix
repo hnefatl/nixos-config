@@ -45,7 +45,10 @@
               ./modules/firefox.nix
               ./modules/moonlight.nix
             ];
-            extraSpecialArgs = { inherit firefox-addons; inherit pkgs-unstable; };
+            extraSpecialArgs = {
+              inherit firefox-addons;
+              inherit pkgs-unstable;
+            };
           };
           "keith@desktop" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
@@ -56,7 +59,10 @@
               ./modules/firefox.nix
               ./modules/ffxiv.nix
             ];
-            extraSpecialArgs = { inherit firefox-addons; inherit pkgs-unstable; };
+            extraSpecialArgs = {
+              inherit firefox-addons;
+              inherit pkgs-unstable;
+            };
           };
 
           # Users on impermanence-based setups are located in

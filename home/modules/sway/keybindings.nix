@@ -1,13 +1,18 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   mod = "Mod4"; # Super/Windows/Framework key
   caps = "Mod5"; # Caps lock
-  dmenu-emoji = pkgs.callPackage ../../scripts/dmenu-emoji.nix { inherit pkgs; };
-  dmenu-audio = pkgs.callPackage ../../scripts/dmenu-audio.nix { inherit pkgs; };
+  dmenu-emoji = pkgs.callPackage ../../scripts/dmenu-emoji.nix { };
+  dmenu-audio = pkgs.callPackage ../../scripts/dmenu-audio.nix { };
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   playerctl = "${lib.getExe pkgs.playerctl}";
-  screencap = pkgs.callPackage ../../scripts/screencap.nix { inherit pkgs; };
+  screencap = pkgs.callPackage ../../scripts/screencap.nix { };
   systemctl = "${pkgs.systemd}/bin/systemctl";
   mute-application = pkgs.callPackage ../../scripts/mute-application.nix { };
 
@@ -19,7 +24,8 @@ let
     "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
     "${caps}+f" = "exec ${lib.getExe config.programs.ghostty.package} ${lib.getExe pkgs.ranger}";
     "${caps}+h" = "exec ${lib.getExe config.programs.ghostty.package} ${lib.getExe pkgs.htop}";
-    "${caps}+g" = "exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep";
+    "${caps}+g" =
+      "exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep";
     "${mod}+d" = "exec ${lib.getExe pkgs.fuzzel}";
 
     # Wayland global keybind -> Discord in XWayland workaround.
