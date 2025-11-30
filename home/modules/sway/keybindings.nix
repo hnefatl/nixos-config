@@ -9,6 +9,7 @@ let
   playerctl = "${lib.getExe pkgs.playerctl}";
   screencap = pkgs.callPackage ../../scripts/screencap.nix { inherit pkgs; };
   systemctl = "${pkgs.systemd}/bin/systemctl";
+  mute-application = pkgs.callPackage ../../scripts/mute-application.nix { };
 
   self = {
     "${mod}+r" = "reload";
@@ -30,6 +31,7 @@ let
     "Shift+XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -1% , exec pkill -SIGRTMIN+10 i3blocks";
     "Shift+XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +1% , exec pkill -SIGRTMIN+10 i3blocks";
     "XF86AudioMute" = "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle , exec pkill -SIGRTMIN+10 i3blocks";
+    "${mod}+XF86AudioMute" = "exec ${mute-application}/bin/mute-application";
     "XF86AudioPrev" = "exec ${playerctl} -p spotify previous , exec pkill -SIGRTMIN+11 i3blocks";
     "XF86AudioNext" = "exec ${playerctl} -p spotify next , exec pkill -SIGRTMIN+11 i3blocks";
     # Spotify-specific, should maybe make generic player equivalents for e.g. youtube.
