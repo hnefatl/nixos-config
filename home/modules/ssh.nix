@@ -2,9 +2,12 @@
 {
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "12h";
+    # Prep for field being deleted from upstream.
+    enableDefaultConfig = false;
 
     matchBlocks = {
+      "*".addKeysToAgent = "12h";
+
       "desktop" = {
         host = "desktop";
         hostname = "10.20.2.5";

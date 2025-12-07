@@ -2,16 +2,17 @@
 {
   programs.git = {
     enable = true;
-
-    userEmail = "hnefatl@gmail.com";
-    userName = "Keith Collister";
-
     signing = {
       signByDefault = true;
       format = "ssh";
       key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
     };
-    extraConfig = {
+    settings = {
+      user = {
+        email = "hnefatl@gmail.com";
+        name = "Keith Collister";
+      };
+
       gpg.ssh.allowedSignersFile = "${config.home.homeDirectory}/.config/git/allowed_signers";
       credential.helper = "store";
     };

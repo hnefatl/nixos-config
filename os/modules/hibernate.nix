@@ -3,9 +3,9 @@
 {
   powerManagement.enable = true;
 
-  services.logind = {
-    powerKey = if config.machine_config.formFactor == "desktop" then "suspend" else "hibernate";
-    powerKeyLongPress = "poweroff";
-    lidSwitch = "suspend";
+  services.logind.settings.Login = {
+    HandlePowerKey = if config.machine_config.formFactor == "desktop" then "suspend" else "hibernate";
+    HandlePowerKeyLongPress = "poweroff";
+    HandleLidSwitch = "suspend";
   };
 }
