@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "bore-scheduler-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1764342762,
+        "narHash": "sha256-svIpCsJ0+IKJorVUoJIT02sGjbUwdXk4kUQztfmGb4Q=",
+        "owner": "firelzrd",
+        "repo": "bore-scheduler",
+        "rev": "02867ff7fd059a9a416eb1658493ddfcaa9c5ba5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "firelzrd",
+        "repo": "bore-scheduler",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1754269165,
@@ -379,6 +395,7 @@
     },
     "root": {
       "inputs": {
+        "bore-scheduler-src": "bore-scheduler-src",
         "home": "home",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",

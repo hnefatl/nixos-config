@@ -16,6 +16,10 @@
       url = "github:oddlama/nix-topology";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    bore-scheduler-src = {
+      url = "github:firelzrd/bore-scheduler";
+      flake = false;
+    };
     home.url = "path:./../home";
   };
 
@@ -27,6 +31,7 @@
       sops-nix,
       impermanence,
       nix-topology,
+      bore-scheduler-src,
       home,
     }:
     {
@@ -78,7 +83,11 @@
             ./modules/warthog-nfs.nix
             ./modules/virtualisation.nix
             ./modules/cross-compile-aarch64.nix
+            ./modules/bore.nix
           ];
+          specialArgs = {
+            inherit bore-scheduler-src;
+          };
         };
         warthog = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
