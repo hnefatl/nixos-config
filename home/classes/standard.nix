@@ -2,7 +2,7 @@
 {
   imports = [
     ./base.nix
-    ../modules/ghostty.nix
+    ../modules/terminator.nix
     ../modules/sway/sway.nix
     ../modules/sway/swaylock.nix
     ../modules/sway/swayidle.nix

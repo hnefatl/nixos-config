@@ -8,6 +8,7 @@
 let
   mod = "Mod4"; # Super/Windows/Framework key
   caps = "Mod5"; # Caps lock
+  terminal = config.wayland.windowManager.sway.config.terminal;
   dmenu-emoji = pkgs.callPackage ../../scripts/dmenu-emoji.nix { };
   dmenu-audio = pkgs.callPackage ../../scripts/dmenu-audio.nix { };
   pactl = "${pkgs.pulseaudio}/bin/pactl";
@@ -20,10 +21,10 @@ let
     "${mod}+r" = "reload";
     "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
 
-    "${caps}+t" = "exec ${lib.getExe config.programs.ghostty.package}";
+    "${caps}+t" = "exec ${terminal}";
     "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
-    "${caps}+f" = "exec ${lib.getExe config.programs.ghostty.package} ${lib.getExe pkgs.ranger}";
-    "${caps}+h" = "exec ${lib.getExe config.programs.ghostty.package} ${lib.getExe pkgs.htop}";
+    "${caps}+f" = "exec ${terminal} ${lib.getExe pkgs.ranger}";
+    "${caps}+h" = "exec ${terminal} ${lib.getExe pkgs.htop}";
     "${caps}+g" =
       "exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep";
     "${mod}+d" = "exec ${lib.getExe pkgs.fuzzel}";
