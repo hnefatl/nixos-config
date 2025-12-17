@@ -58,6 +58,7 @@
               ./classes/standard.nix
               ./modules/firefox.nix
               ./modules/ffxiv.nix
+              ./modules/vesktop.nix
             ];
             extraSpecialArgs = {
               inherit firefox-addons;

@@ -145,6 +145,7 @@ let
 
     # Flags prevent blurry apps with Wayland.
     "${caps}+d" = "exec ${pkgs.discord}/bin/discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto";
+    "${caps}+v" = lib.mkIf config.programs.vesktop.enable "exec ${pkgs.vesktop}/bin/vesktop --ozone-platform-hint=auto";
     "${caps}+s" = "exec ${pkgs.spotify}/bin/spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto";
   };
 in
