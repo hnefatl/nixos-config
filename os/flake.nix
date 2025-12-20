@@ -84,7 +84,6 @@
             ./modules/warthog-nfs.nix
             ./modules/virtualisation.nix
             ./modules/cross-compile-aarch64.nix
-            ./modules/bore.nix
           ];
           specialArgs = { inherit inputs; };
         };
