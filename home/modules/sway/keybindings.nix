@@ -23,8 +23,8 @@ let
 
     "${caps}+t" = "exec ${terminal}";
     "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
-    "${caps}+f" = "exec ${terminal} ${lib.getExe pkgs.ranger}";
-    "${caps}+h" = "exec ${terminal} ${lib.getExe pkgs.htop}";
+    "${caps}+f" = "exec ${terminal} -x ${lib.getExe pkgs.ranger}";
+    "${caps}+h" = "exec ${terminal} -x ${lib.getExe pkgs.htop}";
     "${caps}+g" =
       "exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep";
     "${mod}+d" = "exec ${lib.getExe pkgs.fuzzel}";
