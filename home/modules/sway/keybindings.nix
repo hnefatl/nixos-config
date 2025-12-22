@@ -25,6 +25,7 @@ let
     "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
     "${caps}+f" = "exec ${terminal} -x ${lib.getExe pkgs.ranger}";
     "${caps}+h" = "exec ${terminal} -x ${lib.getExe pkgs.htop}";
+    "${caps}+c" = "exec ${terminal} --title calculator -x ${lib.getExe pkgs.bc}";
     "${caps}+g" =
       "exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep";
     "${mod}+d" = "exec ${lib.getExe pkgs.fuzzel}";

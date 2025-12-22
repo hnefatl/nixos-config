@@ -32,6 +32,7 @@
     wget
     ncdu
     htop
+    bc
     acpi
     sysstat # iostat
     python3

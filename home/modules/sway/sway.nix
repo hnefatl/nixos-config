@@ -86,6 +86,7 @@
       # Disable idle for fullscreen apps and steam games.
       for_window [all] inhibit_idle fullscreen
       for_window [class="steam_app*"] inhibit_idle focus
+      for_window [title="calculator"] floating enable
 
       # Disable middle-mouse copy/paste - accidentally pastes when trying to scroll on work laptop.
       primary_selection disabled
