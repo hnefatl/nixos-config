@@ -25,6 +25,7 @@
       '';
     in
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run mkdir -p $VERBOSE_ARG ~/.config/terminator
       run cp $VERBOSE_ARG ${config} ~/.config/terminator/config
       run chmod $VERBOSE_ARG u+w ~/.config/terminator/config
     '';
