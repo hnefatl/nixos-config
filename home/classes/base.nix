@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ../modules/autoupgrade.nix
     ../modules/unfree.nix
     ../modules/ssh.nix
     ../modules/git.nix
