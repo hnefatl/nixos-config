@@ -1,14 +1,14 @@
 {
   lib,
+  inputs,
   home-manager,
-  impermanence,
   ...
 }:
 {
   imports = [ home-manager.nixosModules.home-manager ];
 
   home-manager.users.root = {
-    imports = [ impermanence.homeManagerModules.impermanence ];
+    imports = [ inputs.impermanence.homeManagerModules.impermanence ];
 
     home.persistence."/persist/root" = {
       files = [

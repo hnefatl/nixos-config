@@ -24,7 +24,7 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       lanzaboote,
@@ -59,6 +59,7 @@
             ./modules/warthog-nfs.nix
             ./modules/cross-compile-aarch64.nix
           ];
+          specialArgs = { inherit inputs; };
         };
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -85,9 +86,7 @@
             ./modules/cross-compile-aarch64.nix
             ./modules/bore.nix
           ];
-          specialArgs = {
-            inherit bore-scheduler-src;
-          };
+          specialArgs = { inherit inputs; };
         };
         warthog = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -111,7 +110,7 @@
             ../hosts/warthog/modules/smb-server.nix
           ];
           specialArgs = {
-            inherit impermanence;
+            inherit inputs;
             # This tries to bind the home-manager + nixpkgs versions used by an impermanence setup
             # to the same versions as currently being used on non-impermanence.
             inherit (home.inputs) home-manager;

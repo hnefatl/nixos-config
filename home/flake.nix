@@ -46,7 +46,7 @@
               ./modules/moonlight.nix
             ];
             extraSpecialArgs = {
-              inherit firefox-addons;
+              inherit inputs;
               inherit pkgs-unstable;
             };
           };
@@ -61,7 +61,7 @@
               ./modules/vesktop.nix
             ];
             extraSpecialArgs = {
-              inherit firefox-addons;
+              inherit inputs;
               inherit pkgs-unstable;
             };
           };

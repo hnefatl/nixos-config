@@ -1,14 +1,14 @@
 {
   config,
+  inputs,
   pkgs,
   lib,
-  firefox-addons,
   ...
 }:
 
 {
   nixpkgs.overlays = [
-    firefox-addons.overlays.default
+    inputs.firefox-addons.overlays.default
   ];
 
   programs.firefox = {

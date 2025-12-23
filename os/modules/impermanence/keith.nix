@@ -1,7 +1,7 @@
 {
   lib,
+  inputs,
   home-manager,
-  impermanence,
   ...
 }:
 {
@@ -12,7 +12,7 @@
   # defined in the NixOS module, not standalone :/
   home-manager.users.keith = {
     imports = [
-      impermanence.homeManagerModules.impermanence
+      inputs.impermanence.homeManagerModules.impermanence
       ../../../hosts/warthog/model.nix
       ../../../home/classes/base.nix
     ];
