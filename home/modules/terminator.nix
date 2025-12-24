@@ -22,6 +22,9 @@
             background_color = "#333333"
             cursor_color = "#aaaaaa"
             palette = "#000000:#cc0403:#19cb00:#cecb00:#0d73cc:#cb1ed1:#0dcdcd:#dddddd:#767676:#f2201f:#23fd00:#fffd00:#1a8fff:#fd28ff:#14ffff:#ffffff"
+
+            # "Dimming" ratio on unfocused terminals.
+            inactive_color_offset = 0.9
       '';
     in
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
