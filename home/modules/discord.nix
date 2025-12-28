@@ -5,14 +5,14 @@
   ...
 }:
 {
+  programs.discord.enable = true;
   home = {
     # Fix blur on wayland
     shellAliases = {
       discord = "discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto";
     };
-    packages = [ pkgs.discord ];
   };
-  systemd.user.services.discord = lib.mkIf (!config.machine_config.isWork) {
+  systemd.user.services.discord = lib.mkIf (!config.machine_config.isWork && !config.programs.vesktop.enable) {
     Unit = {
       Description = "Start discord on login.";
       # Wait for network to avoid "reconnecting" on startup.
