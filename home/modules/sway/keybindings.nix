@@ -45,11 +45,9 @@ let
     "${mod}+XF86AudioMute" = "exec ${mute-application}/bin/mute-application";
     "XF86AudioPrev" = "exec ${playerctl} -p spotify previous , exec pkill -SIGRTMIN+11 i3blocks";
     "XF86AudioNext" = "exec ${playerctl} -p spotify next , exec pkill -SIGRTMIN+11 i3blocks";
-    # Spotify-specific, should maybe make generic player equivalents for e.g. youtube.
-    # TODO: one of my devices has different output here, maybe PC?
     "XF86AudioPlay" = "exec ${playerctl} -p spotify play-pause , exec pkill -SIGRTMIN+11 i3blocks";
     "XF86AudioPause" = "exec ${playerctl} -p spotify pause , exec pkill -SIGRTMIN+11 i3blocks";
-    # Testing generic media play/pause
+    # Generic media play/pause
     "${mod}+XF86AudioPlay" = "exec ${playerctl} play-pause , exec pkill -SIGRTMIN+11 i3blocks";
     "${mod}+XF86AudioPause" = "exec ${playerctl} pause , exec pkill -SIGRTMIN+11 i3blocks";
 
@@ -63,14 +61,12 @@ let
     "${mod}+numbersign" = self.XF86AudioNext;
     "${mod}+backspace" = self.XF86AudioMicMute;
 
-    # TODO: replace with semantic paths once dotfiles are ported into home-manager?
     "${mod}+slash" = "exec ${dmenu-audio}/bin/dmenu-audio";
     "${mod}+a" = "exec ${dmenu-emoji}/bin/dmenu-emoji";
 
     "XF86MonBrightnessUp" = "exec brightnessctl set +5%";
     "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
 
-    # TODO: Separate path for work lockscreen?
     "${mod}+${caps}+l" = "exec ${lib.getExe pkgs.swaylock-effects}";
 
     # dmenu stdin are the prefilled options. Alternative names can be entered.

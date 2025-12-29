@@ -21,10 +21,6 @@
         }
       ];
 
-      # Cycle around containers in the same workspace.
-      # TODO: Still need something like i3-cycle to define "horizontal-only" workspace wrapping (or like tabbed-workspace-direction-only).
-      # focus.wrapping = "workspace";
-
       fonts = {
         names = [ "Noto Sans" ];
         style = "Mono";
