@@ -5,6 +5,9 @@
     flake = "/etc/nixos/os";
     flags = [
       "--print-build-logs"
+      "--update-input=nixpkgs"
+      "--update-input=lanzaboote"
+      "--update-input=sops-nix"
     ];
     dates = "01:00";
     randomizedDelaySec = "30min";
