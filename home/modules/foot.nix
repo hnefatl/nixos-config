@@ -6,9 +6,8 @@
     # https://codeberg.org/dnkl/foot/src/branch/master/foot.ini
     settings = {
       main = {
-        font = "Noto Sans Mono:size=11";
+        font = "Noto Sans Mono:size=12";
         term = "xterm-256color";
-        dpi-aware = "yes";
         gamma-correct-blending = "yes";
       };
       scrollback = {
