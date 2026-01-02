@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     camera-backup.url = "github:hnefatl/camera-backup";
+    autoupgrade = {
+      url = "github:hnefatl/nixos-autoupgrader";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home.url = "path:./../home";
   };
 
@@ -29,6 +33,7 @@
       impermanence,
       nix-topology,
       camera-backup,
+      autoupgrade,
       home,
     }:
     {
@@ -39,6 +44,7 @@
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
             nix-topology.nixosModules.default
+            autoupgrade.nixosModules.nixos-autoupgrade
             ../hosts/laptop/config.nix
 
             ./classes/base.nix
@@ -66,6 +72,7 @@
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
             nix-topology.nixosModules.default
+            autoupgrade.nixosModules.nixos-autoupgrade
             ../hosts/desktop/config.nix
 
             ./classes/base.nix
@@ -94,6 +101,7 @@
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
             nix-topology.nixosModules.default
+            autoupgrade.nixosModules.nixos-autoupgrade
             impermanence.nixosModules.impermanence
             ../hosts/warthog/config.nix
 

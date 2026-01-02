@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "autoupgrade": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775001138,
+        "narHash": "sha256-+BXcRBhglz8aV46zCEUKZnSBaUCKZYeMt1s8Np4NguI=",
+        "owner": "hnefatl",
+        "repo": "nixos-autoupgrader",
+        "rev": "ae2694004a238e3a90d956de6ea7091cf3111900",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hnefatl",
+        "repo": "nixos-autoupgrader",
+        "type": "github"
+      }
+    },
     "camera-backup": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -506,6 +526,7 @@
     },
     "root": {
       "inputs": {
+        "autoupgrade": "autoupgrade",
         "camera-backup": "camera-backup",
         "home": "home",
         "impermanence": "impermanence",
