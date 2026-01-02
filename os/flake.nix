@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     camera-backup.url = "github:hnefatl/camera-backup";
+    autoupgrader = {
+      url = "github:hnefatl/nixos-autoupgrader";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home.url = "path:./../home";
   };
 
@@ -29,6 +33,7 @@
       impermanence,
       nix-topology,
       camera-backup,
+      autoupgrader,
       home,
     }:
     {
