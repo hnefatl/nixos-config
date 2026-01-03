@@ -1,8 +1,9 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
   boot.loader = {
-    timeout = lib.mkDefault 1;
+    # KVM has a bit of latency, allow a bit longer.
+    timeout = if config.machine_config.instance == "warthog" then 5 else 2;
     efi.canTouchEfiVariables = true;
   };
 }
