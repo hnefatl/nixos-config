@@ -145,13 +145,14 @@ let
     "${mod}+Print" = "exec ${screencap}/bin/screencap record";
 
     # Flags prevent blurry apps with Wayland.
-    "${caps}+d" =
+    "${caps}+d" = lib.mkIf (config.programs.vesktop.enable || config.programs.discord.enable) (
       if config.programs.vesktop.enable then
         "exec ${pkgs.vesktop}/bin/vesktop --ozone-platform=wayland"
       else if config.programs.discord.enable then
         "exec ${pkgs.discord}/bin/discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto"
       else
-        "";
+        ""
+    );
     "${caps}+s" = "exec ${pkgs.spotify}/bin/spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto";
   };
 in
