@@ -52,4 +52,14 @@
       "noatime"
     ];
   };
+  fileSystems."/warthog/camera" = {
+    device = "10.20.1.3:/pool/camera";
+    fsType = "nfs";
+    options = [
+      "noauto"
+      "x-systemd.automount"
+      "x-systemd.idle-timeout=3600"
+      "noatime"
+    ];
+  };
 }
