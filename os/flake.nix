@@ -58,6 +58,7 @@
             ./modules/gaming.nix
             ./modules/warthog-nfs.nix
             ./modules/cross-compile-aarch64.nix
+            ./modules/photography.nix
           ];
           specialArgs = { inherit inputs; };
         };
@@ -84,6 +85,7 @@
             ./modules/warthog-nfs.nix
             ./modules/virtualisation.nix
             ./modules/cross-compile-aarch64.nix
+            ./modules/photography.nix
           ];
           specialArgs = { inherit inputs; };
         };
