@@ -10,6 +10,7 @@ let
     "/pool/immich" = "zslow/enc/immich";
     "/pool/transfer" = "zslow/enc/transfer";
     "/pool/media" = "zslow/enc/media";
+    "/pool/camera" = "zslow/enc/snap/camera";
   };
   poolFilesystem = mount: dataset: {
     device = dataset;
