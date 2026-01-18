@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  sd_uuid = "FB06-F55D";
+  sd_uuid = "0812-1232";
   camera-backup = pkgs.callPackage ../scripts/camera-backup.nix { };
 in
 {
@@ -21,7 +21,7 @@ in
 
   # See available attrs using `udevadm info /dev/...`
   services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEMS=="usb", ENV{ID_FS_UUID}=="FB06-F55D", ENV{SYSTEMD_WANTS}+="${config.systemd.services.camera-backup.name}"
+    ACTION=="add", SUBSYSTEMS=="usb", ENV{ID_FS_UUID}=="${sd_uuid}", ENV{SYSTEMD_WANTS}+="${config.systemd.services.camera-backup.name}"
   '';
 
   # A separate systemd service to avoid mounting in the udev rule, which is Bad™.
