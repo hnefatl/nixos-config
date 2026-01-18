@@ -1,8 +1,8 @@
 { pkgs, lib, ... }:
 
 pkgs.writeShellApplication {
-  name = "camera-mount-and-store";
-  text = lib.readFile ./camera-mount-and-store.sh;
+  name = "camera-backup";
+  text = lib.readFile ./camera-backup.sh;
 
   runtimeInputs = with pkgs; [
     util-linux
