@@ -44,6 +44,7 @@
               ./classes/standard.nix
               ./modules/firefox.nix
               ./modules/moonlight.nix
+              ./modules/signal.nix
             ];
             extraSpecialArgs = {
               inherit inputs;
@@ -59,6 +60,7 @@
               ./modules/firefox.nix
               ./modules/ffxiv.nix
               ./modules/vesktop.nix
+              ./modules/signal.nix
             ];
             extraSpecialArgs = {
               inherit inputs;
