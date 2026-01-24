@@ -83,6 +83,7 @@
       for_window [all] inhibit_idle fullscreen
       for_window [class="steam_app*"] inhibit_idle focus
       for_window [title="calculator"] floating enable
+      for_window [title="^Google Pay.*"] floating enable
       for_window [title="notepad"] floating enable
 
       # Disable middle-mouse copy/paste - accidentally pastes when trying to scroll on work laptop.
