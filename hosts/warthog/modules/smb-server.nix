@@ -30,6 +30,14 @@
         "create mask" = "0644";
         "directory mask" = "0755";
       };
+      "camera" = {
+        "path" = "/pool/camera";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
     };
   };
 
