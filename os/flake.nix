@@ -16,10 +16,7 @@
       url = "github:oddlama/nix-topology";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    bore-scheduler-src = {
-      url = "github:firelzrd/bore-scheduler";
-      flake = false;
-    };
+    camera-backup.url = "github:hnefatl/camera-backup";
     home.url = "path:./../home";
   };
 
@@ -31,7 +28,7 @@
       sops-nix,
       impermanence,
       nix-topology,
-      bore-scheduler-src,
+      camera-backup,
       home,
     }:
     {

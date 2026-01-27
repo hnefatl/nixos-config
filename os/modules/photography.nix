@@ -1,7 +1,12 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   sd_uuid = "0812-1232";
-  camera-backup = pkgs.callPackage ../scripts/camera-backup.nix { };
+  camera-backup = inputs.camera-backup.packages."x86_64-linux".default;
 in
 {
   environment.systemPackages = [ pkgs.rawtherapee ];
@@ -39,7 +44,7 @@ in
     serviceConfig = {
       User = "keith";
       Group = "users";
-      ExecStart = "${camera-backup}/bin/camera-backup";
+      ExecStart = "${camera-backup}/bin/camera-backup --dry-run=false --source-root=/camera/DCIM --destination-root=/warthog/camera/raw";
     };
   };
 }
