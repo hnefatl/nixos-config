@@ -20,6 +20,7 @@
           ms-python.python
           ms-pyright.pyright
           ms-python.black-formatter
+          ms-vscode.cpptools
         ]
         ++ lib.optionals (!config.machine_config.isWork) [
           vscode-extensions.github.copilot
