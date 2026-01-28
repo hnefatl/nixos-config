@@ -8,11 +8,11 @@
         "nixpkgs-mozilla": "nixpkgs-mozilla"
       },
       "locked": {
-        "lastModified": 1769545118,
-        "narHash": "sha256-cx43NEvbW3dHI854ESlNRJBSxao9WhE9eYlmpV9+Rlw=",
+        "lastModified": 1769561027,
+        "narHash": "sha256-8J5+X7CPDqsP/OW7fgEU/JbeElE1ZZCTJlcbsrn4y3Q=",
         "owner": "hnefatl",
         "repo": "camera-backup",
-        "rev": "69c4deb26992a781ef1977613d9c78738745ffa0",
+        "rev": "81aa934d0fad5751029be4699b4347a13e5b5da0",
         "type": "github"
       },
       "original": {
