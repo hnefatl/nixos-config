@@ -19,4 +19,11 @@
     enable = true;
     settings.general.inhibit_screensaver = 0;
   };
+
+  systemd.user.services.steam = {
+    enable = true;
+    description = "Launch steam on startup";
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig.ExecStart = "${config.programs.steam.package}/bin/steam -silent %U";
+  };
 }
