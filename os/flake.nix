@@ -56,6 +56,7 @@
             ./modules/warthog-nfs.nix
             ./modules/cross-compile-aarch64.nix
             ./modules/photography.nix
+            ./modules/monitoring/prometheus-exporter.nix
           ];
           specialArgs = { inherit inputs; };
         };
@@ -83,6 +84,7 @@
             ./modules/virtualisation.nix
             ./modules/cross-compile-aarch64.nix
             ./modules/photography.nix
+            ./modules/monitoring/prometheus-exporter.nix
           ];
           specialArgs = { inherit inputs; };
         };
@@ -103,6 +105,8 @@
             ./modules/tlp.nix
             ./modules/impermanence/impermanence.nix
             ./modules/impermanence/keith.nix
+            ./modules/monitoring/prometheus-scraper.nix
+            ./modules/monitoring/prometheus-exporter.nix
             ../hosts/warthog/modules/services.nix
             ../hosts/warthog/modules/nfs-server.nix
             ../hosts/warthog/modules/smb-server.nix
