@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 let
-  dataPath = "/pool/monitoring/prometheus";
+  dataPath = "/pool/services/prometheus";
   serverPort = 9090;
   # https://prometheus.io/docs/prometheus/latest/configuration/configuration/
   config = {
@@ -9,7 +9,7 @@ let
       {
         job_name = "warthog";
         # Prometheus exporter and docker exporter
-        static_configs = [{ targets = ["warthog:9000" "127.0.0.1:9323" ]; } ];
+        static_configs = [{ targets = ["127.0.0.1:9000" "127.0.0.1:9323" ]; } ];
       }
       {
         job_name = "desktop";
