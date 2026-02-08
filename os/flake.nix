@@ -105,11 +105,11 @@
             ./modules/tlp.nix
             ./modules/impermanence/impermanence.nix
             ./modules/impermanence/keith.nix
-            ./modules/monitoring/prometheus-scraper.nix
             ./modules/monitoring/prometheus-exporter.nix
             ../hosts/warthog/modules/services.nix
             ../hosts/warthog/modules/nfs-server.nix
             ../hosts/warthog/modules/smb-server.nix
+            ../hosts/warthog/modules/prometheus-server.nix
           ];
           specialArgs = {
             inherit inputs;
