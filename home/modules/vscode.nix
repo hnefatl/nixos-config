@@ -28,6 +28,7 @@
           tamasfe.even-better-toml
           ms-vscode-remote.remote-ssh
           hashicorp.terraform
+          matthewpi.caddyfile-support
         ];
     })
     nixfmt-rfc-style
