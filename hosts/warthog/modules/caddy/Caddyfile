@@ -1,5 +1,9 @@
 {
 	email hnefatl@gmail.com
+	servers {
+		trusted_proxies static 10.20.0.1
+		trusted_proxies_strict
+	}
 }
 
 (authelia) {
@@ -16,4 +20,50 @@ auth.warthog.keith.collister.xyz {
 https://prometheus.warthog.keith.collister.xyz {
 	import authelia
 	reverse_proxy localhost:9090
+}
+
+https://ha.keith.collister.xyz {
+	reverse_proxy localhost:8123
+}
+https://esphome.warthog.keith.collister.xyz {
+	import authelia
+	reverse_proxy localhost:6052
+}
+
+https://plex.warthog.keith.collister.xyz {
+	reverse_proxy localhost:32400
+}
+https://jellyfin.warthog.keith.collister.xyz {
+	reverse_proxy localhost:8096
+}
+https://qbittorrent.warthog.keith.collister.xyz {
+	import authelia
+	reverse_proxy localhost:8097
+}
+https://radarr.warthog.keith.collister.xyz {
+	import authelia
+	reverse_proxy localhost:7878
+}
+https://sonarr.warthog.keith.collister.xyz {
+	import authelia
+	reverse_proxy localhost:8989
+}
+https://prowlarr.warthog.keith.collister.xyz {
+	import authelia
+	reverse_proxy localhost:9696
+}
+https://bazarr.warthog.keith.collister.xyz {
+	import authelia
+	reverse_proxy localhost:6767
+}
+https://mealie.warthog.keith.collister.xyz {
+	import authelia
+	reverse_proxy localhost:9000
+}
+https://people-display-exporter.warthog.keith.collister.xyz {
+	reverse_proxy localhost:12364
+}
+https://miniflux.warthog.keith.collister.xyz {
+	import authelia
+	reverse_proxy localhost:7195
 }
