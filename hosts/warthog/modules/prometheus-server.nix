@@ -25,7 +25,7 @@ let
 
   cmdLineArgs = [
     "--config.file=${configFile}"
-    "--web.listen-address=0.0.0.0:${toString serverPort}"
+    "--web.listen-address=localhost:${toString serverPort}"
     "--storage.tsdb.path=${dataPath}"
     # Unclear why these can't be provided as config file params, the docs claim they can.
     "--storage.tsdb.retention.time=90d"

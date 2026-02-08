@@ -110,6 +110,8 @@
             ../hosts/warthog/modules/nfs-server.nix
             ../hosts/warthog/modules/smb-server.nix
             ../hosts/warthog/modules/prometheus-server.nix
+            ../hosts/warthog/modules/authelia/authelia.nix
+            ../hosts/warthog/modules/caddy/caddy.nix
           ];
           specialArgs = {
             inherit inputs;

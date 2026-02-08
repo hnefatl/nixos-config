@@ -1,0 +1,84 @@
+theme: dark
+
+server:
+  address: "tcp://127.0.0.1:9091"
+
+totp:
+  issuer: authelia.com
+
+log:
+  level: info
+  file_path: /pool/services/authelia/authelia.log
+  keep_stdout: true
+
+authentication_backend:
+  # Disable both the HTML element and the API for reset password functionality.
+  password_reset:
+    disable: true
+
+  file:
+    path: /pool/services/authelia/users_database.yaml
+    password:
+      algorithm: argon2id
+      iterations: 1
+      key_length: 32
+      salt_length: 16
+      memory: 1024
+      parallelism: 8
+
+access_control:
+  default_policy: deny
+  rules:
+      # Byass authelia for HA. This isn't ideal, but the HA app struggles hard
+      # with redirecting to and from authelia. There's also some false-positive
+      # cached auth stuff that makes testing this hard... We already have 2fa
+      # set up internally to HA, which should be ~okay.
+    - domain: "ha.keith.collister.xyz"
+      policy: bypass
+
+      # Let anything on warthog using the FQDN talk to anything else on warthog
+      # without needing to authenticate. E.g. glances->influxdb.
+    - domain: ["*.keith.collister.xyz"]
+      policy: bypass
+      networks:
+        - 10.20.1.3/32  # physical server
+
+      # Give stuff on the local network single-factor login for ease-of-use.
+    - domain: ["*.keith.collister.xyz"]
+      policy: one_factor
+      networks:
+        - 10.20.0.0/16
+          # VPN
+        - 10.29.0.0/16
+
+      # Everything else (outside the network) needs two-factor.
+    - domain: "*.keith.collister.xyz"
+      policy: two_factor
+
+session:
+  name: authelia_session
+  cookies:
+    - domain: keith.collister.xyz
+      authelia_url: https://auth.warthog.keith.collister.xyz
+
+# Allow caddy to use authelia for forward-auth.
+server:
+  endpoints:
+    authz:
+      forward-auth:
+        implementation: 'ForwardAuth'
+
+regulation:
+  max_retries: 10
+  find_time: 2m
+  ban_time: 5m
+
+storage:
+  local:
+    path: /pool/services/authelia/db.sqlite3
+
+notifier:
+  disable_startup_check: false
+  filesystem:
+    # TODO: smtp this?
+    filename: /pool/services/authelia/notification.txt
