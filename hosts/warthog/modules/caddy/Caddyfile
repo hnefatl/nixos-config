@@ -12,6 +12,11 @@
 		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
 	}
 }
+(internal_only) {
+    @denied not client_ip private_ranges
+    # TODO: return a more consistent error on this and for 404s.
+    abort @denied
+}
 
 auth.warthog.keith.collister.xyz {
 	reverse_proxy localhost:9091
@@ -19,6 +24,7 @@ auth.warthog.keith.collister.xyz {
 
 https://prometheus.warthog.keith.collister.xyz {
 	import authelia
+    import internal_only
 	reverse_proxy localhost:9090
 }
 
@@ -27,6 +33,7 @@ https://ha.keith.collister.xyz {
 }
 https://esphome.warthog.keith.collister.xyz {
 	import authelia
+    import internal_only
 	reverse_proxy localhost:6052
 }
 
@@ -38,32 +45,38 @@ https://jellyfin.warthog.keith.collister.xyz {
 }
 https://qbittorrent.warthog.keith.collister.xyz {
 	import authelia
+    import internal_only
 	reverse_proxy localhost:8097
 }
 https://radarr.warthog.keith.collister.xyz {
 	import authelia
+    import internal_only
 	reverse_proxy localhost:7878
 }
 https://sonarr.warthog.keith.collister.xyz {
 	import authelia
+    import internal_only
 	reverse_proxy localhost:8989
 }
 https://prowlarr.warthog.keith.collister.xyz {
 	import authelia
+    import internal_only
 	reverse_proxy localhost:9696
 }
 https://bazarr.warthog.keith.collister.xyz {
 	import authelia
+    import internal_only
 	reverse_proxy localhost:6767
 }
 https://mealie.warthog.keith.collister.xyz {
 	import authelia
-	reverse_proxy localhost:9000
+	reverse_proxy localhost:9001
 }
 https://people-display-exporter.warthog.keith.collister.xyz {
 	reverse_proxy localhost:12364
 }
 https://miniflux.warthog.keith.collister.xyz {
 	import authelia
+    import internal_only
 	reverse_proxy localhost:7195
 }
