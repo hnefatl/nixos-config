@@ -10,11 +10,8 @@
   system.stateVersion = "25.05";
 
   nixpkgs.config.nvidia.acceptLicense = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
-    # ftr this seems to enable CUDA support implicitly, making it
-    # suitable for encoding (for e.g. Jellyfin).
-    datacenter.enable = true;
-    nvidiaPersistenced = true;
     powerManagement.enable = true;
     open = true;
   };
