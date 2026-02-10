@@ -33,8 +33,6 @@
     allowedTCPPorts = [
       # home-assistant
       8123
-      # esphome
-      6052
     ];
   };
   # Required to let home-assistant find google cast and other mDNS devices.
