@@ -73,7 +73,7 @@ https://mealie.warthog.keith.collister.xyz {
 	reverse_proxy localhost:9001
 }
 https://people-display-exporter.warthog.keith.collister.xyz {
-	reverse_proxy localhost:12364
+	reverse_proxy h2c://localhost:12364
 }
 https://miniflux.warthog.keith.collister.xyz {
 	import authelia
