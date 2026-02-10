@@ -15,6 +15,12 @@
 
       gpg.ssh.allowedSignersFile = "${config.home.homeDirectory}/.config/git/allowed_signers";
       credential.helper = "store";
+
+      # Awkward special case to put here but hard to inject elsewhere.
+      # Some day remove, once the legacy `docker_configs` directory is gone.
+      safe.directory = lib.mkIf (config.machine_config.instance == "warthog") [
+        "/pool/services/docker_configs"
+      ];
     };
   };
 
