@@ -9,7 +9,7 @@
   services.swayidle = {
     enable = true;
     # Lock before sleep in all cases, so that resuming shows a lockscreen.
-    events = lib.mkIf (config.machine_config.formFactor == "desktop") [
+    events = [
       {
         event = "before-sleep";
         command = "${lib.getExe pkgs.swaylock-effects} --daemonize";
@@ -17,19 +17,12 @@
     ];
 
     timeouts =
-      let
-        lockIfNotDesktop =
-          if config.machine_config.formFactor == "desktop" then
-            [ ]
-          else
-            [
-              {
-                timeout = 300; # 5mins
-                command = "${lib.getExe pkgs.swaylock-effects} --daemonize";
-              }
-            ];
-      in
-      lockIfNotDesktop
+      (lib.optionals (config.machine_config.formFactor != "desktop") [
+        {
+          timeout = 300; # 5mins
+          command = "${lib.getExe pkgs.swaylock-effects} --daemonize";
+        }
+      ])
       ++ [
         {
           timeout = 310; # 5m10s
