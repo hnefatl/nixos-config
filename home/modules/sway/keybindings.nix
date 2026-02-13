@@ -43,35 +43,35 @@ in
     bindsym Alt+e exec ${pkgs.xdotool}/bin/xdotool key alt+e
     bindsym Alt+q exec ${pkgs.xdotool}/bin/xdotool key alt+q
 
-    bindsym XF86AudioLowerVolume       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -5%"}
-    bindsym XF86AudioRaiseVolume       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +5%"}
-    bindsym Shift+XF86AudioLowerVolume exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -1%"}
-    bindsym Shift+XF86AudioRaiseVolume exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +1%"}
-    bindsym XF86AudioMute              exec ${pactl-op "set-sink-mute @DEFAULT_SINK@ toggle"}
-    bindsym XF86AudioMicMute           exec ${mute-source}
-    bindsym ${mod}+XF86AudioMute       exec ${mute-application}/bin/mute-application
-    bindsym XF86AudioPrev  exec ${spotify-op "previous"}
-    bindsym XF86AudioNext  exec ${spotify-op "next"}
-    bindsym XF86AudioPlay  exec ${spotify-op "play-pause"}
-    bindsym XF86AudioPause exec ${spotify-op "pause"}
+    bindsym --locked XF86AudioLowerVolume       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -5%"}
+    bindsym --locked XF86AudioRaiseVolume       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +5%"}
+    bindsym --locked Shift+XF86AudioLowerVolume exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -1%"}
+    bindsym --locked Shift+XF86AudioRaiseVolume exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +1%"}
+    bindsym --locked XF86AudioMute              exec ${pactl-op "set-sink-mute @DEFAULT_SINK@ toggle"}
+    bindsym --locked XF86AudioMicMute           exec ${mute-source}
+    bindsym          ${mod}+XF86AudioMute       exec ${mute-application}/bin/mute-application
+    bindsym --locked XF86AudioPrev  exec ${spotify-op "previous"}
+    bindsym --locked XF86AudioNext  exec ${spotify-op "next"}
+    bindsym --locked XF86AudioPlay  exec ${spotify-op "play-pause"}
+    bindsym --locked XF86AudioPause exec ${spotify-op "pause"}
     # Generic media play/pause
     bindsym ${mod}+XF86AudioPlay  exec ${playerctl} play-pause , exec pkill -SIGRTMIN+11 i3blocks
     bindsym ${mod}+XF86AudioPause exec ${playerctl} pause , exec pkill -SIGRTMIN+11 i3blocks
 
-    bindsym ${mod}+bracketleft        exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -5%"}
-    bindsym ${mod}+bracketright       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +5%"}
-    bindsym ${mod}+Shift+bracketleft  exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -1%"}
-    bindsym ${mod}+Shift+bracketright exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +1%"}
-    bindsym ${mod}+p                  exec ${spotify-op "play-pause"}
-    bindsym ${mod}+apostrophe         exec ${spotify-op "previous"}
-    bindsym ${mod}+numbersign         exec ${spotify-op "next"}
-    bindsym ${mod}+backspace          exec ${mute-source}
+    bindsym --locked ${mod}+bracketleft        exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -5%"}
+    bindsym --locked ${mod}+bracketright       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +5%"}
+    bindsym --locked ${mod}+Shift+bracketleft  exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -1%"}
+    bindsym --locked ${mod}+Shift+bracketright exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +1%"}
+    bindsym --locked ${mod}+p                  exec ${spotify-op "play-pause"}
+    bindsym --locked ${mod}+apostrophe         exec ${spotify-op "previous"}
+    bindsym --locked ${mod}+numbersign         exec ${spotify-op "next"}
+    bindsym          ${mod}+backspace          exec ${mute-source}
 
     bindsym ${mod}+slash exec ${dmenu-audio}/bin/dmenu-audio
     bindsym ${mod}+a     exec ${dmenu-emoji}/bin/dmenu-emoji
 
-    bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
-    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp   exec brightnessctl set +5%
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 
     bindsym ${mod}+${caps}+l exec ${lib.getExe pkgs.swaylock-effects}
 
