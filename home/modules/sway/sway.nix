@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ./keybindings.nix ];
+
   wayland.windowManager.sway = {
     enable = true;
     xwayland = true;
@@ -75,8 +77,6 @@
           statusCommand = "${pkgs.i3blocks}/bin/i3blocks";
         }
       ];
-
-      keybindings = (import ./keybindings.nix { inherit config pkgs lib; });
     };
     extraConfig = ''
       # Disable idle for fullscreen apps and steam games.

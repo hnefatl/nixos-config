@@ -4,7 +4,6 @@
   lib,
   ...
 }:
-
 let
   mod = "Mod4"; # Super/Windows/Framework key
   caps = "Mod5"; # Caps lock
@@ -18,142 +17,148 @@ let
   mute-application = pkgs.callPackage ../../scripts/mute-application.nix { };
   mute-source = lib.getExe (pkgs.callPackage ../../scripts/mute-source.nix { });
 
-  self = {
-    "${mod}+r" = "reload";
-    "${mod}+Shift+q" = "swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'";
+  spotify-op = op: "${playerctl} -p spotify ${op} , exec pkill -SIGRTMIN+11 i3blocks";
+  pactl-op = op: "${pactl} ${op} , exec pkill -SIGRTMIN+10 i3blocks";
+in
+{
+  # Disable default keybindings
+  wayland.windowManager.sway.config.keybindings = { };
 
-    "${caps}+t" = "exec ${terminal}";
-    "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
-    "${caps}+f" = "exec ${terminal} -x ${lib.getExe pkgs.ranger}";
-    "${caps}+h" = "exec ${terminal} -x ${lib.getExe pkgs.htop}";
-    "${caps}+c" = "exec ${terminal} --title calculator -x ${lib.getExe pkgs.bc} --quiet";
-    "${caps}+n" = "exec ${terminal} --title notepad -x ${lib.getExe pkgs.neovim}";
-    "${caps}+g" =
-      "exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep";
-    "${mod}+d" = "exec ${lib.getExe pkgs.fuzzel}";
+  # I want to use the full config syntax like `--locked`, so it's easier to just
+  # do everything as a raw config file.
+  wayland.windowManager.sway.extraConfig = ''
+    bindsym ${mod}+r reload
+    bindsym ${mod}+Shift+q exec swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'
+
+    bindsym ${caps}+t exec ${terminal}
+    bindsym ${caps}+w exec ${lib.getExe pkgs.firefox}
+    bindsym ${caps}+f exec ${terminal} -x ${lib.getExe pkgs.ranger}
+    bindsym ${caps}+h exec ${terminal} -x ${lib.getExe pkgs.htop}
+    bindsym ${caps}+c exec ${terminal} --title calculator -x ${lib.getExe pkgs.bc} --quiet
+    bindsym ${caps}+n exec ${terminal} --title notepad -x ${lib.getExe pkgs.neovim}
+    bindsym ${caps}+g exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep
+    bindsym ${mod}+d  exec ${lib.getExe pkgs.fuzzel}
 
     # Wayland global keybind -> Discord in XWayland workaround.
-    "Alt+e" = "exec ${pkgs.xdotool}/bin/xdotool key alt+e";
-    "Alt+q" = "exec ${pkgs.xdotool}/bin/xdotool key alt+q";
+    bindsym Alt+e exec ${pkgs.xdotool}/bin/xdotool key alt+e
+    bindsym Alt+q exec ${pkgs.xdotool}/bin/xdotool key alt+q
 
-    "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -5% , exec pkill -SIGRTMIN+10 i3blocks";
-    "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +5% , exec pkill -SIGRTMIN+10 i3blocks";
-    "Shift+XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -1% , exec pkill -SIGRTMIN+10 i3blocks";
-    "Shift+XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +1% , exec pkill -SIGRTMIN+10 i3blocks";
-    "XF86AudioMute" = "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle , exec pkill -SIGRTMIN+10 i3blocks";
-    "XF86AudioMicMute" = "exec ${mute-source}";
-    "${mod}+XF86AudioMute" = "exec ${mute-application}/bin/mute-application";
-    "XF86AudioPrev" = "exec ${playerctl} -p spotify previous , exec pkill -SIGRTMIN+11 i3blocks";
-    "XF86AudioNext" = "exec ${playerctl} -p spotify next , exec pkill -SIGRTMIN+11 i3blocks";
-    "XF86AudioPlay" = "exec ${playerctl} -p spotify play-pause , exec pkill -SIGRTMIN+11 i3blocks";
-    "XF86AudioPause" = "exec ${playerctl} -p spotify pause , exec pkill -SIGRTMIN+11 i3blocks";
+    bindsym XF86AudioLowerVolume       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -5%"}
+    bindsym XF86AudioRaiseVolume       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +5%"}
+    bindsym Shift+XF86AudioLowerVolume exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -1%"}
+    bindsym Shift+XF86AudioRaiseVolume exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +1%"}
+    bindsym XF86AudioMute              exec ${pactl-op "set-sink-mute @DEFAULT_SINK@ toggle"}
+    bindsym XF86AudioMicMute           exec ${mute-source}
+    bindsym ${mod}+XF86AudioMute       exec ${mute-application}/bin/mute-application
+    bindsym XF86AudioPrev  exec ${spotify-op "previous"}
+    bindsym XF86AudioNext  exec ${spotify-op "next"}
+    bindsym XF86AudioPlay  exec ${spotify-op "play-pause"}
+    bindsym XF86AudioPause exec ${spotify-op "pause"}
     # Generic media play/pause
-    "${mod}+XF86AudioPlay" = "exec ${playerctl} play-pause , exec pkill -SIGRTMIN+11 i3blocks";
-    "${mod}+XF86AudioPause" = "exec ${playerctl} pause , exec pkill -SIGRTMIN+11 i3blocks";
+    bindsym ${mod}+XF86AudioPlay  exec ${playerctl} play-pause , exec pkill -SIGRTMIN+11 i3blocks
+    bindsym ${mod}+XF86AudioPause exec ${playerctl} pause , exec pkill -SIGRTMIN+11 i3blocks
 
-    # These aren't key rebindings, it's just getting the value of the Nix variables above.
-    "${mod}+bracketleft" = self.XF86AudioLowerVolume;
-    "${mod}+bracketright" = self.XF86AudioRaiseVolume;
-    "${mod}+Shift+bracketleft" = self."Shift+XF86AudioLowerVolume";
-    "${mod}+Shift+bracketright" = self."Shift+XF86AudioRaiseVolume";
-    "${mod}+p" = self.XF86AudioPlay;
-    "${mod}+apostrophe" = self.XF86AudioPrev;
-    "${mod}+numbersign" = self.XF86AudioNext;
-    "${mod}+backspace" = self.XF86AudioMicMute;
+    bindsym ${mod}+bracketleft        exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -5%"}
+    bindsym ${mod}+bracketright       exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +5%"}
+    bindsym ${mod}+Shift+bracketleft  exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ -1%"}
+    bindsym ${mod}+Shift+bracketright exec ${pactl-op "set-sink-volume @DEFAULT_SINK@ +1%"}
+    bindsym ${mod}+p                  exec ${spotify-op "play-pause"}
+    bindsym ${mod}+apostrophe         exec ${spotify-op "previous"}
+    bindsym ${mod}+numbersign         exec ${spotify-op "next"}
+    bindsym ${mod}+backspace          exec ${mute-source}
 
-    "${mod}+slash" = "exec ${dmenu-audio}/bin/dmenu-audio";
-    "${mod}+a" = "exec ${dmenu-emoji}/bin/dmenu-emoji";
+    bindsym ${mod}+slash exec ${dmenu-audio}/bin/dmenu-audio
+    bindsym ${mod}+a     exec ${dmenu-emoji}/bin/dmenu-emoji
 
-    "XF86MonBrightnessUp" = "exec brightnessctl set +5%";
-    "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
+    bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
-    "${mod}+${caps}+l" = "exec ${lib.getExe pkgs.swaylock-effects}";
+    bindsym ${mod}+${caps}+l exec ${lib.getExe pkgs.swaylock-effects}
 
     # dmenu stdin are the prefilled options. Alternative names can be entered.
-    "${mod}+Return" =
-      "exec echo 'spotify\\nmisc' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Name:' | xargs swaymsg rename workspace to";
+    bindsym ${mod}+Return exec echo 'spotify\\nmisc' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Name:' | xargs swaymsg rename workspace to
 
-    "${mod}+q" = "kill";
+    bindsym ${mod}+q kill
 
-    "${mod}+h" = "focus left";
-    "${mod}+l" = "focus right";
-    "${mod}+j" = "focus down";
-    "${mod}+k" = "focus up";
-    "${mod}+semicolon" = "focus parent";
-    "${mod}+Shift+semicolon" = "focus child";
-    "${mod}+Shift+h" = "move left";
-    "${mod}+Shift+l" = "move right";
-    "${mod}+Shift+j" = "move down";
-    "${mod}+Shift+k" = "move up";
+    bindsym ${mod}+h       focus left
+    bindsym ${mod}+l       focus right
+    bindsym ${mod}+j       focus down
+    bindsym ${mod}+k       focus up
+    bindsym ${mod}+Shift+h move left
+    bindsym ${mod}+Shift+l move right
+    bindsym ${mod}+Shift+j move down
+    bindsym ${mod}+Shift+k move up
 
-    "${mod}+g" = "split h";
-    "${mod}+t" = "split v";
-    "${mod}+s" = "layout stacking";
-    "${mod}+w" = "layout tabbed";
-    "${mod}+e" = "layout toggle split";
+    bindsym ${mod}+semicolon       focus parent
+    bindsym ${mod}+Shift+semicolon focus child
 
-    "${mod}+f" = "fullscreen toggle";
-    "${mod}+space" = "floating toggle";
-    "${mod}+b" = "focus mode_toggle";
+    bindsym ${mod}+g split h
+    bindsym ${mod}+t split v
+    bindsym ${mod}+s layout stacking
+    bindsym ${mod}+w layout tabbed
+    bindsym ${mod}+e layout toggle split
 
-    "${mod}+n" = "workspace prev";
-    "${mod}+m" = "workspace next";
-    "${mod}+1" = "workspace number 1";
-    "${mod}+2" = "workspace number 2";
-    "${mod}+3" = "workspace number 3";
-    "${mod}+4" = "workspace number 4";
-    "${mod}+5" = "workspace number 5";
-    "${mod}+6" = "workspace number 6";
-    "${mod}+7" = "workspace number 7";
-    "${mod}+8" = "workspace number 8";
-    "${mod}+9" = "workspace number 9";
-    "${mod}+0" = "workspace number 10";
-    "${mod}+grave" = "workspace main";
-    "${mod}+minus" = "workspace vert";
-    "${mod}+Shift+n" = "move container to workspace prev; workspace prev";
-    "${mod}+Shift+m" = "move container to workspace next; workspace next";
-    "${mod}+Shift+1" = "move container to workspace number 1; workspace number 1";
-    "${mod}+Shift+2" = "move container to workspace number 2; workspace number 2";
-    "${mod}+Shift+3" = "move container to workspace number 3; workspace number 3";
-    "${mod}+Shift+4" = "move container to workspace number 4; workspace number 4";
-    "${mod}+Shift+5" = "move container to workspace number 5; workspace number 5";
-    "${mod}+Shift+6" = "move container to workspace number 6; workspace number 6";
-    "${mod}+Shift+7" = "move container to workspace number 7; workspace number 7";
-    "${mod}+Shift+8" = "move container to workspace number 8; workspace number 8";
-    "${mod}+Shift+9" = "move container to workspace number 9; workspace number 9";
-    "${mod}+Shift+0" = "move container to workspace number 10; workspace number 10";
-    "${mod}+Shift+grave" = "move container to workspace main; workspace main";
-    "${mod}+Shift+minus" = "move container to workspace vert; workspace vert";
+    bindsym ${mod}+f     fullscreen toggle
+    bindsym ${mod}+space floating toggle
+    bindsym ${mod}+b     focus mode_toggle
 
-    "${mod}+Alt+Shift+h" = "move workspace to output left";
-    "${mod}+Alt+Shift+l" = "move workspace to output right";
-    "${mod}+Alt+Shift+j" = "move workspace to output down";
-    "${mod}+Alt+Shift+k" = "move workspace to output up";
+    bindsym ${mod}+n           workspace prev
+    bindsym ${mod}+m           workspace next
+    bindsym ${mod}+1           workspace number 1
+    bindsym ${mod}+2           workspace number 2
+    bindsym ${mod}+3           workspace number 3
+    bindsym ${mod}+4           workspace number 4
+    bindsym ${mod}+5           workspace number 5
+    bindsym ${mod}+6           workspace number 6
+    bindsym ${mod}+7           workspace number 7
+    bindsym ${mod}+8           workspace number 8
+    bindsym ${mod}+9           workspace number 9
+    bindsym ${mod}+0           workspace number 10
+    bindsym ${mod}+grave       workspace main
+    bindsym ${mod}+minus       workspace vert
+    bindsym ${mod}+Shift+n     move container to workspace prev; workspace prev
+    bindsym ${mod}+Shift+m     move container to workspace next; workspace next
+    bindsym ${mod}+Shift+1     move container to workspace number 1; workspace number 1
+    bindsym ${mod}+Shift+2     move container to workspace number 2; workspace number 2
+    bindsym ${mod}+Shift+3     move container to workspace number 3; workspace number 3
+    bindsym ${mod}+Shift+4     move container to workspace number 4; workspace number 4
+    bindsym ${mod}+Shift+5     move container to workspace number 5; workspace number 5
+    bindsym ${mod}+Shift+6     move container to workspace number 6; workspace number 6
+    bindsym ${mod}+Shift+7     move container to workspace number 7; workspace number 7
+    bindsym ${mod}+Shift+8     move container to workspace number 8; workspace number 8
+    bindsym ${mod}+Shift+9     move container to workspace number 9; workspace number 9
+    bindsym ${mod}+Shift+0     move container to workspace number 10; workspace number 10
+    bindsym ${mod}+Shift+grave move container to workspace main; workspace main
+    bindsym ${mod}+Shift+minus move container to workspace vert; workspace vert
 
-    "${mod}+u" = "resize grow width 5px or 5ppt";
-    "${mod}+Shift+u" = "resize shrink width 5px or 5ppt";
-    "${mod}+i" = "resize grow height 5px or 5ppt";
-    "${mod}+Shift+i" = "resize shrink height 5px or 5ppt";
+    bindsym ${mod}+Alt+Shift+h move workspace to output left
+    bindsym ${mod}+Alt+Shift+l move workspace to output right
+    bindsym ${mod}+Alt+Shift+j move workspace to output down
+    bindsym ${mod}+Alt+Shift+k move workspace to output up
 
-    "${mod}+x" = "exec ${pkgs.mako}/bin/makoctl dismiss";
-    "${mod}+Shift+x" = "exec ${pkgs.mako}/bin/makoctl restore";
+    bindsym ${mod}+u       resize grow width 5px or 5ppt
+    bindsym ${mod}+Shift+u resize shrink width 5px or 5ppt
+    bindsym ${mod}+i       resize grow height 5px or 5ppt
+    bindsym ${mod}+Shift+i resize shrink height 5px or 5ppt
+
+    bindsym ${mod}+x         exec ${pkgs.mako}/bin/makoctl dismiss
+    bindsym ${mod}+Shift+x = exec ${pkgs.mako}/bin/makoctl restore
     # Handle actionable notifications
-    "${mod}+c" = "exec ${pkgs.mako}/bin/makoctl menu -- ${lib.getExe pkgs.fuzzel} --dmenu";
+    bindsym ${mod}+c         exec ${pkgs.mako}/bin/makoctl menu -- ${lib.getExe pkgs.fuzzel} --dmenu
 
-    "Print" = "exec ${screencap}/bin/screencap printscreen";
-    "Alt+Print" = "exec ${screencap}/bin/screencap delay_printscreen";
-    "${mod}+Print" = "exec ${screencap}/bin/screencap record";
+    bindsym Print        exec ${screencap}/bin/screencap printscreen
+    bindsym Alt+Print    exec ${screencap}/bin/screencap delay_printscreen
+    bindsym ${mod}+Print exec ${screencap}/bin/screencap record
 
     # Flags prevent blurry apps with Wayland.
-    "${caps}+d" = lib.mkIf (config.programs.vesktop.enable || config.programs.discord.enable) (
+    bindsym ${caps}+d ${
       if config.programs.vesktop.enable then
         "exec ${pkgs.vesktop}/bin/vesktop --ozone-platform=wayland"
       else if config.programs.discord.enable then
         "exec ${pkgs.discord}/bin/discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto"
       else
         ""
-    );
-    "${caps}+s" = "exec ${pkgs.spotify}/bin/spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto";
-  };
-in
-self
+    }
+    bindsym ${caps}+s exec ${pkgs.spotify}/bin/spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto
+  '';
+}
