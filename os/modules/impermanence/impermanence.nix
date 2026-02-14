@@ -35,7 +35,8 @@ in
     after = [ "zfs-import-${config.standard_filesystems.pool_names.root}.service" ];
     before = [ "sysroot.mount" ];
 
-    path = [ pkgs.zfs ];
+    # Use whatever ZFS version is currently used, not just `pkgs.zfs`.
+    path = [ config.boot.zfs.package ];
 
     unitConfig.DefaultDependencies = "no";
     serviceConfig.Type = "oneshot";
