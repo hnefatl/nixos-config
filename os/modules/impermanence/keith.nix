@@ -12,7 +12,6 @@
   # defined in the NixOS module, not standalone :/
   home-manager.users.keith = {
     imports = [
-      inputs.impermanence.homeManagerModules.impermanence
       ../../../hosts/warthog/model.nix
       ../../../home/classes/base.nix
     ];
@@ -21,14 +20,15 @@
     # for installing the OS.
     home.shellAliases."nsh" = lib.mkForce "nso";
 
-    home.persistence."/persist/home/keith" = {
+    # This is automatically stored under `/persist/home/keith`
+    home.persistence."/persist" = {
       files = [
         ".zsh_history"
         ".git-credentials"
         ".ssh/id_ed25519"
         ".ssh/id_ed25519.pub"
       ];
-      allowOther = true;
     };
   };
+  fileSystems."/home/keith".neededForBoot = true;
 }

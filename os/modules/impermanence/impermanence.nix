@@ -21,11 +21,13 @@ in
       fsType = "zfs";
       neededForBoot = true;
     };
-
-    # Required so that impermanence has the filesystem available for setting user passwords:
-    # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
-    "/etc/nixos".neededForBoot = true;
   };
+
+  # sops-nix needs the persisted secrets available before it can set user passwords.
+  # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
+  #
+  # So point it to the SoT persisted file, rather than requiring `/etc/nixos` be mounted in initrd.
+  sops.age.keyFile = lib.mkForce "/persist/etc/nixos/machine_secrets/age.key";
 
   # Rollback to empty root once devices are available and before mounted.
   boot.initrd.systemd.services.zfs-rollback-root = {
