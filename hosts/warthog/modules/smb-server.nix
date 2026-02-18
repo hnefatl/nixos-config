@@ -11,7 +11,7 @@
         "server string" = "smbnix";
         "netbios name" = "smbnix";
         "security" = "user";
-        "hosts allow" = "10.20.";
+        "hosts allow" = "10.";
         "hosts deny" = "0.0.0.0/0";
       };
       "transfer" = {
