@@ -9,6 +9,8 @@
       "noauto"
       "x-systemd.automount"
       "x-systemd.idle-timeout=600"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
       "noatime"
     ];
   };
@@ -19,6 +21,8 @@
       "noauto"
       "x-systemd.automount"
       "x-systemd.idle-timeout=600"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
       "noatime"
     ];
   };
@@ -29,6 +33,8 @@
       "noauto"
       "x-systemd.automount"
       "x-systemd.idle-timeout=600"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
       "noatime"
     ];
   };
@@ -39,6 +45,8 @@
       "noauto"
       "x-systemd.automount"
       "x-systemd.idle-timeout=600"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
       "noatime"
     ];
   };
@@ -49,6 +57,8 @@
       "noauto"
       "x-systemd.automount"
       "x-systemd.idle-timeout=600"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
       "noatime"
     ];
   };
@@ -59,6 +69,8 @@
       "noauto"
       "x-systemd.automount"
       "x-systemd.idle-timeout=3600"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
       "noatime"
     ];
   };
