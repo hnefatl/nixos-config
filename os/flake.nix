@@ -106,6 +106,7 @@
             ./modules/impermanence/impermanence.nix
             ./modules/impermanence/keith.nix
             ./modules/monitoring/prometheus-exporter.nix
+            ../hosts/warthog/modules/camera-backup-server.nix
             ../hosts/warthog/modules/services.nix
             ../hosts/warthog/modules/nfs-server.nix
             ../hosts/warthog/modules/smb-server.nix
