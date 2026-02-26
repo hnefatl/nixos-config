@@ -36,7 +36,6 @@ in
       "dbus.service"
       "graphical.target"
       "camera.mount"
-      "warthog-camera.mount"
     ];
     # Only start this service once all the deps are done.
     after = requires;
@@ -44,7 +43,7 @@ in
     serviceConfig = {
       User = "keith";
       Group = "users";
-      ExecStart = "${camera-backup}/bin/camera-backup --dry-run=false --source-root=/camera/DCIM --destination-root=/warthog/camera/raw";
+      ExecStart = "${camera-backup}/bin/client --dry-run=false --source-root=/camera/DCIM --server-address=http://warthog:4361 --max-inflight-sends=5";
     };
   };
 }
