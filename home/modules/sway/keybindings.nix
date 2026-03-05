@@ -157,7 +157,8 @@ in
       else if config.programs.discord.enable then
         "exec ${pkgs.discord}/bin/discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto"
       else
-        ""
+        # TODO: replace with e.g. opening the default browser
+        "exec echo open https://discord.com/channels/@me"
     }
     bindsym ${caps}+s exec ${pkgs.spotify}/bin/spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto
   '';
