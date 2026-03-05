@@ -26,12 +26,17 @@ in
 
   # I want to use the full config syntax like `--locked`, so it's easier to just
   # do everything as a raw config file.
+  wayland.windowManager.sway.config.keybindings = {
+    # But some things need to be overridden by corp profile...
+    "${caps}+w" = "exec ${lib.getExe pkgs.firefox}";
+    "${mod}+grave" = "workspace main";
+    "${mod}+Shift+grave" = "move container to workspace main; workspace main";
+  };
   wayland.windowManager.sway.extraConfig = ''
     bindsym ${mod}+r reload
     bindsym ${mod}+Shift+q exec swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'
 
     bindsym ${caps}+t exec ${terminal}
-    bindsym ${caps}+w exec ${lib.getExe pkgs.firefox}
     bindsym ${caps}+f exec ${terminal} -x ${lib.getExe pkgs.ranger}
     bindsym ${caps}+h exec ${terminal} -x ${lib.getExe pkgs.htop}
     bindsym ${caps}+c exec ${terminal} --title calculator -x ${lib.getExe pkgs.bc} --quiet
@@ -114,7 +119,6 @@ in
     bindsym ${mod}+8           workspace number 8
     bindsym ${mod}+9           workspace number 9
     bindsym ${mod}+0           workspace number 10
-    bindsym ${mod}+grave       workspace main
     bindsym ${mod}+minus       workspace vert
     bindsym ${mod}+Shift+n     move container to workspace prev; workspace prev
     bindsym ${mod}+Shift+m     move container to workspace next; workspace next
@@ -128,7 +132,6 @@ in
     bindsym ${mod}+Shift+8     move container to workspace number 8; workspace number 8
     bindsym ${mod}+Shift+9     move container to workspace number 9; workspace number 9
     bindsym ${mod}+Shift+0     move container to workspace number 10; workspace number 10
-    bindsym ${mod}+Shift+grave move container to workspace main; workspace main
     bindsym ${mod}+Shift+minus move container to workspace vert; workspace vert
 
     bindsym ${mod}+Alt+Shift+h move workspace to output left
