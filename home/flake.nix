@@ -11,6 +11,10 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    i3blocks-contrib = {
+      url = "github:vivien/i3blocks-contrib";
+      flake = false;
+    };
   };
 
   outputs =
@@ -20,6 +24,7 @@
       nixpkgs-unstable,
       home-manager,
       firefox-addons,
+      i3blocks-contrib,
     }:
     {
       homeConfigurations =

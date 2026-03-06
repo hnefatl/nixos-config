@@ -6,6 +6,7 @@
     ../modules/sway/sway.nix
     ../modules/sway/swaylock.nix
     ../modules/sway/swayidle.nix
+    ../modules/i3blocks/i3blocks.nix
     ../modules/feh.nix
     ../modules/mpv.nix
     ../modules/vscode.nix
