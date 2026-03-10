@@ -44,7 +44,7 @@ in
     label=MEM 
     separator=false
     interval=30
-    PERCENT=false;
+    PERCENT=false
     
     [memory]
     command=${contrib_script "memory"}
@@ -52,7 +52,7 @@ in
     instance=swap
     separator=false
     interval=30
-    PERCENT=false;
+    PERCENT=false
     
     [disk]
     command=${contrib_script "disk"}
@@ -76,11 +76,7 @@ in
     interval=10
     min_width=CPU 100%
     DECIMALS=0
-    COLOR_NORMAL="#FFFFFF";
-    
-    [weather]
-    command=${./weather.sh}
-    interval=600
+    COLOR_NORMAL="#FFFFFF"
     
     [battery]
     command=${contrib_script "battery"}
