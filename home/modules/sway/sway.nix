@@ -74,7 +74,7 @@
         {
           position = "top";
           trayOutput = "primary";
-          statusCommand = "${pkgs.i3blocks}/bin/i3blocks";
+          command = "${pkgs.waybar}/bin/waybar";
         }
       ];
     };
