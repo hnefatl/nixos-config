@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     i3blocks-contrib = {
-      url = "github:vivien/i3blocks-contrib";
+      url = "github:hnefatl/i3blocks-contrib";
       flake = false;
     };
   };
