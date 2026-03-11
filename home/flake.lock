@@ -46,11 +46,11 @@
     "i3blocks-contrib": {
       "flake": false,
       "locked": {
-        "lastModified": 1773169759,
-        "narHash": "sha256-S1D1SjwAShTFsdK5ZCptm7/hFxnC1njnO9/HR9MXubo=",
+        "lastModified": 1773174991,
+        "narHash": "sha256-yQjycV5h2wft+Qllxm0e3aYCzNNR/EW5wsAiIyHf1vs=",
         "owner": "hnefatl",
         "repo": "i3blocks-contrib",
-        "rev": "1a22e2ea97b4704503e53a8972170fa9753e2e55",
+        "rev": "a183f676daf9192d9f51744d9483d2d3061bea5e",
         "type": "github"
       },
       "original": {
