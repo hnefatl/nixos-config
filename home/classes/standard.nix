@@ -19,6 +19,7 @@
     packages = with pkgs; [
       spotify
       playerctl
+      pavucontrol
       xidlehook
       i3blocks
       noto-fonts
