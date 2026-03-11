@@ -12,7 +12,13 @@
     # Need to use `config...` rather than just `username` to get lazy evaluation.
     homeDirectory = "/home/${config.home.username}";
 
-    packages = [
+    packages = with pkgs; [
+      htop
+      wget
+      curl
+      bc
+      ncdu
+      acpi
       # Utility scripts
       (pkgs.callPackage ../scripts/nix-init.nix { inherit pkgs; })
     ];
