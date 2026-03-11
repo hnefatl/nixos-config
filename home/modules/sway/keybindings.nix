@@ -10,6 +10,7 @@ let
   terminal = config.wayland.windowManager.sway.config.terminal;
   dmenu-emoji = pkgs.callPackage ../../scripts/dmenu-emoji.nix { };
   dmenu-audio = pkgs.callPackage ../../scripts/dmenu-audio.nix { };
+  brightnessctl = "${lib.getExe pkgs.brightnessctl}";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   playerctl = "${lib.getExe pkgs.playerctl}";
   screencap = pkgs.callPackage ../../scripts/screencap.nix { };
@@ -75,8 +76,8 @@ in
     bindsym ${mod}+slash exec ${dmenu-audio}/bin/dmenu-audio
     bindsym ${mod}+a     exec ${dmenu-emoji}/bin/dmenu-emoji
 
-    bindsym --locked XF86MonBrightnessUp   exec brightnessctl set +5%
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp   exec ${brightnessctl} set +5%
+    bindsym --locked XF86MonBrightnessDown exec ${brightnessctl} set 5%-
 
     bindsym ${mod}+${caps}+l exec ${lib.getExe pkgs.swaylock-effects}
 
