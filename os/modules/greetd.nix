@@ -10,8 +10,7 @@
     enable = true;
     settings =
       let
-        swayCommand =
-          "${pkgs.sway}/bin/sway" + (if config.machine_config.instance == "desktop" then " --unsupported-gpu" else "");
+        swayCommand = lib.getExe pkgs.sway;
       in
       rec {
         # By default show a nice login UI
