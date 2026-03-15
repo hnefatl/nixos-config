@@ -15,7 +15,7 @@ in
     events = [
       {
         event = "before-sleep";
-        command = "${lib.getExe pkgs.swaylock-effects} --daemonize";
+        command = "${lib.getExe pkgs.swaylock} --daemonize";
       }
     ];
 
@@ -36,7 +36,7 @@ in
     ++ (lib.optionals (config.machine_config.formFactor != "desktop") [
       {
         timeout = 300; # 5mins
-        command = "${lib.getExe pkgs.swaylock-effects} --daemonize";
+        command = "${lib.getExe pkgs.swaylock} --daemonize";
       }
     ])
     ++ [

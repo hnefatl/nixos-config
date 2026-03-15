@@ -79,7 +79,7 @@ in
     bindsym --locked XF86MonBrightnessUp   exec ${brightnessctl} set +5%
     bindsym --locked XF86MonBrightnessDown exec ${brightnessctl} set 5%-
 
-    bindsym ${mod}+${caps}+l exec ${lib.getExe pkgs.swaylock-effects}
+    bindsym ${mod}+${caps}+l exec ${lib.getExe pkgs.swaylock}
 
     # dmenu stdin are the prefilled options. Alternative names can be entered.
     bindsym ${mod}+Return exec echo 'spotify\nmisc' | ${lib.getExe pkgs.fuzzel} --dmenu -p 'Name:' | xargs swaymsg rename workspace to
