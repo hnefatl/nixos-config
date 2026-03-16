@@ -43,9 +43,13 @@
     history = {
       size = 10000;
       ignoreDups = true;
+      # Support multiple shell histories.
+      append = true;
       # Don't update a terminal with the latest commands from other terminals.
       # Causes confusing "up arrow is the last command run in any zsh, not this zsh".
       share = false;
+      # Include timestamps.
+      extended = true;
     };
     initContent = ''
       # Necessary because vim keybindings disable this binding?
