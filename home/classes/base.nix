@@ -90,6 +90,8 @@
           \| exe "normal! g'\"" | endif
       endif
     '';
+    viAlias = true;
+    vimAlias = true;
   };
 
   programs.ranger.enable = true;
