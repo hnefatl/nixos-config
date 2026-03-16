@@ -6,6 +6,7 @@
     settings = {
       show-failed-attempts = true;
       show-keyboard-layout = true;
+      indicator-idle-visible = true;
       indicator-caps-lock = true;
       indicator-radius = 60;
       color = "101010";
