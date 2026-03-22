@@ -44,23 +44,25 @@
           dwt = "enabled";
         };
       };
-      output."*".adaptive_sync = "true";
-      # Desktop screens
-      output."LG Electronics LG ULTRAGEAR 102MAMBHL915" = {
-        position = "0,0";
-      };
-      output."Samsung Electric Company LF24T35 H4LRC06671" = {
-        position = "2560,0";
-        transform = "90";
-      };
-      # Laptop screen always at 0,0
-      output."BOE NE135A1M-NY1 Unknown" = {
-        position = "0,0";
-      };
-      # Desk screen
-      output."Dell Inc. DELL P2720DC 81WTK0131RMS" = {
-        position = "-560,-1440";
-      };
+      output = {
+        "*".adaptive_sync = "true";
+        # Desktop screens
+        "LG Electronics LG ULTRAGEAR 102MAMBHL915" = {
+          position = "0,0";
+        };
+        "Samsung Electric Company LF24T35 H4LRC06671" = {
+          position = "2560,0";
+          transform = "90";
+        };
+        # Laptop screen always at 0,0
+        "BOE NE135A1M-NY1 Unknown" = {
+          position = "0,0";
+        };
+        # Desk screen
+        "Dell Inc. DELL P2720DC 81WTK0131RMS" = {
+          position = "-560,-1440";
+        };
+      }
 
       window = {
         border = 2;
