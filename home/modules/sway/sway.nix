@@ -53,9 +53,13 @@
         position = "2560,0";
         transform = "90";
       };
+      # Laptop screen always at 0,0
+      output."BOE NE135A1M-NY1 Unknown" = {
+        position = "0,0";
+      };
       # Desk screen
       output."Dell Inc. DELL P2720DC 81WTK0131RMS" = {
-        position = "-320,-1440";
+        position = "-560,-1440";
       };
 
       window = {
