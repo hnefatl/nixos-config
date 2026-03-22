@@ -1,11 +1,10 @@
 {
   lib,
   inputs,
-  home-manager,
   ...
 }:
 {
-  imports = [ home-manager.nixosModules.home-manager ];
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
 
   # This is ~the same as what's defined in `home/flake.nix`, just
   # here because impermanence requires home-manager configs to be

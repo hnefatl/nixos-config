@@ -115,10 +115,10 @@
             ../hosts/warthog/modules/caddy/caddy.nix
           ];
           specialArgs = {
-            inherit inputs;
-            # This tries to bind the home-manager + nixpkgs versions used by an impermanence setup
-            # to the same versions as currently being used on non-impermanence.
-            inherit (home.inputs) home-manager;
+            # Inputs for warthog are this flake's input plus the inputs to the home flake.
+            # Attributes in this flake's inputs are prioritised, to try and minimise
+            # version skew.
+            inputs = home.inputs // inputs;
           };
         };
       };

@@ -38,7 +38,6 @@
             inherit system;
             allowUnfree = true;
           };
-          firefox-packages = (pkgs.callPackage firefox-addons { });
         in
         {
           "keith@laptop" = home-manager.lib.homeManagerConfiguration {
