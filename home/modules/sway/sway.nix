@@ -62,7 +62,7 @@
         "Dell Inc. DELL P2720DC 81WTK0131RMS" = {
           position = "-560,-1440";
         };
-      }
+      };
 
       window = {
         border = 2;
