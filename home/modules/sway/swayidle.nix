@@ -7,6 +7,8 @@
 
 let
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+  pkill = "${pkgs.procps}/bin/pkill";
+  dim-screen = lib.getExe (pkgs.callPackage ../../../scripts/dim-screen.nix { });
 in
 {
   services.swayidle = {
@@ -24,12 +26,9 @@ in
       # So the lockscreen is first shown when the screen is dim, but brightens up.
       {
         timeout = 290; # 4m50s
-        command = "${brightnessctl} -s ; ${brightnessctl} set $(($(${brightnessctl} get) / 2))";
-        resumeCommand = "${brightnessctl} -r";
-      }
-      {
-        timeout = 295; # 4m55s
-        command = "${brightnessctl} set $(($(${brightnessctl} get) / 2))";
+        # Dim over <10 seconds, because the script currently takes > the passed time because it's doing naive sleeps.
+        command = "${brightnessctl} -s ; ${dim-screen} 8";
+        resumeCommand = "${pkill} dim-screen ; ${brightnessctl} -r";
       }
     ]
     # Desktop is fine to leave unlocked if unattended.
