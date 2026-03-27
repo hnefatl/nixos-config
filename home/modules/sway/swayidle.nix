@@ -6,7 +6,10 @@
 }:
 
 let
-  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+  brightnessctl = lib.getExe pkgs.brightnessctl;
+  swaylock = lib.getExe pkgs.swaylock;
+  pkill = "${pkgs.procps}/bin/pkill";
+  dim-screen = lib.getExe (pkgs.callPackage ../../scripts/dim-screen.nix { });
 in
 {
   services.swayidle = {
@@ -15,7 +18,7 @@ in
     events = [
       {
         event = "before-sleep";
-        command = "${lib.getExe pkgs.swaylock} --daemonize";
+        command = "${swaylock} --daemonize";
       }
     ];
 
@@ -23,20 +26,22 @@ in
       # These dimmings are undone if the device leaves idle mode, even if on the lockscreen.
       # So the lockscreen is first shown when the screen is dim, but brightens up.
       {
-        timeout = 290; # 4m50s
-        command = "${brightnessctl} -s ; ${brightnessctl} set $(($(${brightnessctl} get) / 2))";
+        timeout = 5; # 4m50
+        command = "${brightnessctl} -s";
         resumeCommand = "${brightnessctl} -r";
       }
       {
-        timeout = 295; # 4m55s
-        command = "${brightnessctl} set $(($(${brightnessctl} get) / 2))";
+        timeout = 6; # 4m50
+        # Dim over <10 seconds, because the script currently takes > the passed time because it's doing naive sleeps.
+        command = "${dim-screen} 8";
+        resumeCommand = "${pkill} dim-screen";
       }
     ]
     # Desktop is fine to leave unlocked if unattended.
     ++ (lib.optionals (config.machine_config.formFactor != "desktop") [
       {
         timeout = 300; # 5mins
-        command = "${lib.getExe pkgs.swaylock} --daemonize";
+        command = "${swaylock} --daemonize";
       }
     ])
     ++ [
