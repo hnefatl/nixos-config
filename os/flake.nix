@@ -21,6 +21,7 @@
       url = "github:hnefatl/nixos-autoupgrader";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    people-display.url = "github:hnefatl/people-display";
     home.url = "path:./../home";
   };
 
