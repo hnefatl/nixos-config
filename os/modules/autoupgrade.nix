@@ -1,22 +1,25 @@
-{ inputs, ... }:
+{ config, ... }:
 {
-  system.autoUpgrade = {
-    enable = true;
-    flake = "/etc/nixos/os";
-    flags = [
-      "--print-build-logs"
-      "--update-input=nixpkgs"
-      "--update-input=lanzaboote"
-      "--update-input=sops-nix"
-    ];
-    dates = "01:00";
-    randomizedDelaySec = "30min";
+  nixos-autoupgrade = {
+    when =
+      if config.machine_config.instance == "warthog" then
+        # Weekly at 1am on Saturdays
+        "00 01 * * 6"
+      else
+        # Daily at 1am
+        "00 01 * * *";
+
+    args = rec {
+      os-flake-dir = "/etc/nixos/os";
+      home-flake-dir = "/etc/nixos/home";
+      home-user = "keith";
+      update-inputs = "nixpkgs";
+      from-email = "hnefatl+infrastructure@gmail.com";
+      to-email = from-email;
+    };
   };
 
-  # Might need to try
-  # https://github.com/firecat53/nixos/blob/38e6b7b410fe6fb3ecb8bada64a2efc88b3e6669/hosts/office/services/nixos.nix#L12
-  # if the flake doesn't actually get updated.
-
+  # Needed since the upgrader runs as root, and these dirs aren't owned by root.
   programs.git.config.safe.directory = [
     "/etc/nixos"
     "/etc/nixos/secrets"

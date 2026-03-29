@@ -15,10 +15,6 @@
       url = "github:hnefatl/i3blocks-contrib";
       flake = false;
     };
-    autoupgrader = {
-      url = "github:hnefatl/nixos-autoupgrader";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -29,7 +25,6 @@
       home-manager,
       firefox-addons,
       i3blocks-contrib,
-      autoupgrader,
     }:
     {
       homeConfigurations =
