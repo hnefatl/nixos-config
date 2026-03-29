@@ -8,15 +8,15 @@ let
   mod = "Mod4"; # Super/Windows/Framework key
   caps = "Mod5"; # Caps lock
   terminal = config.wayland.windowManager.sway.config.terminal;
-  dmenu-emoji = pkgs.callPackage ../../scripts/dmenu-emoji.nix { };
-  dmenu-audio = pkgs.callPackage ../../scripts/dmenu-audio.nix { };
+  dmenu-emoji = pkgs.callPackage ../../../scripts/dmenu-emoji.nix { };
+  dmenu-audio = pkgs.callPackage ../../../scripts/dmenu-audio.nix { };
   brightnessctl = "${lib.getExe pkgs.brightnessctl}";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   playerctl = "${lib.getExe pkgs.playerctl}";
-  screencap = pkgs.callPackage ../../scripts/screencap.nix { };
+  screencap = pkgs.callPackage ../../../scripts/screencap.nix { };
   systemctl = "${pkgs.systemd}/bin/systemctl";
-  mute-application = pkgs.callPackage ../../scripts/mute-application.nix { };
-  mute-source = lib.getExe (pkgs.callPackage ../../scripts/mute-source.nix { });
+  mute-application = pkgs.callPackage ../../../scripts/mute-application.nix { };
+  mute-source = lib.getExe (pkgs.callPackage ../../../scripts/mute-source.nix { });
 
   spotify-op = op: "${playerctl} -p spotify ${op} , exec pkill -SIGRTMIN+11 i3blocks";
   pactl-op = op: "${pactl} ${op} , exec pkill -SIGRTMIN+10 i3blocks";

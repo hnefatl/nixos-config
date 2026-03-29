@@ -20,7 +20,7 @@
       ncdu
       acpi
       # Utility scripts
-      (pkgs.callPackage ../scripts/nix-init.nix { inherit pkgs; })
+      (pkgs.callPackage ../../scripts/nix-init.nix { inherit pkgs; })
     ];
 
     shellAliases = {
