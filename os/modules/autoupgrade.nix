@@ -1,13 +1,14 @@
 { config, ... }:
 {
   nixos-autoupgrade = {
+    enable = true;
     when =
       if config.machine_config.instance == "warthog" then
         # Weekly at 1am on Saturdays
-        "00 01 * * 6"
+        "Sat *-*-* 01:00:00"
       else
         # Daily at 1am
-        "00 01 * * *";
+        "*-*-* 01:00:00";
 
     args = rec {
       os-flake-dir = "/etc/nixos/os";
