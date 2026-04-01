@@ -15,7 +15,7 @@
       home-flake-dir = "/etc/nixos/home";
       home-user = "keith";
       update-inputs = "nixpkgs";
-      from-email = "hnefatl+infrastructure@gmail.com";
+      from-email = "hnefatl+autoupgrader@gmail.com";
       to-email = from-email;
     };
   };
