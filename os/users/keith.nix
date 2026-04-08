@@ -14,6 +14,8 @@
     extraGroups = [
       "wheel"
       "video"
+      # Serial port access
+      "dialout"
     ]
     ++ lib.optionals config.programs.gamemode.enable [ "gamemode" ];
 
