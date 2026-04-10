@@ -25,8 +25,8 @@
     shellAliases = {
       c = "clear";
       cl = "clear ; ls";
-      nso = "nh os switch /etc/nixos/os";
-      nsh = "nh home switch /etc/nixos/home";
+      nso = "nh os switch --show-activation-logs /etc/nixos/os";
+      nsh = "nh home switch --show-activation-logs /etc/nixos/home";
       alert = "echo -e '\\a'";
     };
   };
