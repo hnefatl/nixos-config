@@ -29,6 +29,8 @@
           ms-vscode-remote.remote-ssh
           hashicorp.terraform
           matthewpi.caddyfile-support
+        ] ++ lib.optionals (config.machine_config.isWork) [
+          golang.go
         ];
     })
     nixfmt-rfc-style
