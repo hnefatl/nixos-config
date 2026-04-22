@@ -14,8 +14,7 @@
 }
 (internal_only) {
     @denied not client_ip private_ranges
-    # TODO: return a more consistent error on this and for 404s.
-    abort @denied
+    error @denied "Permission Denied" 403
 }
 
 auth.warthog.keith.collister.xyz {
