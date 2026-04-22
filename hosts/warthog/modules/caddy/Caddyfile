@@ -36,6 +36,22 @@ https://esphome.warthog.keith.collister.xyz {
     reverse_proxy localhost:6052
 }
 
+https://router.warthog.keith.collister.xyz {
+    import authelia
+    import internal_only
+    reverse_proxy 10.20.0.1:80
+}
+https://ap1.warthog.keith.collister.xyz {
+    import authelia
+    import internal_only
+    reverse_proxy 10.20.0.2:80
+}
+https://ap2.warthog.keith.collister.xyz {
+    import authelia
+    import internal_only
+    reverse_proxy 10.20.0.3:80
+}
+
 https://plex.warthog.keith.collister.xyz {
     reverse_proxy localhost:32400
 }
