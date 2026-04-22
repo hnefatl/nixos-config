@@ -1,16 +1,16 @@
 {
-	email hnefatl@gmail.com
-	servers {
-		trusted_proxies static 10.20.0.1
-		trusted_proxies_strict
-	}
+    email hnefatl@gmail.com
+    servers {
+        trusted_proxies static 10.20.0.1
+        trusted_proxies_strict
+    }
 }
 
 (authelia) {
-	forward_auth localhost:9091 {
-		uri /api/authz/forward-auth
-		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-	}
+    forward_auth localhost:9091 {
+        uri /api/authz/forward-auth
+        copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+    }
 }
 (internal_only) {
     @denied not client_ip private_ranges
@@ -19,64 +19,64 @@
 }
 
 auth.warthog.keith.collister.xyz {
-	reverse_proxy localhost:9091
+    reverse_proxy localhost:9091
 }
 
 https://prometheus.warthog.keith.collister.xyz {
-	import authelia
+    import authelia
     import internal_only
-	reverse_proxy localhost:9090
+    reverse_proxy localhost:9090
 }
 
 https://ha.keith.collister.xyz {
-	reverse_proxy localhost:8123
+    reverse_proxy localhost:8123
 }
 https://esphome.warthog.keith.collister.xyz {
-	import authelia
+    import authelia
     import internal_only
-	reverse_proxy localhost:6052
+    reverse_proxy localhost:6052
 }
 
 https://plex.warthog.keith.collister.xyz {
-	reverse_proxy localhost:32400
+    reverse_proxy localhost:32400
 }
 https://jellyfin.warthog.keith.collister.xyz {
-	reverse_proxy localhost:8096
+    reverse_proxy localhost:8096
 }
 https://qbittorrent.warthog.keith.collister.xyz {
-	import authelia
+    import authelia
     import internal_only
-	reverse_proxy localhost:8097
+    reverse_proxy localhost:8097
 }
 https://radarr.warthog.keith.collister.xyz {
-	import authelia
+    import authelia
     import internal_only
-	reverse_proxy localhost:7878
+    reverse_proxy localhost:7878
 }
 https://sonarr.warthog.keith.collister.xyz {
-	import authelia
+    import authelia
     import internal_only
-	reverse_proxy localhost:8989
+    reverse_proxy localhost:8989
 }
 https://prowlarr.warthog.keith.collister.xyz {
-	import authelia
+    import authelia
     import internal_only
-	reverse_proxy localhost:9696
+    reverse_proxy localhost:9696
 }
 https://bazarr.warthog.keith.collister.xyz {
-	import authelia
+    import authelia
     import internal_only
-	reverse_proxy localhost:6767
+    reverse_proxy localhost:6767
 }
 https://mealie.warthog.keith.collister.xyz {
-	import authelia
-	reverse_proxy localhost:9001
+    import authelia
+    reverse_proxy localhost:9001
 }
 https://people-display-exporter.warthog.keith.collister.xyz {
-	reverse_proxy h2c://localhost:12364
+    reverse_proxy h2c://localhost:12364
 }
 https://miniflux.warthog.keith.collister.xyz {
-	import authelia
+    import authelia
     import internal_only
-	reverse_proxy localhost:7195
+    reverse_proxy localhost:7195
 }
