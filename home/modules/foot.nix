@@ -38,6 +38,9 @@
       mouse = {
         hide-when-typing = "yes";
       };
+      bell = {
+        urgent = "yes";
+      };
     };
   };
 }
