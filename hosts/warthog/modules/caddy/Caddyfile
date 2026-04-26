@@ -51,6 +51,11 @@ https://ap2.warthog.keith.collister.xyz {
     import internal_only
     reverse_proxy 10.20.0.3:80
 }
+https://tvswitch.warthog.keith.collister.xyz {
+    import authelia
+    import internal_only
+    reverse_proxy 10.20.0.4:80
+}
 
 https://plex.warthog.keith.collister.xyz {
     reverse_proxy localhost:32400
