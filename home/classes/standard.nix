@@ -32,6 +32,7 @@
       xfce.thunar
       xfce.tumbler
       ffmpegthumbnailer
+      sshfs
     ];
 
     pointerCursor = {
