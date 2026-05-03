@@ -1,6 +1,6 @@
 # Use e.g. `nixos-option services.fprintd.enable` to query the value of the current config.
 
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   programs.steam =
@@ -20,7 +20,7 @@
     settings.general.inhibit_screensaver = 0;
   };
 
-  systemd.user.services.steam = {
+  systemd.user.services.steam = lib.mkIf (config.machine_config.instance == "desktop") {
     enable = true;
     description = "Launch steam on startup";
     wantedBy = [ "graphical-session.target" ];
