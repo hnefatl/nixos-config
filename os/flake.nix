@@ -56,7 +56,8 @@
             ./modules/bluetooth.nix
             ./modules/spotify.nix
             ./modules/fingerprint.nix
-            ./modules/wireguard.nix
+            # TODO: re-enable once network is more stable.
+            #./modules/wireguard.nix
             ./modules/swaylock.nix
             ./modules/gaming.nix
             ./modules/warthog-nfs.nix
