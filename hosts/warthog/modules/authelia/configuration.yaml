@@ -53,6 +53,7 @@ access_control:
       policy: one_factor
       networks:
         - 10.20.0.0/16
+        - fc00::/7
           # VPN
         - 10.29.0.0/16
 
