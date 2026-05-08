@@ -10,19 +10,19 @@
 
       "desktop" = {
         host = "desktop";
-        hostname = "10.20.2.5";
+        hostname = "desktop.local";
       };
       "pc" = {
         host = "pc";
-        hostname = "10.20.2.5";
+        hostname = "desktop.local";
       };
       "warthog" = {
         host = "warthog";
-        hostname = "10.20.1.3";
+        hostname = "warthog.local";
       };
       "router" = {
         host = "router";
-        hostname = "10.20.0.1";
+        hostname = "router.local";
         user = "root";
       };
       "pikvm" = {
@@ -37,7 +37,7 @@
       };
       "ap1" = {
         host = "ap1";
-        hostname = "10.20.0.2";
+        hostname = "ap1.local";
         user = "root";
         extraOptions = {
           # Runs OpenWRT 19.07.10, and is too old+small to install new dropbear.
@@ -47,7 +47,7 @@
       };
       "ap2" = {
         host = "ap2";
-        hostname = "10.20.0.3";
+        hostname = "ap2.local";
         user = "root";
       };
       "crash" = {
