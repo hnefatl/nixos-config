@@ -1,7 +1,7 @@
 {
     email hnefatl@gmail.com
     servers {
-        trusted_proxies static 10.20.0.1 10.20.10.1 fdf3:685c:acae:10::1
+        trusted_proxies static 10.20.0.1 10.20.10.1 fdf3:685c:acae:10::1 2a01:4b00:bd20:7010::1
         trusted_proxies_strict
     }
 }
@@ -13,7 +13,7 @@
     }
 }
 (internal_only) {
-    @denied not client_ip private_ranges
+    @denied not client_ip private_ranges 2a01:4b00:bd20:7000::/56
     error @denied "Permission Denied" 403
 }
 
@@ -39,22 +39,22 @@ https://esphome.warthog.keith.collister.xyz {
 https://router.warthog.keith.collister.xyz {
     import authelia
     import internal_only
-    reverse_proxy [2a01:4b00:bd20:7001::1]:80
+    reverse_proxy [fdf3:685c:acae:1::1]:80
 }
 https://ap1.warthog.keith.collister.xyz {
     import authelia
     import internal_only
-    reverse_proxy [2a01:4b00:bd20:7001::1]:80
+    reverse_proxy [fdf3:685c:acae:1::1]:80
 }
 https://ap2.warthog.keith.collister.xyz {
     import authelia
     import internal_only
-    reverse_proxy [2a01:4b00:bd20:7001::2]:80
+    reverse_proxy [fdf3:685c:acae:1::1]:80
 }
 https://tvswitch.warthog.keith.collister.xyz {
     import authelia
     import internal_only
-    reverse_proxy [2a01:4b00:bd20:7001::3]:80
+    reverse_proxy [fdf3:685c:acae:1::1]:80
 }
 
 https://plex.warthog.keith.collister.xyz {
