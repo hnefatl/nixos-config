@@ -44,17 +44,17 @@ https://router.warthog.keith.collister.xyz {
 https://ap1.warthog.keith.collister.xyz {
     import authelia
     import internal_only
-    reverse_proxy [fdf3:685c:acae:1::1]:80
+    reverse_proxy [fdf3:685c:acae:1::2]:80
 }
 https://ap2.warthog.keith.collister.xyz {
     import authelia
     import internal_only
-    reverse_proxy [fdf3:685c:acae:1::1]:80
+    reverse_proxy [fdf3:685c:acae:1::3]:80
 }
 https://tvswitch.warthog.keith.collister.xyz {
     import authelia
     import internal_only
-    reverse_proxy [fdf3:685c:acae:1::1]:80
+    reverse_proxy [fdf3:685c:acae:1::4]:80
 }
 
 https://plex.warthog.keith.collister.xyz {
