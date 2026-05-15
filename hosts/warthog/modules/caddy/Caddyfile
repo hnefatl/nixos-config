@@ -90,7 +90,8 @@ https://bazarr.warthog.keith.collister.xyz {
 }
 https://mealie.warthog.keith.collister.xyz {
     import authelia
-    reverse_proxy localhost:9001
+    # Specifically ipv4, mealie doesn't bind to ipv6
+    reverse_proxy 127.0.0.1:9001
 }
 https://people-display-exporter.warthog.keith.collister.xyz {
     reverse_proxy h2c://localhost:12364
@@ -99,4 +100,12 @@ https://miniflux.warthog.keith.collister.xyz {
     import authelia
     import internal_only
     reverse_proxy localhost:7195
+}
+
+https://octoprint.warthog.keith.collister.xyz {
+    import authelia
+    import internal_only
+    # If clients can be ipv6, octoprint must disable crossorigin in `config.yaml` API settings.
+    # Otherwise WSS has ipv4/6 conflicts and rejects requests.
+    reverse_proxy 10.20.10.97:80
 }
