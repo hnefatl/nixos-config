@@ -18,6 +18,7 @@
       bc
       ncdu
       acpi
+      dig
       # Utility scripts
       (pkgs.callPackage ../../scripts/nix-init.nix { inherit pkgs; })
     ];
