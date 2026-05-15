@@ -49,6 +49,7 @@
               ./modules/firefox.nix
               ./modules/moonlight.nix
               ./modules/signal.nix
+              ./modules/3d-printing.nix
             ];
             extraSpecialArgs = {
               inherit inputs;
@@ -65,6 +66,7 @@
               ./modules/ffxiv.nix
               ./modules/vesktop.nix
               ./modules/signal.nix
+              ./modules/3d-printing.nix
             ];
             extraSpecialArgs = {
               inherit inputs;
