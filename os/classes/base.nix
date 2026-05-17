@@ -8,6 +8,7 @@
 }:
 {
   imports = [
+    ../modules/build-caches.nix
     ../modules/sops.nix
     ../users/users.nix
     ../modules/mdns.nix
