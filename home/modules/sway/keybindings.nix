@@ -38,10 +38,11 @@ in
     bindsym ${mod}+Shift+q exec swaynag -t warning -m 'Do you really want to exit?' -b 'Yes' 'swaymsg exit'
 
     bindsym ${caps}+t exec ${terminal}
-    bindsym ${caps}+f exec ${terminal} -x ${lib.getExe pkgs.ranger}
-    bindsym ${caps}+h exec ${terminal} -x ${lib.getExe pkgs.htop}
-    bindsym ${caps}+c exec ${terminal} --title calculator -x ${lib.getExe pkgs.bc} --quiet
-    bindsym ${caps}+n exec ${terminal} --title notepad -x ${lib.getExe pkgs.neovim}
+    bindsym ${caps}+f exec ${terminal} ${lib.getExe pkgs.ranger}
+    bindsym ${caps}+h exec ${terminal} ${lib.getExe pkgs.htop}
+    bindsym ${caps}+c exec ${terminal} --title calculator ${lib.getExe pkgs.bc} --quiet
+    bindsym ${caps}+n exec ${terminal} --title notepad ${lib.getExe pkgs.neovim}
+    bindsym ${caps}+v exec ${terminal} --title notepad ${lib.getExe pkgs.neovim}
     bindsym ${caps}+g exec ${systemctl} --user is-active --quiet gammastep && ${systemctl} --user stop gammastep || systemctl --user start gammastep
     bindsym ${mod}+d  exec ${lib.getExe pkgs.fuzzel}
 
