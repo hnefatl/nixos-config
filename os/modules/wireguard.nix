@@ -26,7 +26,7 @@
     wg-quick.interfaces."wg0" = {
       autostart = true;
       address = [ "10.29.0.9/32" ];
-      dns = [ "10.20.0.1" ];
+      dns = [ "10.29.0.1" ];
       listenPort = 51820;
 
       generatePrivateKeyFile = true;
