@@ -66,7 +66,8 @@ https://jellyfin.warthog.keith.collister.xyz {
 https://qbittorrent.warthog.keith.collister.xyz {
     import authelia
     import internal_only
-    reverse_proxy localhost:8097
+    # IPv4 only.
+    reverse_proxy 127.0.0.1:8097
 }
 https://radarr.warthog.keith.collister.xyz {
     import authelia
