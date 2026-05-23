@@ -14,6 +14,14 @@
     };
   };
 
+  systemd.services.docker = {
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = "5s";
+      StartLimitIntervalSec = 0; # Don't limit startups
+    };
+  };
+
   systemd.services.start-services = {
     description = "Start server services";
     script = "./up ; echo 'Server services started'";
@@ -26,6 +34,9 @@
     serviceConfig = {
       Type = "oneshot";
       WorkingDirectory = "/pool/services/docker_configs/";
+      Restart = "on-failure";
+      RestartSec = "5s";
+      StartLimitIntervalSec = 0; # Don't limit startups
     };
   };
 
