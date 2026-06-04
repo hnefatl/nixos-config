@@ -18,6 +18,8 @@
     serviceConfig = {
       Restart = "on-failure";
       RestartSec = "5s";
+    };
+    unitConfig = {
       StartLimitIntervalSec = 0; # Don't limit startups
     };
   };
@@ -36,6 +38,8 @@
       WorkingDirectory = "/pool/services/docker_configs/";
       Restart = "on-failure";
       RestartSec = "5s";
+    };
+    unitConfig = {
       StartLimitIntervalSec = 0; # Don't limit startups
     };
   };
