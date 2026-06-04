@@ -13,6 +13,7 @@ in
 
   fileSystems."/camera" = {
     device = "/dev/disk/by-uuid/${sd_uuid}";
+    fsType = "auto";
     options = [
       "noauto"
       "ro"
