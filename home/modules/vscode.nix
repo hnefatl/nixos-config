@@ -33,6 +33,6 @@
           golang.go
         ];
     })
-    nixfmt-rfc-style
+    nixfmt
   ];
 }

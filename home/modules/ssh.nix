@@ -5,7 +5,7 @@
     # Prep for field being deleted from upstream.
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       "*".addKeysToAgent = "12h";
 
       "desktop" = {

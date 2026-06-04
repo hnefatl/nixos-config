@@ -18,7 +18,6 @@
     arandr
     pavucontrol
     vlc
-    xorg.xev
     gimp
     brightnessctl
     yubioath-flutter

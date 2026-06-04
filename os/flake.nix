@@ -1,10 +1,9 @@
 {
   inputs = {
     self.submodules = true;
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.3";
-      # Optional but recommended to limit the size of your system closure.
+      url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {

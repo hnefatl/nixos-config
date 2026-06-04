@@ -13,7 +13,7 @@
       scrollback = {
         lines = "10000";
       };
-      colors = {
+      colors-dark = {
         alpha = "1.0";
         foreground = "ffffff";
         background = "333333";

@@ -92,6 +92,9 @@
     '';
     viAlias = true;
     vimAlias = true;
+    # Needed since stateversion 26.05 to suppress warnings.
+    withRuby = false;
+    withPython3 = false;
   };
 
   programs.ranger.enable = true;

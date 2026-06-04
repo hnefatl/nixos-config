@@ -13,13 +13,10 @@ in
 {
   services.swayidle = {
     enable = true;
-    # Lock before sleep in all cases, so that resuming shows a lockscreen.
-    events = [
-      {
-        event = "before-sleep";
-        command = "${lib.getExe pkgs.swaylock} --daemonize";
-      }
-    ];
+    events = {
+      # Lock before sleep in all cases, so that resuming shows a lockscreen.
+      "before-sleep" = "${lib.getExe pkgs.swaylock} --daemonize";
+    };
 
     timeouts = [
       # These dimmings are undone if the device leaves idle mode, even if on the lockscreen.

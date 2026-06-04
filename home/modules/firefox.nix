@@ -13,6 +13,8 @@
 
   programs.firefox = {
     enable = true;
+    # Needed since stateversion 26.05
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
 
     profiles.keith = {
       search = {

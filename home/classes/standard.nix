@@ -29,8 +29,8 @@
       # Needed for e.g. blueman-applet icon.
       hicolor-icon-theme
       # File explorer
-      xfce.thunar
-      xfce.tumbler
+      thunar
+      tumbler
       ffmpegthumbnailer
       sshfs
     ];

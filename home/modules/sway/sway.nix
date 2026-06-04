@@ -17,7 +17,7 @@
       # Set the primary monitor in X11 for xwayland apps. Prevents e.g. games defaulting to wrong screen.
       startup = [
         {
-          command = "${lib.getExe pkgs.xorg.xrandr} --output ${config.machine_config.primaryMonitor} --primary";
+          command = "${lib.getExe pkgs.xrandr} --output ${config.machine_config.primaryMonitor} --primary";
           always = true;
         }
       ];
