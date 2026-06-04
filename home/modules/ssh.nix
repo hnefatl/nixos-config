@@ -35,16 +35,6 @@
         hostname = "vpn.keith.collister.xyz";
         user = "root";
       };
-      "ap1" = {
-        host = "ap1";
-        hostname = "ap1.local";
-        user = "root";
-        extraOptions = {
-          # Runs OpenWRT 19.07.10, and is too old+small to install new dropbear.
-          HostkeyAlgorithms = "+ssh-rsa";
-          PubkeyAcceptedAlgorithms = "+ssh-rsa";
-        };
-      };
       "ap2" = {
         host = "ap2";
         hostname = "ap2.local";
