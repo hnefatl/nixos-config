@@ -50,6 +50,7 @@
               ./modules/moonlight.nix
               ./modules/signal.nix
               ./modules/3d-printing.nix
+              ./modules/remmina.nix
             ];
             extraSpecialArgs = {
               inherit inputs;
@@ -67,6 +68,7 @@
               ./modules/vesktop.nix
               ./modules/signal.nix
               ./modules/3d-printing.nix
+              ./modules/remmina.nix
             ];
             extraSpecialArgs = {
               inherit inputs;
