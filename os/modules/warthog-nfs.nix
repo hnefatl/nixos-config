@@ -17,6 +17,11 @@ in
     fsType = "nfs";
     inherit options;
   };
+  fileSystems."/warthog/docker_configs" = {
+    device = "[2a01:4b00:bd20:7010:230:59ff:fe28:d000]:/pool/docker_configs";
+    fsType = "nfs";
+    inherit options;
+  };
   fileSystems."/warthog/media" = {
     device = "[2a01:4b00:bd20:7010:230:59ff:fe28:d000]:/pool/media";
     fsType = "nfs";
