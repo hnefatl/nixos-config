@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./bambuddy.nix
+  ];
+
   hardware.nvidia-container-toolkit = {
     enable = true;
   };

@@ -110,3 +110,10 @@ https://octoprint.warthog.keith.collister.xyz {
     # Otherwise WSS has ipv4/6 conflicts and rejects requests.
     reverse_proxy 10.20.10.97:80
 }
+https://bambuddy.warthog.keith.collister.xyz {
+    import authelia
+    import internal_only
+    # If clients can be ipv6, octoprint must disable crossorigin in `config.yaml` API settings.
+    # Otherwise WSS has ipv4/6 conflicts and rejects requests.
+    reverse_proxy localhost:8659
+}
