@@ -2,7 +2,7 @@
   inputs = {
     self.submodules = true;
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs";
+    nixpkgs-custom.url = "github:hnefatl/nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +21,7 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-unstable,
+      nixpkgs-custom,
       home-manager,
       firefox-addons,
       i3blocks-contrib,
@@ -34,7 +34,7 @@
             inherit system;
             allowUnfree = true;
           };
-          pkgs-unstable = import nixpkgs-unstable {
+          pkgs-custom = import nixpkgs-custom {
             inherit system;
             allowUnfree = true;
           };
@@ -54,7 +54,7 @@
             ];
             extraSpecialArgs = {
               inherit inputs;
-              inherit pkgs-unstable;
+              inherit pkgs-custom;
             };
           };
           "keith@desktop" = home-manager.lib.homeManagerConfiguration {
@@ -72,7 +72,7 @@
             ];
             extraSpecialArgs = {
               inherit inputs;
-              inherit pkgs-unstable;
+              inherit pkgs-custom;
             };
           };
 
