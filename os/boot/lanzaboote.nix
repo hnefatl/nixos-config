@@ -8,6 +8,10 @@
 {
   imports = [ ./systemd.nix ];
 
+  environment.systemPackages = with pkgs; [
+    sbctl
+  ];
+
   boot = {
     initrd.systemd.enable = true;
 
