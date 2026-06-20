@@ -63,6 +63,7 @@
             ./modules/cross-compile-aarch64.nix
             ./modules/photography.nix
             ./modules/monitoring/prometheus-exporter.nix
+            ./modules/radio.nix
           ];
           specialArgs = { inherit inputs; };
         };
