@@ -20,7 +20,7 @@
 
   systemd.services.docker = {
     serviceConfig = {
-      Restart = "on-failure";
+      Restart = "always";
       RestartSec = "5s";
     };
     unitConfig = {
@@ -30,17 +30,19 @@
 
   systemd.services.start-services = {
     description = "Start server services";
-    script = "./up ; echo 'Server services started'";
+    script = "./up";
     path = [
       pkgs.bash
       pkgs.docker-compose
     ];
 
     wantedBy = [ "multi-user.target" ];
+    after = [ "docker.service" ];
+    requires = [ "docker.service" ];
     serviceConfig = {
       Type = "oneshot";
+      RemainAfterExit = true;
       WorkingDirectory = "/pool/services/docker_configs/";
-      Restart = "on-failure";
       RestartSec = "5s";
     };
     unitConfig = {
