@@ -48,7 +48,7 @@
       "parents_pi" = {
         host = "parents_pi";
         hostname = "10.29.0.8";
-        user = "root";
+        user = "dietpi";
       };
       "octoprint" = {
         host = "octoprint";
