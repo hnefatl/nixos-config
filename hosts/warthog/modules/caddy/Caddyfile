@@ -95,7 +95,13 @@ https://mealie.warthog.keith.collister.xyz {
     reverse_proxy 127.0.0.1:9001
 }
 https://people-display-exporter.warthog.keith.collister.xyz {
-    reverse_proxy h2c://localhost:12364
+    # Necessary to start connection w/ http2, not http1.1 then upgrade.
+    # The rust grpc server doesn't speak http1.1, so fails otherwise.
+    reverse_proxy 127.0.0.1:12364 {
+        transport http {
+            versions h2c
+        }
+    }
 }
 https://miniflux.warthog.keith.collister.xyz {
     import authelia
