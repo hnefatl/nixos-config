@@ -23,6 +23,11 @@
       Restart = "always";
       RestartSec = "5s";
     };
+
+    # Make sure Docker restarts after an upgrade.
+    after = [ "nixos-autoupgrade.service" ];
+    requires = [ "nixos-autoupgrade.service" ];
+
     unitConfig = {
       StartLimitIntervalSec = 0; # Don't limit startups
     };
