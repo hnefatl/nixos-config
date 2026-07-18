@@ -27,6 +27,7 @@
     # Make sure Docker restarts after an upgrade.
     after = [ "nixos-autoupgrade.service" ];
     requires = [ "nixos-autoupgrade.service" ];
+    wantedBy = [ "nixos-autoupgrade.service" ];
 
     unitConfig = {
       StartLimitIntervalSec = 0; # Don't limit startups
@@ -41,7 +42,7 @@
       pkgs.docker-compose
     ];
 
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = [ "multi-user.target" "nixos-autoupgrade.service" ];
     after = [ "docker.service" ];
     requires = [ "docker.service" ];
     serviceConfig = {
