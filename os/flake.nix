@@ -59,6 +59,7 @@
             #./modules/wireguard.nix
             ./modules/swaylock.nix
             ./modules/gaming.nix
+            ./modules/sunshine.nix
             ./modules/warthog-nfs.nix
             ./modules/cross-compile-aarch64.nix
             ./modules/photography.nix
