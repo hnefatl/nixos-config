@@ -93,7 +93,12 @@
   xdg.mimeApps.enable = true;
   xdg.portal = {
     enable = true;
-    configPackages = [ pkgs.xdg-desktop-portal-wlr ];
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    configPackages = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+    config.common = {
+      "default" = "gtk";
+      "org.freedesktop.impl.portal.Screenshot" = "wlr";
+      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+    };
   };
 }
