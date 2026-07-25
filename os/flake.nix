@@ -123,6 +123,7 @@
             ../hosts/warthog/modules/prometheus-server.nix
             ../hosts/warthog/modules/authelia/authelia.nix
             ../hosts/warthog/modules/caddy/caddy.nix
+            ../hosts/warthog/modules/automation/mqtt.nix
           ];
           specialArgs = {
             # Inputs for warthog are this flake's input plus the inputs to the home flake.
