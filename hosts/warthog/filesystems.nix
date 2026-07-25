@@ -43,8 +43,7 @@ in
   # TODO: this is pretty messy, partly because sanoid's not been very nix-ified, partly because
   # I should probably write a proper opinionated wrapper around it.
   services.sanoid = {
-    # Run every 5mins, to reliably catch the 10min gameserver snapshots below.
-    interval = lib.mkForce "*-*-* *:0/5:00";
+    interval = lib.mkForce "*-*-* *:0/30:00";
     datasets =
       let
         # Copied from "zroot/enc/snap" configuration for now.
