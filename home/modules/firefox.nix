@@ -19,7 +19,7 @@
     profiles.keith = {
       search = {
         force = true;
-        default = "kagi";
+        default = "google";
         order = [
           "kagi"
           "ddg"
