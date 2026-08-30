@@ -123,3 +123,8 @@ https://bambuddy.warthog.keith.collister.xyz {
     # Otherwise WSS has ipv4/6 conflicts and rejects requests.
     reverse_proxy localhost:8659
 }
+https://music-assistant.warthog.keith.collister.xyz {
+    import authelia
+    import internal_only
+    reverse_proxy localhost:8095
+}

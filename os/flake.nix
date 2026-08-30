@@ -124,6 +124,7 @@
             ../hosts/warthog/modules/authelia/authelia.nix
             ../hosts/warthog/modules/caddy/caddy.nix
             ../hosts/warthog/modules/automation/mqtt.nix
+            ../hosts/warthog/modules/music-assistant.nix
           ];
           specialArgs = {
             # Inputs for warthog are this flake's input plus the inputs to the home flake.
