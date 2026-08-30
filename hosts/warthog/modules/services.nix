@@ -15,6 +15,8 @@
       enable = true;
       logDriver = "json-file";
       autoPrune.enable = true;
+      # Allow restarting the docker daemon without restarting containers: tries to improve system upgrade stability.
+      daemon.settings.live-restore = true;
     };
   };
 
