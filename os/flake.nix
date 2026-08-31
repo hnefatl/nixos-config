@@ -56,7 +56,7 @@
             ./modules/spotify.nix
             ./modules/fingerprint.nix
             # TODO: re-enable once network is more stable.
-            #./modules/wireguard.nix
+            ./modules/wireguard.nix
             ./modules/swaylock.nix
             ./modules/gaming.nix
             ./modules/sunshine.nix
