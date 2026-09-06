@@ -93,6 +93,7 @@
             ./modules/virtualisation.nix
             ./modules/cross-compile-aarch64.nix
             ./modules/photography.nix
+            ./modules/sendspin.nix
             ./modules/monitoring/prometheus-exporter.nix
           ];
           specialArgs = { inherit inputs; };
