@@ -12,5 +12,6 @@ pkgs.writeShellApplication {
     libnotify
     procps
     pulseaudio
+    wl-clipboard
   ];
 }

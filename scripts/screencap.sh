@@ -19,7 +19,8 @@ elif [[ "$1" == "record" ]] ; then
     area="$(slurp -d)"
     device="$(pactl get-default-sink).monitor"
     notify-send -t 2000 'Recording started' 'Hit printscreen to stop.'
-    exec wf-recorder --audio="$device" -g "$area" -f /tmp/recording.mp4 -y
+    wf-recorder --audio="$device" -g "$area" -f /tmp/recording.mp4 -y
+    exec wl-copy -t text/uri-list file:///tmp/recording.mp4
 else
     echo "Unknown command: '$1'"
     exit 1
