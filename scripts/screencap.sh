@@ -17,8 +17,9 @@ elif [[ "$1" == "delay_printscreen" ]] ; then
     exec grimshot --notify --cursor --wait "$delay" copy anything
 elif [[ "$1" == "record" ]] ; then
     area="$(slurp -d)"
+    device="$(pactl get-default-sink).monitor"
     notify-send -t 2000 'Recording started' 'Hit printscreen to stop.'
-    exec wf-recorder -a -g "$area" -f /tmp/recording.mp4 -y
+    exec wf-recorder --audio="$device" -g "$area" -f /tmp/recording.mp4 -y
 else
     echo "Unknown command: '$1'"
     exit 1

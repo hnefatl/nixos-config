@@ -11,5 +11,6 @@ pkgs.writeShellApplication {
     wf-recorder
     libnotify
     procps
+    pulseaudio
   ];
 }
