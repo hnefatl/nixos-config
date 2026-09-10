@@ -18,7 +18,7 @@
       };
       "warthog" = {
         host = "warthog";
-        hostname = "warthog.local";
+        hostname = "2a01:4b00:bd20:7010:230:59ff:fe28:d000";
       };
       "router" = {
         host = "router";

@@ -44,7 +44,7 @@ in
     serviceConfig = {
       User = "keith";
       Group = "users";
-      ExecStart = "${camera-backup}/bin/client --dry-run=false --source-root=/camera/DCIM --server-address=http://warthog.local:4361 --max-inflight-sends=5";
+      ExecStart = "${camera-backup}/bin/client --dry-run=false --source-root=/camera/DCIM --server-address=http://[2a01:4b00:bd20:7010:230:59ff:fe28:d000]:4361 --max-inflight-sends=5";
     };
   };
 }

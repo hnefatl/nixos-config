@@ -17,9 +17,4 @@
       linkConfig.RequiredForOnline = "routable";
     };
   };
-
-  # Disable Avahi on e.g. docker interfaces
-  services.avahi.allowInterfaces = [
-    config.systemd.network.networks."10-lan".matchConfig.Name
-  ];
 }
