@@ -11,6 +11,7 @@
     ../modules/build-caches.nix
     ../modules/sops.nix
     ../users/users.nix
+    ../modules/mdns.nix
     ../modules/autoupgrade.nix
     ../modules/nix.nix
     ../modules/neovim.nix

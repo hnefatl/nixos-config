@@ -65,8 +65,7 @@
     ];
   };
   # Required to let home-assistant find google cast and other mDNS devices.
-  # This is now provided implicitly by music-assistant's docker container running in host networking?
-  #services.avahi.enable = true;
+  services.avahi.enable = true;
 
   environment.systemPackages = [
     pkgs.docker-compose

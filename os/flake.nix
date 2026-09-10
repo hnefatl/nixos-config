@@ -65,7 +65,6 @@
             ./modules/photography.nix
             ./modules/monitoring/prometheus-exporter.nix
             ./modules/radio.nix
-            ./modules/mdns.nix
           ];
           specialArgs = { inherit inputs; };
         };
@@ -96,7 +95,6 @@
             ./modules/photography.nix
             ./modules/sendspin.nix
             ./modules/monitoring/prometheus-exporter.nix
-            ./modules/mdns.nix
           ];
           specialArgs = { inherit inputs; };
         };
