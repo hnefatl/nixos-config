@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   # Disable legacy stack.
   networking.useDHCP = false;
@@ -20,5 +20,5 @@
 
   # Music-assistant docker container already provides an mDNS server, so just enable
   # clients, don't publish.
-  services.avahi.publish.enable = false;
+  services.avahi.publish.enable = lib.mkForce false;
 }
