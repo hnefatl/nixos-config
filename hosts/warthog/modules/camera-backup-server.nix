@@ -19,7 +19,7 @@ in
     serviceConfig = {
       User = "keith";
       Group = "users";
-      ExecStart = "${camera-backup}/bin/server --directory=/pool/camera/raw --address=0.0.0.0:${toString port}";
+      ExecStart = "${camera-backup}/bin/server --directory=/pool/camera/raw --address=[::]:${toString port}";
     };
   };
 
