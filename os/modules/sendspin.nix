@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs-unstable, ... }:
 {
   systemd.services.sendspin-daemon = {
     description = "Sendspin Daemon";
@@ -8,7 +8,7 @@
 
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.sendspin-go}/bin/sendspin-go --daemon --name='Desktop Speakers' --audio-device='alsa_output.pci-0000_00_1f.3.analog-surround-21'";
+      ExecStart = "${pkgs-unstable.sendspin-go}/bin/sendspin-go --daemon --name='Desktop Speakers' --audio-device='alsa_output.pci-0000_00_1f.3.analog-surround-21'";
 
       Restart = "always";
       RestartSec = "5s";
