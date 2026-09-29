@@ -2,6 +2,7 @@
   inputs = {
     self.submodules = true;
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +28,7 @@
     inputs@{
       self,
       nixpkgs,
+      nixpkgs-unstable,
       lanzaboote,
       sops-nix,
       impermanence,
@@ -35,10 +37,17 @@
       autoupgrade,
       home,
     }:
+    let 
+      system = "x86_64-linux";
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        allowUnfree = true;
+      };
+    in
     {
       nixosConfigurations = {
         laptop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = [
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
@@ -66,10 +75,10 @@
             ./modules/monitoring/prometheus-exporter.nix
             ./modules/radio.nix
           ];
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs pkgs-unstable; };
         };
         desktop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = [
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
@@ -96,10 +105,10 @@
             ./modules/sendspin.nix
             ./modules/monitoring/prometheus-exporter.nix
           ];
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs pkgs-unstable; };
         };
         warthog = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = [
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
@@ -133,6 +142,7 @@
             # Attributes in this flake's inputs are prioritised, to try and minimise
             # version skew.
             inputs = home.inputs // inputs;
+            inherit pkgs-unstable;
           };
         };
       };
