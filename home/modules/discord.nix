@@ -5,7 +5,7 @@
   ...
 }:
 {
-  programs.discord.enable = lib.mkDefault true;
+  programs.discord.enable = true;
   home = lib.mkIf config.programs.discord.enable {
     # Fix blur on wayland
     shellAliases = {
