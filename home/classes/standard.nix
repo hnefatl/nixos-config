@@ -13,11 +13,11 @@
     ../modules/fuzzel.nix
     ../modules/discord.nix
     ../modules/gammastep.nix
+    ../modules/spotify.nix
   ];
 
   home = {
     packages = with pkgs; [
-      spotify
       playerctl
       pavucontrol
       xidlehook

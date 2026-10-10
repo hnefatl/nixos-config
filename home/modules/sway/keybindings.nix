@@ -165,6 +165,6 @@ in
         # TODO: replace with e.g. opening the default browser
         "exec echo open https://discord.com/channels/@me"
     }
-    bindsym ${caps}+s exec ${pkgs.spotify}/bin/spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto
+    bindsym ${caps}+s exec ${pkgs.spotify}/bin/spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --password-store=basic
   '';
 }

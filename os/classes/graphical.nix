@@ -28,6 +28,7 @@
     enable32Bit = true;
   };
 
+  # This requires a password to be entered at some point: for greetd with autologin, it's not possible to auto-unlock this :/
   services.gnome.gnome-keyring.enable = true;
 
   services.blueman.enable = config.hardware.bluetooth.enable;
