@@ -5,17 +5,17 @@
     when =
       if config.machine_config.instance == "warthog" then
         # Weekly at 1am on Saturdays
-        "Sat *-*-* 01:00:00"
+        "00 01 * * Sat"
       else
         # Daily at 1am
-        "*-*-* 01:00:00";
+        "00 01 * * *";
 
     args = rec {
       os-flake-dir = "/etc/nixos/os";
       # No home-manager config on warthog, due to impermanence.
       home-flake-dir = lib.mkIf (config.machine_config.hostname != "warthog") "/etc/nixos/home";
       home-user = "keith";
-      update-inputs = "nixpkgs";
+      update-inputs = "nixpkgs nixpkgs-unstable";
       from-email = "hnefatl+autoupgrader@gmail.com";
       to-email = from-email;
     };
