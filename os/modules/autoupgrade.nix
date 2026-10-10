@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   nixos-autoupgrade = {
     enable = true;
@@ -12,7 +12,8 @@
 
     args = rec {
       os-flake-dir = "/etc/nixos/os";
-      home-flake-dir = "/etc/nixos/home";
+      # No home-manager config on warthog, due to impermanence.
+      home-flake-dir = lib.mkIf (config.machine_config.hostname != "warthog") "/etc/nixos/home";
       home-user = "keith";
       update-inputs = "nixpkgs";
       from-email = "hnefatl+autoupgrader@gmail.com";
