@@ -44,7 +44,10 @@
       pkgs.docker-compose
     ];
 
-    wantedBy = [ "multi-user.target" "nixos-autoupgrade.service" ];
+    wantedBy = [
+      "multi-user.target"
+      "nixos-autoupgrade.service"
+    ];
     after = [ "docker.service" ];
     requires = [ "docker.service" ];
     serviceConfig = {

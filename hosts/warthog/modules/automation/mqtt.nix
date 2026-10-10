@@ -10,31 +10,33 @@
 
   services.mosquitto = {
     enable = true;
-    listeners = [{
-      users.homeassistant = {
-        acl = [
-          "readwrite homeassistant/#"
-          "readwrite zigbee2mqtt/#"
-          "read $SYS/#"
-        ];
-        passwordFile = config.sops.secrets."mosquitto/passwords/homeassistant".path;
-      };
-      users.zigbee2mqtt = {
-        acl = [
-          "readwrite homeassistant/#"
-          "readwrite zigbee2mqtt/#"
-        ];
-        passwordFile = config.sops.secrets."mosquitto/passwords/zigbee2mqtt".path;
-      };
-      users.bms = {
-        acl = [
-          "readwrite bms/#"
-          "readwrite homeassistant/#"
-          "readwrite zigbee2mqtt/#"
-        ];
-        passwordFile = config.sops.secrets."mosquitto/passwords/bms".path;
-      };
-    }];
+    listeners = [
+      {
+        users.homeassistant = {
+          acl = [
+            "readwrite homeassistant/#"
+            "readwrite zigbee2mqtt/#"
+            "read $SYS/#"
+          ];
+          passwordFile = config.sops.secrets."mosquitto/passwords/homeassistant".path;
+        };
+        users.zigbee2mqtt = {
+          acl = [
+            "readwrite homeassistant/#"
+            "readwrite zigbee2mqtt/#"
+          ];
+          passwordFile = config.sops.secrets."mosquitto/passwords/zigbee2mqtt".path;
+        };
+        users.bms = {
+          acl = [
+            "readwrite bms/#"
+            "readwrite homeassistant/#"
+            "readwrite zigbee2mqtt/#"
+          ];
+          passwordFile = config.sops.secrets."mosquitto/passwords/bms".path;
+        };
+      }
+    ];
   };
   networking.firewall.allowedTCPPorts = [ 1883 ];
 

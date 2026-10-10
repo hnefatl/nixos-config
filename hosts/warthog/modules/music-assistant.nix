@@ -1,3 +1,6 @@
 {
-  networking.firewall.allowedTCPPorts = [ 8097 8927 ];
+  networking.firewall.allowedTCPPorts = [
+    8097
+    8927
+  ];
 }

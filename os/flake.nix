@@ -37,7 +37,7 @@
       autoupgrade,
       home,
     }:
-    let 
+    let
       system = "x86_64-linux";
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;

@@ -1,10 +1,15 @@
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 {
   users.users.bms = {
     isSystemUser = true;
     group = "bms";
   };
-  users.groups.bms = {};
+  users.groups.bms = { };
 
   systemd.services.bms = {
     description = "Building Management System";

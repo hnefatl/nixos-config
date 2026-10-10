@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   users.users.bambuddy = {
-    isSystemUser  = true;
+    isSystemUser = true;
     uid = 2000;
     group = "bambuddy";
   };

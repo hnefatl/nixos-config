@@ -2,8 +2,14 @@
 {
   systemd.services.sendspin-daemon = {
     description = "Sendspin Daemon";
-    after = [ "network-online.target" "sound.target" ];
-    wants = [ "network-online.target" "sound.target" ];
+    after = [
+      "network-online.target"
+      "sound.target"
+    ];
+    wants = [
+      "network-online.target"
+      "sound.target"
+    ];
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
@@ -21,5 +27,8 @@
       NoNewPrivileges = true;
     };
   };
-  networking.firewall.allowedTCPPorts = [ 8927 8928 ];
+  networking.firewall.allowedTCPPorts = [
+    8927
+    8928
+  ];
 }
