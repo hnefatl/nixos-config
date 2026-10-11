@@ -64,6 +64,8 @@ access_control:
 
 session:
   name: authelia_session
+  redis:
+    host: '/run/redis-authelia/redis.sock'
   cookies:
     - domain: keith.collister.xyz
       authelia_url: https://auth.warthog.keith.collister.xyz

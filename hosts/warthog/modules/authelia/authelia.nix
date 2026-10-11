@@ -1,19 +1,32 @@
 { config, lib, ... }:
 let
-  dataPath = "/pool/services/authelia";
+  autheliaData = "/pool/services/authelia";
+  redisData = "/pool/services/redis-authelia";
 in
 {
-  services.authelia.instances.main = {
+  services.authelia.instances."main" = {
     enable = true;
     settingsFiles = [ "/etc/nixos/hosts/warthog/modules/authelia/configuration.yaml" ];
     secrets = {
-      jwtSecretFile = "${dataPath}/secrets/session_secret";
-      storageEncryptionKeyFile = "${dataPath}/secrets/storage_encryption_key";
+      jwtSecretFile = "${autheliaData}/secrets/jwt_secret";
+      storageEncryptionKeyFile = "${autheliaData}/secrets/storage_encryption_key";
+      sessionSecretFile = "${autheliaData}/secrets/session_secret";
     };
   };
-
-  systemd.services.authelia-main.serviceConfig = {
+  systemd.services."authelia-main".serviceConfig = {
     # Let the locked-down systemd service write to the pool path.
-    ReadWritePaths = dataPath;
+    ReadWritePaths = autheliaData;
+  };
+  # Make sure authelia can access the UDS for talking with redis.
+  users.users."authelia-main".extraGroups = [ "redis-authelia" ];
+
+  services.redis.servers."authelia" = {
+    enable = true;
+    settings = {
+      dir = lib.mkForce redisData;
+    };
+  };
+  systemd.services."redis-authelia".serviceConfig = {
+    ReadWritePaths = redisData;
   };
 }
