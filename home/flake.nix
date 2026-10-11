@@ -62,7 +62,6 @@
 
               ./classes/standard.nix
               ./modules/firefox.nix
-              ./modules/ffxiv.nix
               ./modules/discord.nix
               ./modules/signal.nix
             ];
