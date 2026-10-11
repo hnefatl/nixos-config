@@ -57,6 +57,10 @@
       # Allow `#foo` to not run foo.
       setopt interactivecomments
 
+      # Treat pasted text as special to avoid weird artefacts.
+      autoload -Uz bracketed-paste-magic
+      zle -N bracketed-paste bracketed-paste-magic
+
       function nos() {
         nix eval /etc/nixos/os#nixosConfigurations.$HOST.config.$1
       }
