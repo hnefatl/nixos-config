@@ -5,8 +5,8 @@
   ...
 }:
 let
-  impermanent_root_dataset = "${config.standard_filesystems.pool_names.root}/enc/ephemeralroot";
-  persistent_root_dataset = "${config.standard_filesystems.pool_names.root}/enc/snap/persistentroot";
+  impermanent_root_dataset = "${config.standard_filesystems.pools.root}/enc/ephemeralroot";
+  persistent_root_dataset = "${config.standard_filesystems.pools.root}/enc/snap/persistentroot";
 in
 {
   # This config relies on values set in this module, and assumes the machine is using this layout.
@@ -34,7 +34,7 @@ in
     description = "ZFS rollback root to empty.";
 
     wantedBy = [ "initrd.target" ];
-    after = [ "zfs-import-${config.standard_filesystems.pool_names.root}.service" ];
+    after = [ "zfs-import-${config.standard_filesystems.pools.root}.service" ];
     before = [ "sysroot.mount" ];
 
     # Use whatever ZFS version is currently used, not just `pkgs.zfs`.

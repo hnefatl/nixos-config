@@ -24,7 +24,7 @@ in
         type = lib.types.str;
       };
     };
-    pool_names = {
+    pools = {
       root = lib.mkOption {
         default = "zroot";
         readOnly = true;
@@ -50,7 +50,7 @@ in
         after = [ "cryptsetup.target" ];
         # Finish loading keys to the pools before starting the ZFS mounts
         before = [
-          "zfs-import-${cfg.pool_names.root}.service"
+          "zfs-import-${cfg.pools.root}.service"
           "sysroot.mount"
         ];
         unitConfig.DefaultDependencies = "no";
@@ -63,10 +63,10 @@ in
         # is and allows easier mounting if new keys are needed.
         script = ''
           echo "Loading bootstrap keys"
-          zpool import -f ${cfg.pool_names.zfskeys}
-          zpool scrub -w ${cfg.pool_names.zfskeys}
+          zpool import -f ${cfg.pools.zfskeys}
+          zpool scrub -w ${cfg.pools.zfskeys}
           mkdir -p /zfskeys
-          mount -t zfs -o ro ${cfg.pool_names.zfskeys} /zfskeys
+          mount -t zfs -o ro ${cfg.pools.zfskeys} /zfskeys
 
           echo "Loading ZFS pools and keys"
           zpool import -f -a
@@ -76,7 +76,7 @@ in
           umount /zfskeys
           # This shouldn't fail the script.
           rmdir /zfskeys || echo "Dirty zfskeys directory"
-          zpool export ${cfg.pool_names.zfskeys}
+          zpool export ${cfg.pools.zfskeys}
         '';
       };
     };
@@ -95,18 +95,18 @@ in
 
       "/" = {
         # Overriden in impermanent setups.
-        device = "${cfg.pool_names.root}/enc/snap/root";
+        device = "${cfg.pools.root}/enc/snap/root";
         fsType = "zfs";
         neededForBoot = true;
       };
 
       "/home/keith" = {
-        device = "${cfg.pool_names.root}/enc/snap/home/keith";
+        device = "${cfg.pools.root}/enc/snap/home/keith";
         fsType = "zfs";
       };
 
       "/nix" = {
-        device = "${cfg.pool_names.root}/enc/snap/nix";
+        device = "${cfg.pools.root}/enc/snap/nix";
         fsType = "zfs";
       };
 
@@ -156,12 +156,12 @@ in
           set -x
 
           # Unlock the LUKS volume containing ZFS keys.
-          systemd-cryptsetup attach ${cfg.pool_names.zfskeys} '/dev/disk/by-partuuid/${cfg.partuuids.zfskeys}'
-          zpool import -f ${cfg.pool_names.zfskeys}
+          systemd-cryptsetup attach ${cfg.pools.zfskeys} '/dev/disk/by-partuuid/${cfg.partuuids.zfskeys}'
+          zpool import -f ${cfg.pools.zfskeys}
           # Make sure the partition is healthy.
-          zpool scrub -w ${cfg.pool_names.zfskeys}
+          zpool scrub -w ${cfg.pools.zfskeys}
           mkdir -p /zfskeys
-          mount -t zfs -o ro ${cfg.pool_names.zfskeys} /zfskeys
+          mount -t zfs -o ro ${cfg.pools.zfskeys} /zfskeys
 
           # Import root
           zpool import -f zroot
@@ -186,7 +186,7 @@ in
           # This handles unmounting any datasets that are mounted.
           # We need to export when we're done so that on next boot the OS can import them.
           zpool export -a
-          systemd-cryptsetup detach ${cfg.pool_names.zfskeys}
+          systemd-cryptsetup detach ${cfg.pools.zfskeys}
           rmdir /os /zfskeys
           EOF
 
