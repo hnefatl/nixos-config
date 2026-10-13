@@ -16,4 +16,6 @@
       "x-systemd.automount"
     ];
   };
+  # Force import of pool on stage 2 boot, so that any scrubs etc use this pool even if it's not been mounted.
+  systemd.services."zfs-import-zgames".requiredBy = [ "zfs-import.target" ];
 }
