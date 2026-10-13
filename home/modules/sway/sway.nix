@@ -43,6 +43,10 @@
           # Disable-while-typing
           dwt = "enabled";
         };
+        # Disable playstation touchpads, normally not intended to be picked up as a mouse on PC.
+        "1356:3302:Sony_Interactive_Entertainment_DualSense_Wireless_Controller_Touchpad" = {
+          events = "disabled";
+        };
       };
       output = {
         "*".adaptive_sync = "true";
