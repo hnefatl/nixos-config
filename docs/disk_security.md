@@ -21,7 +21,7 @@ TL;DR: use ZFS native encryption where possible, it's nice for supporting increm
 - Boot disk (GPT partition table)
   - Unencrypted FAT32 `/boot` partition (ideally secure-booted)
   - LUKS partition (autounlocked via TPM)
-    - `zfskeys` ZFS pool: contains just the keys for encrypted ZFS datasets on the machine. ZFS used here for the checksumming. Individual dataset keys are backed up to a Dashlane secure note.
+    - `zfskeys` EXT4 partition: contains just the keys for encrypted ZFS datasets on the machine. Individual dataset keys are backed up to a Dashlane secure note. I used to use ZFS here, but in stage 1 boot there's a cyclic dependency between "mounting `zfskeys` on the `/sysroot`" and "mounting `zroot` on `/`". The NixOS ZFS configuration prevents mounting a stage 1 ZFS dataset outside `/sysroot`, so switching to EXT4 makes things easier.
   - `zroot` main ZFS pool partition
     - `zroot/enc`: encrypted parent dataset.
       - `zroot/enc/...`: general encrypted datasets.

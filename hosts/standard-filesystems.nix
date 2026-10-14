@@ -1,9 +1,7 @@
 # Standardised filesystem layout.
 # Assumes standardised naming documented in /docs/disk_security.md.
 
-# TODO: disable default zpool logic, do explicit zpool imports to avoid e.g. `import -a`, `load-keys -a` which break on e.g. clones of encrypted datasets.
-
-{ lib, config, ... }:
+{ config, pkgs, lib, utils, ... }:
 let
   cfg = config.standard_filesystems;
 in
@@ -30,58 +28,68 @@ in
         readOnly = true;
         type = lib.types.str;
       };
-      zfskeys = lib.mkOption {
-        default = "zfskeys";
-        readOnly = true;
-        type = lib.types.str;
-      };
     };
   };
 
   config = {
+    # TODO: configure hashed password for getting root access if initrd fails to boot. Would need to rotate etc.
+
     boot.initrd = {
       luks.devices = {
+        # These devices survive the stage1->2 transition since they're kernel-internal.
         "zfskeys".device = "/dev/disk/by-partuuid/${cfg.partuuids.zfskeys}";
+        # Swap needs to be available in stage1 to support hibernation.
         "swap".device = "/dev/disk/by-partuuid/${cfg.partuuids.swap}";
       };
 
-      systemd.services.zfskeybootstrap = {
-        wantedBy = [ "initrd.target" ];
-        after = [ "cryptsetup.target" ];
-        # Finish loading keys to the pools before starting the ZFS mounts
-        before = [
-          "zfs-import-${cfg.pools.root}.service"
-          "sysroot.mount"
-        ];
-        unitConfig.DefaultDependencies = "no";
-        serviceConfig.Type = "oneshot";
+      systemd.mounts = [
+        {
+          # In stage 1, mount /zfskeys outside the /sysroot that's going to be chroot'd into, so that they're available
+          # for zroot decryption.
+          # Trying to mount in a less explicit way ends up with the mountpoint being inside /sysroot, which creates a
+          # cyclic dependency since zroot is mounted to /sysroot, but importing zroot requires keys mounted inside
+          # /sysroot/zfskeys.
+          what = "/dev/mapper/zfskeys";
+          where = "/zfskeys";
+          type = "ext4";
+          options = "ro";
+          wants = [ "cryptsetup.target" ];
+          after = [ "cryptsetup.target" ];
+          wantedBy = [ "zfs-import-zroot.service" ];
+          before = [ "zfs-import-zroot.service" ];
+          # Unmount before the chroot to avoid leaving a dangling mount.
+          conflicts = [ "initrd-switch-root.target" ];
+        }
+        {
+          # Also mount keys into /sysroot/zfskeys, so they're available in stage 2. Doing it in stage 1 avoids needing
+          # to set up systemd dependencies for stage2 zfs imports.
+          what = "/dev/mapper/zfskeys";
+          where = "/sysroot/zfskeys";
+          type = "ext4";
+          options = "ro";
+          wants = [ "cryptsetup.target" ];
+          after = [ "cryptsetup.target" ];
+          wantedBy = [ "initrd-switch-root.target" ];
+          before = [ "initrd-switch-root.target" ];
+        }
+      ];
 
-        # We need to make these available before the root filesystem mount, because
-        # the root filesystem is encrypted using these keys.
-        #
-        # The LUKS device remains opened, which makes it clearer what the partition
-        # is and allows easier mounting if new keys are needed.
-        script = ''
-          echo "Loading bootstrap keys"
-          zpool import -f ${cfg.pools.zfskeys}
-          zpool scrub -w ${cfg.pools.zfskeys}
-          mkdir -p /zfskeys
-          mount -t zfs -o ro ${cfg.pools.zfskeys} /zfskeys
-
-          echo "Loading ZFS pools and keys"
-          zpool import -f -a
-          zfs load-key -a
-
-          echo "Unloading bootstrap keys"
-          umount /zfskeys
-          # This shouldn't fail the script.
-          rmdir /zfskeys || echo "Dirty zfskeys directory"
-          zpool export ${cfg.pools.zfskeys}
-        '';
+      # Ext4 is mandatory for mounting the ext4 zfskeys partition.
+      # The other modules and programs are just nice-to-have, recovery is hard without them.
+      kernelModules = [ "ext4" "fat" "vfat" ];
+      systemd.extraBin = {
+        vi = "${pkgs.busybox}/bin/vi";
       };
     };
 
     swapDevices = [ { device = "/dev/mapper/swap"; } ];
+
+    boot.zfs = {
+      # Only try to decrypt these datasets.
+      requestEncryptionCredentials = [ "${cfg.pools.root}/enc" ];
+      # Helps recover after tinkering.
+      forceImportRoot = lib.mkForce true;
+    };
 
     fileSystems = {
       "/boot" = {
@@ -156,16 +164,13 @@ in
           set -x
 
           # Unlock the LUKS volume containing ZFS keys.
-          systemd-cryptsetup attach ${cfg.pools.zfskeys} '/dev/disk/by-partuuid/${cfg.partuuids.zfskeys}'
-          zpool import -f ${cfg.pools.zfskeys}
-          # Make sure the partition is healthy.
-          zpool scrub -w ${cfg.pools.zfskeys}
+          systemd-cryptsetup attach zfskeys '/dev/disk/by-partuuid/${cfg.partuuids.zfskeys}'
           mkdir -p /zfskeys
-          mount -t zfs -o ro ${cfg.pools.zfskeys} /zfskeys
+          mount -o ro /dev/mapper/zfskeys /zfskeys
 
           # Import root
-          zpool import -f zroot
-          zfs load-key zroot/enc
+          zpool import -f ${cfg.pools.root}
+          zfs load-key ${cfg.pools.root}/enc
 
           # Mount everything on /os
           mkdir -p /os
@@ -186,7 +191,7 @@ in
           # This handles unmounting any datasets that are mounted.
           # We need to export when we're done so that on next boot the OS can import them.
           zpool export -a
-          systemd-cryptsetup detach ${cfg.pools.zfskeys}
+          systemd-cryptsetup detach zfskeys
           rmdir /os /zfskeys
           EOF
 
