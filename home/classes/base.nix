@@ -87,6 +87,7 @@
       set smartcase
       set relativenumber
       set number
+      set colorcolumn=120
 
       " Re-open at previous position in file: https://stackoverflow.com/a/774599
       if has("autocmd")
