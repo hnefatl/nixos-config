@@ -133,3 +133,7 @@ https://music-assistant.warthog.keith.collister.xyz {
     import internal_only
     reverse_proxy localhost:8095
 }
+https://grafana.warthog.keith.collister.xyz {
+    import authelia
+    reverse_proxy localhost:3829
+}

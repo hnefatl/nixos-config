@@ -136,6 +136,8 @@
             ../hosts/warthog/modules/automation/mqtt.nix
             ../hosts/warthog/modules/automation/bms.nix
             ../hosts/warthog/modules/music-assistant.nix
+            ../hosts/warthog/modules/monitoring/grafana.nix
+            ../hosts/warthog/modules/monitoring/victoriametrics.nix
           ];
           specialArgs = {
             # Inputs for warthog are this flake's input plus the inputs to the home flake.
