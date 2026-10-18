@@ -6,7 +6,7 @@
     globalConfig.external_labels.origin_host = config.networking.hostName;
 
     # VictoriaMetrics instance on warthog.
-    remoteWrite = [{ url = "http://warthog.local:8428/api/v1/write"; }];
+    remoteWrite = [ { url = "http://warthog.local:8428/api/v1/write"; } ];
 
     exporters.node = {
       enable = true;
@@ -25,11 +25,11 @@
     scrapeConfigs = [
       {
         job_name = "node_exporter";
-        static_configs = [{ targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }];
+        static_configs = [ { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; } ];
       }
       (lib.mkIf config.virtualisation.docker.enable {
         job_name = "docker";
-        static_configs = [{ targets = [ "127.0.0.1:9323" ]; }];
+        static_configs = [ { targets = [ "127.0.0.1:9323" ]; } ];
       })
     ];
   };

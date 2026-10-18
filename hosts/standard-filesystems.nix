@@ -1,7 +1,13 @@
 # Standardised filesystem layout.
 # Assumes standardised naming documented in /docs/disk_security.md.
 
-{ config, pkgs, lib, utils, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  utils,
+  ...
+}:
 let
   cfg = config.standard_filesystems;
 in
@@ -76,7 +82,11 @@ in
 
       # Ext4 is mandatory for mounting the ext4 zfskeys partition.
       # The other modules and programs are just nice-to-have, recovery is hard without them.
-      kernelModules = [ "ext4" "fat" "vfat" ];
+      kernelModules = [
+        "ext4"
+        "fat"
+        "vfat"
+      ];
       systemd.extraBin = {
         vi = "${pkgs.busybox}/bin/vi";
       };
