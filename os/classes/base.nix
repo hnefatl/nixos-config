@@ -58,4 +58,7 @@
 
   # Generically useful security setup.
   security.polkit.enable = true;
+
+  # Speech synthesis for accessibility: not needed on any of my machines.
+  services.speechd.enable = lib.mkForce false;
 }
