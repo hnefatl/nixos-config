@@ -72,7 +72,6 @@
             ./modules/warthog-nfs.nix
             ./modules/cross-compile-aarch64.nix
             ./modules/photography.nix
-            ./modules/monitoring/prometheus-exporter.nix
             ./modules/radio.nix
           ];
           specialArgs = { inherit inputs pkgs-unstable; };
@@ -103,7 +102,6 @@
             ./modules/cross-compile-aarch64.nix
             ./modules/photography.nix
             ./modules/sendspin.nix
-            ./modules/monitoring/prometheus-exporter.nix
           ];
           specialArgs = { inherit inputs pkgs-unstable; };
         };
@@ -125,12 +123,10 @@
             ./modules/tlp.nix
             ./modules/impermanence/impermanence.nix
             ./modules/impermanence/keith.nix
-            ./modules/monitoring/prometheus-exporter.nix
             ../hosts/warthog/modules/camera-backup-server.nix
             ../hosts/warthog/modules/services.nix
             ../hosts/warthog/modules/nfs-server.nix
             ../hosts/warthog/modules/smb-server.nix
-            ../hosts/warthog/modules/prometheus-server.nix
             ../hosts/warthog/modules/authelia/authelia.nix
             ../hosts/warthog/modules/caddy/caddy.nix
             ../hosts/warthog/modules/automation/mqtt.nix

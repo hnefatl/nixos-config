@@ -15,6 +15,7 @@
     ../modules/autoupgrade.nix
     ../modules/nix.nix
     ../modules/neovim.nix
+    ../modules/monitoring/prometheus-exporter.nix
   ];
 
   networking.hostName = config.machine_config.hostname;
