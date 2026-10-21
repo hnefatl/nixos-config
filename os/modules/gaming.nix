@@ -20,6 +20,12 @@
     settings.general.inhibit_screensaver = 0;
   };
 
+  # GPU crashes tracked by
+  # https://gitlab.freedesktop.org/mesa/mesa/-/work_items/16158
+  # or
+  # https://gitlab.freedesktop.org/drm/amd/-/work_items/5711
+  environment.sessionVariables.VKD3D_CONFIG = lib.mkIf (config.machine_config.instance == "desktop") "single_queue";
+
   systemd.user.services.steam = lib.mkIf (config.machine_config.instance == "desktop") {
     enable = true;
     description = "Launch steam on startup";
