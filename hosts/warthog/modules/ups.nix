@@ -1,5 +1,10 @@
 # https://wiki.nixos.org/wiki/Uninterruptible_power_supply
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   sops.secrets."nut_password" = {
     owner = config.power.ups.upsmon.user;
@@ -51,10 +56,12 @@
       ];
     };
 
-    upsd.listen = [{
-      address = "127.0.0.1";
-      port = 3493;
-    }];
+    upsd.listen = [
+      {
+        address = "127.0.0.1";
+        port = 3493;
+      }
+    ];
 
     # This isn't a system user, this is a NUT user.
     users."nut-admin" = {
@@ -70,36 +77,47 @@
         user = "nut-admin";
         passwordFile = config.sops.secrets."nut_password".path;
       };
-      # Copied from the NixOS docs.
-      settings = {
-        NOTIFYMSG = [
-          [ "ONLINE" ''"UPS %s: On line power."'' ]
-          [ "ONBATT" ''"UPS %s: On battery."'' ]
-          [ "LOWBATT" ''"UPS %s: Battery is low."'' ]
-          [ "REPLBATT" ''"UPS %s: Battery needs to be replaced."'' ]
-          [ "FSD" ''"UPS %s: Forced shutdown in progress."'' ]
-          [ "SHUTDOWN" ''"Auto logout and shutdown proceeding."'' ]
-          [ "COMMOK" ''"UPS %s: Communications (re-)established."'' ]
-          [ "COMMBAD" ''"UPS %s: Communications lost."'' ]
-          [ "NOCOMM" ''"UPS %s: Not available."'' ]
-          [ "NOPARENT" ''"upsmon parent dead, shutdown impossible."'' ]
-        ];
-        NOTIFYFLAG = [
-          [ "ONLINE" "SYSLOG+WALL" ]
-          [ "ONBATT" "SYSLOG+WALL" ]
-          [ "LOWBATT" "SYSLOG+WALL" ]
-          [ "REPLBATT" "SYSLOG+WALL" ]
-          [ "FSD" "SYSLOG+WALL" ]
-          [ "SHUTDOWN" "SYSLOG+WALL" ]
-          [ "COMMOK" "SYSLOG+WALL" ]
-          [ "COMMBAD" "SYSLOG+WALL" ]
-          [ "NOCOMM" "SYSLOG+WALL" ]
-          [ "NOPARENT" "SYSLOG+WALL" ]
-        ];
-        RBWARNTIME = 216000;
-        NOCOMMWARNTIME = 300;
-        FINALDELAY = 0;
-      };
+
+      settings =
+        let
+          # nixfmt makes this really ugly... but doing this manually is formatted even uglier.
+          unpack =
+            as:
+            lib.mapAttrsToList (k: v: [
+              k
+              v
+            ]) as;
+        in
+        {
+          # Copied from the NixOS docs.
+          NOTIFYMSG = unpack {
+            ONLINE = ''"UPS %s: On line power."'';
+            ONBATT = ''"UPS %s: On battery."'';
+            LOWBATT = ''"UPS %s: Battery is low."'';
+            REPLBATT = ''"UPS %s: Battery needs to be replaced."'';
+            FSD = ''"UPS %s: Forced shutdown in progress."'';
+            SHUTDOWN = ''"Auto logout and shutdown proceeding."'';
+            COMMOK = ''"UPS %s: Communications (re-)established."'';
+            COMMBAD = ''"UPS %s: Communications lost."'';
+            NOCOMM = ''"UPS %s: Not available."'';
+            NOPARENT = ''"upsmon parent dead, shutdown impossible."'';
+          };
+          NOTIFYFLAG = unpack {
+            ONLINE = "SYSLOG+WALL";
+            ONBATT = "SYSLOG+WALL";
+            LOWBATT = "SYSLOG+WALL";
+            REPLBATT = "SYSLOG+WALL";
+            FSD = "SYSLOG+WALL";
+            SHUTDOWN = "SYSLOG+WALL";
+            COMMOK = "SYSLOG+WALL";
+            COMMBAD = "SYSLOG+WALL";
+            NOCOMM = "SYSLOG+WALL";
+            NOPARENT = "SYSLOG+WALL";
+          };
+          RBWARNTIME = 216000;
+          NOCOMMWARNTIME = 300;
+          FINALDELAY = 0;
+        };
     };
   };
 }
