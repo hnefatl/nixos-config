@@ -6,7 +6,11 @@
     globalConfig.external_labels.origin_host = config.networking.hostName;
 
     # VictoriaMetrics instance on warthog.
-    remoteWrite = [ { url = "http://warthog.local:8428/api/v1/write"; } ];
+    remoteWrite =
+      let
+        hostname = if (config.machine_config.hostname == "warthog") then "localhost" else "warthog.local";
+      in
+      [ { url = "http://${hostname}:8428/api/v1/write"; } ];
 
     exporters.node = {
       enable = true;
