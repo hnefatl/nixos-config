@@ -135,6 +135,7 @@
             ../hosts/warthog/modules/monitoring/grafana.nix
             ../hosts/warthog/modules/monitoring/victoriametrics.nix
             ../hosts/warthog/modules/monitoring/telegraf.nix
+            ../hosts/warthog/modules/ups.nix
           ];
           specialArgs = {
             # Inputs for warthog are this flake's input plus the inputs to the home flake.
