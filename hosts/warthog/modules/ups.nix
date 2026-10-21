@@ -9,6 +9,7 @@
   sops.secrets."nut_password" = {
     owner = config.power.ups.upsmon.user;
     group = config.power.ups.upsmon.group;
+    mode = "0440"; # Allow user and group read, so prometheus job below can read.
   };
 
   environment.systemPackages = [ pkgs.nut ];
@@ -120,4 +121,47 @@
         };
     };
   };
+
+  services.prometheus = lib.mkIf config.services.prometheus.enable {
+    scrapeConfigs =
+      let
+        exporterAddress = "${config.services.prometheus.exporters.nut.listenAddress}:${toString config.services.prometheus.exporters.nut.port}";
+      in
+      [
+        {
+          job_name = "nut_exporter";
+          metrics_path = "/ups_metrics";
+          params = {
+            server = [ "127.0.0.1" ];
+          };
+          static_configs = [ { targets = [ "ups" ]; } ];
+
+          # Magic relabelling from https://github.com/DRuggeri/nut_exporter that's necessary for this to work?
+          relabel_configs = [
+            {
+              source_labels = [ "__address__" ];
+              target_label = "__param_ups";
+            }
+            {
+              source_labels = [ "__param_ups" ];
+              target_label = "instance";
+            }
+            {
+              target_label = "__address__";
+              replacement = exporterAddress;
+            }
+          ];
+        }
+      ];
+
+    exporters.nut = {
+      enable = true;
+      listenAddress = "127.0.0.1";
+      nutServer = "127.0.0.1";
+      nutUser = "nut-admin";
+      passwordPath = config.sops.secrets."nut_password".path;
+    };
+  };
+  # Give access to the password file.
+  users.groups.${config.power.ups.upsmon.group}.members = [ "nut-exporter" ];
 }
