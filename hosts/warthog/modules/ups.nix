@@ -160,6 +160,19 @@
       nutServer = "127.0.0.1";
       nutUser = "nut-admin";
       passwordPath = config.sops.secrets."nut_password".path;
+      nutVariables = [
+        "battery.charge"
+        "battery.charge.low"
+        "battery.runtime"
+        "ups.delay.shutdown"
+        "ups.delay.start"
+        "ups.timer.shutdown"
+        "ups.timer.start"
+        "output.voltage"
+        "ups.load"
+        "ups.status"
+        "ups.firmware"
+      ];
     };
   };
   # Give access to the password file.
