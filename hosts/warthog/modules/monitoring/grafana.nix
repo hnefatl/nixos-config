@@ -41,5 +41,6 @@
         }
       ];
     };
+    settings.smtp.enabled = true;
   };
 }
