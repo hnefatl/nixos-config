@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs-unstable, ... }:
 let
   autheliaData = "/pool/services/authelia";
   redisData = "/pool/services/redis-authelia";
@@ -6,6 +6,7 @@ in
 {
   services.authelia.instances."main" = {
     enable = true;
+    package = pkgs-unstable.authelia;
     settingsFiles = [ "/etc/nixos/hosts/warthog/modules/authelia/configuration.yaml" ];
     secrets = {
       jwtSecretFile = "${autheliaData}/secrets/jwt_secret";
