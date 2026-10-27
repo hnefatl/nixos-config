@@ -3,10 +3,7 @@
   services.caddy = {
     enable = true;
     configFile = ./Caddyfile;
+    email = "hnefatl@gmail.com";
+    openFirewall = true;
   };
-
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
 }
