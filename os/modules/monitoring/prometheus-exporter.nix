@@ -35,6 +35,10 @@
         job_name = "docker";
         static_configs = [ { targets = [ "127.0.0.1:9323" ]; } ];
       })
+      (lib.mkIf config.services.caddy.enable {
+        job_name = "caddy";
+        static_configs = [ { targets = [ "127.0.0.1:2019" ]; } ];
+      })
     ];
   };
 
