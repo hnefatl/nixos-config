@@ -49,6 +49,7 @@
               ./modules/firefox.nix
               ./modules/moonlight.nix
               ./modules/signal.nix
+              ./modules/battery-warning.nix
             ];
             extraSpecialArgs = {
               inherit inputs;
