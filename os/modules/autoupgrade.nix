@@ -1,5 +1,8 @@
 { config, lib, ... }:
 {
+  # TODO: cron won't run on next boot if it misses a timer, so 1am upgrades are unlikely to happen.
+  # Systemd service with persistent timer seemed to get restarted during upgrade, breaking the update.
+  # Need some other low-tech solution? Background daemon watching a "last updated" file?
   nixos-autoupgrade = {
     enable = true;
     when =
@@ -7,8 +10,8 @@
         # Weekly at 1am on Saturdays
         "00 01 * * Sat"
       else
-        # Daily at 1am
-        "00 01 * * *";
+        # Daily at midnight
+        "00 00 * * *";
 
     args = rec {
       os-flake-dir = "/etc/nixos/os";

@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791622704,
-        "narHash": "sha256-M52+PMVT9YZGRnVtY94AhEKrDgOoNIohf58aZBBXm9s=",
+        "lastModified": 1794135009,
+        "narHash": "sha256-7UWoKtfi7+7NJUmUOSWF85jeAaM9KBTbuR/srin4PuQ=",
         "owner": "hnefatl",
         "repo": "nixos-autoupgrader",
-        "rev": "13bcf18cfc1e68f4e6a560dfc57d3e557120472c",
+        "rev": "a19d768953835ad571d340b9ad72094fc6a78aba",
         "type": "github"
       },
       "original": {
