@@ -42,6 +42,7 @@
 
   services.zigbee2mqtt = {
     enable = true;
+    dataDir = "/pool/services/zigbee2mqtt";
     settings = {
       homeassistant.enabled = true;
       mqtt = {
